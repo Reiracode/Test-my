@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+			<link rel="stylesheet" href="css/all.css">
+		<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css' />
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+			*,
+			*:before,
+			*:after {
+				box-sizing: border-box;
+				position: relative;
+				letter-spacing: 0.04em;
+				margin:0;
+				padding:0;
+			}
+
+			body {
+				font-family: 'Montserrat', sans-serif;
+				background-color: #7c7575;
+				overflow-x: hidden;
+			}
+
+			.spacer {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			h1 {
+				font-size: 3rem;
+				color: #000;
+			}
+
+			.section {
+				height: auto;
+				width: 100%;
+				position: relative;
+				padding: 0;
+				overflow-x: hidden;
+			}
+
+			.portfolio {
+				width: 100%;
+				height: 100vh;
+				display: flex;
+				flex-wrap: nowrap;
+				background-color: #1F242D;
+				overflow: hidden;
+			}
+
+			.portfolio_title {
+				position: absolute;
+				top: 0;
+				left: -15rem;
+				font-size: 24rem;
+				letter-spacing: 0;
+				-webkit-text-stroke-color: #343A42;
+				display: inline-block;
+			}
+
+			.text-stroke {
+				-webkit-text-fill-color: transparent;
+				-webkit-text-stroke-width: 1px;
+				-webkit-text-stroke-color: #343A42;
+			}
+
+			.grid {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				aling-content: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+
+			.panel {
+				display: flex;
+				flex: 0 0 50%;
+				flex-wrap: wrap;
+				align-items: center;
+				align-content: center;
+				justify-content: center;
+				height: 100%;
+				padding: 10rem 7rem 2rem 7rem;
+				background-color: transparent;
+				overflow: hidden;
+			}
+			@media screen and (max-width:768px) { 
+				.panel {
+					flex: 0 0 80%;
+					padding:30px;
+				}
+			}
+
+			.panel_item {
+				height: 100%;
+				width: 100%;
+				margin: 0 auto;
+			}
+
+			.panel_img {
+				width: 100%;
+				height: 100%;
+				margin: 0 auto;
+			}
+
+			.pin-wrap {
+				display: flex;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="containerss">
+			<div class="spacer">
+				<h1>Scroll DownOOOOO</h1>
+			</div>
+ 
+
+			<section class="section portfolio">
+				<div class="pin-wrap">
+					<!-- <h2 class="portfolio_title text-stroke parallax">Portfolio</h2> -->
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img firstAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img firstAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel_item">
+							<img class="panel_img secondAn" src="https://via.placeholder.com/800x600.jpg" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="spacer">
+				<h1>The End</h1>
+			</div>
+		</div>
+				<script src="./js/jquery.min.js"></script>
+		<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js?r=5426"></script>
+		<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+		<!-- <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+		<script>
+				gsap.registerPlugin(ScrollTrigger);
+				let pageContainer = document.querySelector(".containerss");
+				const scroller = new LocomotiveScroll({
+					el: pageContainer,
+					smooth: true,
+				})
+
+				scroller.on("scroll", ScrollTrigger.update);
+				ScrollTrigger.scrollerProxy(pageContainer, {
+					scrollTop(value) {
+						return arguments.length
+							? scroller.scrollTo(value, 0, 0)
+							: scroller.scroll.instance.scroll.y;
+					},
+					getBoundingClientRect() {
+						return {
+							left: 0,
+							top: 0,
+							width: window.innerWidth,
+							height: window.innerHeight
+						};
+					},
+					pinType: pageContainer.style.transform ? "transform" : "fixed"
+				});
+
+			window.addEventListener("load", function () {
+
+var pinBoxes = $('.panel');
+var pinBoxWidth = pinBoxes.width();
+console.log(pinBoxes.innerWidth())
+console.log(pinBoxes.length)
+
+var windowWidth = $(window).innerWidth(); //Prende la larghezza di tutto lo schermo 100vh
+console.log(windowWidth)
+
+
+var pinWrap = $('.pin-wrap'); //Prende il wrap totale che contiene tutto
+var pinWrapWidth = windowWidth * pinBoxes.length; //Larghezza finestra * .length vede quanti contenitori ci sono con pinbox
+console.log(pinWrapWidth)
+
+var horizontalScrollLength = (pinBoxes.length-1) * pinBoxes.innerWidth();
+// console.log(windowWidth)
+console.log(horizontalScrollLength)
+
+
+				// var horizontalScrollLength = pinWrapWidth;
+				// console.log(windowWidth)
+				console.log(horizontalScrollLength)
+
+
+
+// pinWrap.width(horizontalScrollLength); // Da al contenitore totale una alrghezza fissa
+				let sections = gsap.utils.toArray(".section .panel");
+
+				// gsap.to(sections, {
+					gsap.to(".pin-wrap", {
+					scrollTrigger: {
+						scroller: pageContainer,
+						scrub: true,
+						trigger: ".portfolio",
+						pin: true,
+						markers:true,
+						// anticipatePin: 1,
+						start: "top top",
+						end: horizontalScrollLength,
+						// end: pinWrapWidth,
+					},
+					x: -horizontalScrollLength,
+					ease: "none"
+				});
+			// 	// let pinWrap = document.querySelector(".portfolio");
+			// 	// let pinWrapWidth = pinWrap.offsetWidth;
+			// 	// console.log(pinWrapWidth)
+
+			// 	// let horizontalScrollLength = pinWrapWidth - window.innerWidth;
+			// 	// console.log(horizontalScrollLength)
+
+			// 	// let totals = document.querySelector(".panel").clientWidth;
+			// 	// let sections = gsap.utils.toArray(".section .panel");
+			// 	// console.log(sections.length)
+
+			// 	// let ss = totals * (sections.length-1);
+			// 	// console.log(ss)
+      
+			// 	// gsap.to('.portfolio', {
+			// 	// 	// xPercent: -ss ,
+			// 	// 	x: () => -ss,
+			// 	// 	ease: Linear.easeNone,
+			// 	// 	scrollTrigger: {
+			// 	// 		scroller: '.portfolio',
+			// 	// 		trigger: pinWrap,
+			// 	// 		// scrub: 1,
+			// 	// 		pin: true,
+			// 	// 		markers: true,
+			// 	// 		// end: () => ss,
+			// 	// 		toggleActions: "play none none reverse",
+			// 	// 	}
+			// 	// });
+				ScrollTrigger.addEventListener("refresh", () => scroller.update()); //	
+				ScrollTrigger.refresh();
+
+			});
+
+
+////////////////////////////////////////////////////////////
+	// gsap.registerPlugin(ScrollTrigger);
+// window.addEventListener("load", function () {
+// 	let container = document.querySelector(".portfolio");
+// 	let tl = gsap.timeline({
+// 		scrollTrigger: {
+// 			pin: true,
+// 			scrub: 1,
+// 			trigger: container,
+// 			end: () => container.scrollWidth - document.documentElement.clientWidth
+// 		},
+// 		defaults: { ease: "none", duration: 1 }
+// 	});
+
+// 	tl.to(".parallax", { x: 300 })
+// 		.to(".panel", { x: () => -(container.scrollWidth - document.documentElement.clientWidth) }, 0)
+// 		.from(".secondAn", {
+// 			opacity: 0,
+// 			scale: 0.5,
+// 			duration: 0.2,
+// 			stagger: {
+// 				amount: 0.8
+// 			}
+// 		}, 0);
+
+// 	gsap.from(".firstAn", {
+// 		duration: 1,
+// 		opacity: 0,
+// 		scale: .5,
+// 		scrollTrigger: {
+// 			trigger: container,
+// 			start: "top 90%",
+// 			end: "bottom 10%",
+// 			toggleActions: "play none none reverse"
+// 		}
+// 	});
+
+
+// 	ScrollTrigger.addEventListener("refresh", () => scroller.update()); //	
+// 	ScrollTrigger.refresh();
+
+// });
+		</script>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+
+
+.explore-button {
+  font-size: 1rem;
+  text-align: center;
+  background: #cbbcbc;
+  width: 50%;
+  color: #fff;
+	margin: 3rem auto;
+  padding: 1rem;
+  border-radius: 20px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  box-shadow: 0 15px 20px -10px rgb(0, 0 ,0 / 30%);
+  transition: color 0.6s, box-shadow 0.3s, transform 0.3s;
+}
+
+.explore-button:hover {
+  box-shadow: 0 3px 5px -5px rgb(0, 0, 0 / 30%);
+  transform: translateY(-1px);
+  color: #fff;
+}

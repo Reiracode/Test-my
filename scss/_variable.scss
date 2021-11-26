@@ -1,0 +1,30 @@
+// :root {
+//   --background: #005;
+//   --primary: #edbab694;
+//   --secondary: #d2691e1f;
+//   --third: #ea9999;
+//   --four: #f3f6f9;
+//   --mainbody: #c4b2b29e;
+//   --header-height: 60px;
+// }
+
+// 字型
+$main-font: "Cinzel", "Noto Serif JP", "Cormorant Garamond", sans-serif;
+
+// 主要色調
+$primary-color:#edbab694;
+$secondary-color:#d2691e1f;
+$third-color: #ea9999; 
+$space-color: #fff; 
+$mainbody: #c4b2b29e;
+
+$primary:#a1aafc;
+// $primary: #f2f2f2; 
+
+$header-height:60px;
+$one-page-h:calc(var(--vh, 1vh) * 100);
+
+$full-vh:calc(100vh - #{$header-height});
+ 
+
+$one-page: calc(var(--vh, 1vh) * 100 - #{$header-height});

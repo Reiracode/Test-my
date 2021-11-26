@@ -1737,13 +1737,12 @@
 
 
 	<script>
-		// GSAP
 		gsap.registerPlugin(ScrollTrigger);
 		Splitting();
 
 		const pageContainer = document.querySelector('#scroll-zone');
 		/* SMOOTH SCROLL */
-		const locoScroll = new LocomotiveScroll({
+		const scroller = new LocomotiveScroll({
 			el: pageContainer,
 			smooth: true,
 			// smartphone: {
@@ -1754,13 +1753,13 @@
 			reloadOnContextChange: true
 		});
 
-		locoScroll.on("scroll", ScrollTrigger.update);
+		scroller.on("scroll", ScrollTrigger.update);
 
 		ScrollTrigger.scrollerProxy(pageContainer, {
 			scrollTop(value) {
 				return arguments.length
-					? locoScroll.scrollTo(value, 0, 0)
-					: locoScroll.scroll.instance.scroll.y;
+					? scroller.scrollTo(value, 0, 0)
+					: scroller.scroll.instance.scroll.y;
 			},
 			getBoundingClientRect() {
 				return {
@@ -1777,7 +1776,7 @@
 		const header = document.getElementById('header');
 		console.log(header)
 		let hidden = false, static = true;
-		locoScroll.on('scroll', (instance) => {
+		scroller.on('scroll', (instance) => {
 			let headerHeight = header.getBoundingClientRect().height;
 			console.log("headerHeight" + headerHeight)
 			console.log(instance.scroll.y)
@@ -1819,100 +1818,100 @@
 
 
 		////////////////////////////////////
-		$(window).on('load', function () {
-			// $("header").load("header.html");
-			// horizon scroll 手機不流暢 所以限定桌機
-			// ScrollTrigger.matchMedia({
-			// only desktop
-			// "(min-width: 800px)": function () {
-			let horizonWidth = document.querySelector(".pin-wrap").offsetWidth - window.innerWidth;
-			const images = gsap.utils.toArray(".pin-wrap > .flex_alink3 img");
-			const imagesLen = images.length;
+		// $(window).on('load', function () {
+		// 	// $("header").load("header.html");
+		// 	// horizon scroll 手機不流暢 所以限定桌機
+		// 	// ScrollTrigger.matchMedia({
+		// 	// only desktop
+		// 	// "(min-width: 800px)": function () {
+		// 	let horizonWidth = document.querySelector(".pin-wrap").offsetWidth - window.innerWidth;
+		// 	const images = gsap.utils.toArray(".pin-wrap > .flex_alink3 img");
+		// 	const imagesLen = images.length;
 
-			const t1 = document.querySelector(".pin-wrap").offsetHeight;
-			const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
+		// 	const t1 = document.querySelector(".pin-wrap").offsetHeight;
+		// 	const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
 
-			const ani_word = document.querySelectorAll(".flex_list_descript > h2");
+		// 	const ani_word = document.querySelectorAll(".flex_list_descript > h2");
 
-			console.log(imagesLen)
-			// let s = document.querySelector('.pin-wrap')
-			gsap.to(".pin-wrap", {
-				x: -horizonWidth,
-				scrollTrigger: {
-					scroller: pageContainer, //locomotive-scroll
-					scrub: true,
-					trigger: "#sectionPin",
-					pin: true,
-					// markers: true,
-					start: "top top",
-					end: horizonWidth,
-					// end: () => `+=${horizonWidth}`,
-					id: "XXXXXXhorizonbox",
-					// toggleActions: "play none none reverse",
-					ease: Linear.easeNone,
-					onUpdate: (self) => {
-						// console.log(self.progress)
-						// 最接近的整數 Math.ceil
-						let xindex = Math.ceil(self.progress * imagesLen)
-						//控制第一張圖g
-						if (self.progress <= 0.15) {
-							// images[0].style.setProperty("transform", 'scale(1)')
-							// images[imagesLen-1].style.setProperty("transform", 'scale(1)')
-							images[0].classList.remove('active');
-							images[imagesLen - 1].classList.remove('active');
+		// 	console.log(imagesLen)
+		// 	// let s = document.querySelector('.pin-wrap')
+		// 	gsap.to(".pin-wrap", {
+		// 		x: -horizonWidth,
+		// 		scrollTrigger: {
+		// 			scroller: pageContainer, //locomotive-scroll
+		// 			scrub: true,
+		// 			trigger: "#sectionPin",
+		// 			pin: true,
+		// 			// markers: true,
+		// 			start: "top top",
+		// 			end: horizonWidth,
+		// 			// end: () => `+=${horizonWidth}`,
+		// 			id: "XXXXXXhorizonbox",
+		// 			// toggleActions: "play none none reverse",
+		// 			ease: Linear.easeNone,
+		// 			onUpdate: (self) => {
+		// 				// console.log(self.progress)
+		// 				// 最接近的整數 Math.ceil
+		// 				let xindex = Math.ceil(self.progress * imagesLen)
+		// 				//控制第一張圖g
+		// 				if (self.progress <= 0.15) {
+		// 					// images[0].style.setProperty("transform", 'scale(1)')
+		// 					// images[imagesLen-1].style.setProperty("transform", 'scale(1)')
+		// 					images[0].classList.remove('active');
+		// 					images[imagesLen - 1].classList.remove('active');
 
-						} else {
-							// images[xindex - 1].style.setProperty("transform", 'scale(1.2)')
-							images[xindex - 1].classList.add('active');
-							ani_word[xindex - 1].classList.add('active');
-							images.forEach((item, index) => {
-								if (index != xindex - 1) {
-									// images[index].style.setProperty("transform", 'scale(1)')
-									images[index].classList.remove('active');
-								}
-							})
-						}
-					}
-				}
-			});
-			// 	}
-			// });
+		// 				} else {
+		// 					// images[xindex - 1].style.setProperty("transform", 'scale(1.2)')
+		// 					images[xindex - 1].classList.add('active');
+		// 					ani_word[xindex - 1].classList.add('active');
+		// 					images.forEach((item, index) => {
+		// 						if (index != xindex - 1) {
+		// 							// images[index].style.setProperty("transform", 'scale(1)')
+		// 							images[index].classList.remove('active');
+		// 						}
+		// 					})
+		// 				}
+		// 			}
+		// 		}
+		// 	});
+		// 	// 	}
+		// 	// });
 
-			gsap.utils.toArray(".textpanel").forEach((section, index) => {
-				gsap.to(this, {
-					scrollTrigger: {
-						trigger: section,
-						scroller: pageContainer,
-						start: "top 100%",
-						end: "bottom 25%",
-						onUpdate: (self) => {
-							section.style.setProperty("--progress", self.progress);
-						}
-					}
-				});
-			});
+		// 	gsap.utils.toArray(".textpanel").forEach((section, index) => {
+		// 		gsap.to(this, {
+		// 			scrollTrigger: {
+		// 				trigger: section,
+		// 				scroller: pageContainer,
+		// 				start: "top 100%",
+		// 				end: "bottom 25%",
+		// 				onUpdate: (self) => {
+		// 					section.style.setProperty("--progress", self.progress);
+		// 				}
+		// 			}
+		// 		});
+		// 	});
 
-			gsap.utils.toArray(".circle").forEach((section, index) => {
-				gsap.to(this, {
-					scrollTrigger: {
-						trigger: '.textpanel',
-						scroller: pageContainer,
-						start: "top 50%",
-						end: "bottom 25%",
-						// markers: true,
-						id: "circle",
-						onUpdate: (self) => {
-							// section.style.setProperty("--progress", self.progress);
-							section.style.setProperty("transform", 'scale(15)');
-						}
-					},
-					// scale: 15,
-				});
-			});
+		// 	gsap.utils.toArray(".circle").forEach((section, index) => {
+		// 		gsap.to(this, {
+		// 			scrollTrigger: {
+		// 				trigger: '.textpanel',
+		// 				scroller: pageContainer,
+		// 				start: "top 50%",
+		// 				end: "bottom 25%",
+		// 				// markers: true,
+		// 				id: "circle",
+		// 				onUpdate: (self) => {
+		// 					// section.style.setProperty("--progress", self.progress);
+		// 					section.style.setProperty("transform", 'scale(15)');
+		// 				}
+		// 			},
+		// 			// scale: 15,
+		// 		});
+		// 	});
 
-			ScrollTrigger.addEventListener("refresh", () => locoScroll.update()); //	
-			ScrollTrigger.refresh();
-		});
+		// 	ScrollTrigger.addEventListener("refresh", () => scroller.update()); //	
+		// 	ScrollTrigger.refresh();
+		// });
 
 
 		/* 滑鼠事件 */

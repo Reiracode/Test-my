@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel='stylesheet' href='https://unpkg.com/locomotive-scroll@4.0.6/dist/locomotive-scroll.min.css' />
+<script src='https://unpkg.com/locomotive-scroll@4.0.6/dist/locomotive-scroll.min.js'></script>
+<style>
+	body,
+html {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 2;
+	font-family: 'Noto Sans JP','Helvetica Neue','Lucida Grande','Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3',Meiryo,'メイリオ',sans-serif;
+  font-weight: 300;
+  color: var(--black-color);
+  font-feature-settings: "palt";
+	overflow-x: hidden;
+}
+body{
+	overflow: hidden;
+}
+	h1{
+		font-size: 100px;
+	}
+
+	[data-scroll-direction="horizontal"] [data-scroll-container] {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+[data-scroll] {
+  transform: none;
+  display: inline-block;
+}
+
+</style>
+ 
+</head>
+<body class="contents-wrapper top">
+	<div  data-scroll-container data-horizontal="true">
+    <!-- <div class="main area-scroll"> -->
+
+      <section class="section scroll-section" data-scroll-section id="section1">
+        <div class="section-header">
+          <h1 class="title size-xl"><span class="label">
+            <span data-scroll data-scroll-speed="-2" data-delay="0.05" data-scroll-position="left">SCROLL</span><br>
+            <span data-scroll data-scroll-speed="3.5" data-delay="0.05" data-scroll-position="left">DEMO PAGE</span>
+          </span>
+        </div>
+      </section>
+          
+      <section class="section scroll-section" data-scroll-section id="section2">
+        <div class="section-header">
+    
+        </div>
+      </section>
+          
+      <section class="section scroll-section" data-scroll-section id="section3">
+        <div class="section-header setion_headding">
+          <h2 class="title section-title type-line_bottom"><span class="label" data-scroll data-scroll-speed="-2" data-scroll-direction="vertical">section3</span></h2>
+        </div>
+        <div class="section-block">
+          <p class="concept">あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、<br>
+            うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。<br>
+            またそのなかでいっしょになったたくさんのひとたち、<br>
+            ファゼーロとロザーロ、羊飼のミーロや、<br>
+            顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、<br>
+            いまこの暗い巨きな石の建物のなかで考えていると、</p>
+        </div>
+        
+      </section>
+
+		<section class="section scroll-section" data-scroll-section id="section1">
+        <div class="section-header">
+          <h1 class="title size-xl"><span class="label">
+            <span data-scroll data-scroll-speed="-2" data-delay="0.05" data-scroll-position="left">SCROLL</span><br>
+            <span data-scroll data-scroll-speed="3.5" data-delay="0.05" data-scroll-position="left">DEMO PAGE</span>
+          </span>
+        </div>
+      </section>
+
+ 
+
+
+  
+  <footer class="contents-footer">
+    <section class="section">
+    <p class="copyright">Copyright HOGEHOGE All Right Reserved.</p>
+    <section>
+  </footer> 
+        <!-- </div> -->
+</div>
+ 
+<script>
+/*===============================================================
+
+	load event
+
+===============================================================*/
+ 
+
+  var scroll = new LocomotiveScroll({
+    el: document.querySelector('.contents-wrapper'),
+    smooth: true,
+    direction: 'horizontal',
+    multiplier: 1, // 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ縺ｮ騾溷ｺｦ�亥､縺悟ｰ上＆縺�⊇縺ｩ驕�￥縺ｪ繧具ｼ�
+    horizontalGesture: true
+  });
+ 
+
+
+ 
+</script>
+	
+</body>
+</html>
