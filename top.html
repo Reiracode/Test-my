@@ -11,38 +11,507 @@
   <meta name="description" content="F2E Desinger in Taiwan">
   <title>Rehome</title>
   <link rel="stylesheet" href="css/all.css">
-  <link rel='stylesheet' href=' ./js/locomotive-scroll.css' />
 
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+		<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css' /> -->
+  <link rel="stylesheet" href="./js/normalize.css">
+  <link rel="stylesheet" href="./js/all.css">
+  <!-- <link rel='stylesheet' href=' ./js/locomotive-scroll.css' /> -->
+
+
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      line-height: 2;
+      font-weight: 300;
+      color: var(--black-color);
+      font-feature-settings: "palt";
+      overflow-x: hidden;
+    }
+
+    /* body {
+				position: relative;
+			} */
+
+    .c-header_title_line span {
+      display: inline-block;
+    }
+
+    .intro_section {
+      width: 100vw;
+    }
+
+    .custom-p {
+      opacity: 0;
+      transition: opacity 6s;
+    }
+
+    .scroll-class {
+      opacity: 1;
+    }
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      /* background-color: #fff; */
+      background-color: #031254;
+      mix-blend-mode: difference;
+      isolation: isolate;
+      z-index: 9999;
+      border-radius: 50%;
+      transition: all .5s;
+    }
+
+    .circle:hover {
+      transform: scale(2.5)
+    }
+
+    .left-h1 {
+      color: #253439;
+      font-size: 40px;
+      font-weight: bolder;
+      padding: 2em 0 0em 3em;
+      /* opacity: 0; */
+      transition: opacity 4s;
+    }
+
+    .line {
+      width: 100%;
+      max-width: 800px;
+      height: 2px;
+      margin: 0 0 10px 0;
+      display: inline-block;
+      background-color: rgb(251, 183, 183);
+    }
+
+    /* special offers section */
+    .centered-h1 {
+      text-align: center;
+      color: #253439;
+      font-size: 40px;
+      font-weight: bolder;
+      padding-top: 2em;
+      opacity: 0;
+      transition: opacity 4s;
+    }
+
+    .appear {
+      opacity: 1;
+    }
+
+    .centered-recommendations-container {
+      width: 13%;
+      margin: 0 auto;
+    }
+
+    .special-offers-container {
+      width: 86%;
+      margin: 0 auto;
+      display: flex;
+      padding-bottom: 5em;
+    }
+
+    .special-offers-preview-container {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .blog {
+      width: 90%;
+      margin-left: 7em;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .blogpost {
+      padding: 2em;
+    }
+
+    .blogpost_preview {
+      display: flex;
+    }
+
+    .video {
+      width: 60%;
+      padding: 2em;
+    }
+
+    .video_preview>img {
+      width: 100%;
+      border-radius: 25px;
+    }
+
+    .blogpost_preview_img {
+      width: 25%;
+      height: 180px;
+      padding: .5em;
+      border-radius: 0 20px 20px 20px;
+    }
+
+    .blogpost_preview_img>img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0 15px 15px 15px;
+    }
+
+    /* .wrap_word{
+				position: absolute;
+				line-height: 10vw;
+				color: transparent;
+				font-family: "Bodoni Moda";
+				font-weight: 400;
+				font-size: 80px;
+				-webkit-font-smoothing: antialiased;
+				-webkit-text-stroke: 2px #ffffff;
+				margin-top: 50%;
+				overflow: hidden;
+			
+			
+			} */
+    .main_ds {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+    }
+
+    .wrap_word {
+      color: transparent;
+      /* color:#bda3a3c9; */
+      font-family: "Bodoni Moda";
+      font-weight: 400;
+      font-size: 100px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke: 1.2px #fff;
+      overflow: hidden;
+      /* position: absolute; */
+      line-height: 120px;
+    }
+
+
+    .wrap_word .copy-wrap {
+      font-family: "Bodoni Moda";
+      display: block;
+      transition: all 0.7s 0s ease-in-out;
+      position: relative;
+      transform: translate3d(0, -100%, 0);
+      /* 					background: #c2c2ba; */
+    }
+
+    .header {
+      width: 100%;
+      height: 100px;
+      z-index: 10;
+      position: fixed;
+      transition: transform 0.6s ease-in;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .header.bg-dark.navbar-dark {
+      background: black;
+      color: white;
+    }
+
+    .header.bg-light.navbar-light {
+      background: yellow;
+      color: black;
+    }
+
+    .header.unpinned {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    #scroll-direction {
+      height: 200vh;
+    }
+
+    #scroll-direction [data-scroll-sticky] {
+      height: 60vh;
+      background: red;
+    }
+
+
+    html.has-scroll-smooth {
+      overflow: hidden;
+    }
+
+    html.has-scroll-dragging {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .has-scroll-smooth body {
+      overflow: hidden;
+    }
+
+    .has-scroll-smooth [data-scroll-container] {
+      min-height: 100vh;
+    }
+
+    [data-scroll-direction=horizontal] [data-scroll-container] {
+      white-space: nowrap;
+      height: 100vh;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    [data-scroll-direction=horizontal] [data-scroll-section] {
+      display: inline-block;
+      vertical-align: top;
+      white-space: nowrap;
+      height: 100%;
+    }
+
+    .c-scrollbar {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 11px;
+      z-index: 9999;
+      height: 100%;
+      transform-origin: center right;
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: 0;
+    }
+
+    .c-scrollbar:hover {
+      transform: scaleX(1.45);
+    }
+
+    .c-scrollbar:hover,
+    .has-scroll-scrolling .c-scrollbar,
+    .has-scroll-dragging .c-scrollbar {
+      opacity: 1;
+    }
+
+    [data-scroll-direction=horizontal] .c-scrollbar {
+      width: 100%;
+      height: 10px;
+      top: auto;
+      bottom: 0;
+      transform: scaleY(1);
+    }
+
+    [data-scroll-direction=horizontal] .c-scrollbar:hover {
+      transform: scaleY(1.3);
+    }
+
+    .c-scrollbar_thumb {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: black;
+      opacity: 0.5;
+      width: 7px;
+      border-radius: 10px;
+      margin: 2px;
+      cursor: -webkit-grab;
+      cursor: grab;
+    }
+
+    .has-scroll-dragging .c-scrollbar_thumb {
+      cursor: -webkit-grabbing;
+      cursor: grabbing;
+    }
+
+    [data-scroll-direction=horizontal] .c-scrollbar_thumb {
+      right: auto;
+      bottom: 0;
+    }
+
+    body {
+      font-family: system-ui;
+      color: white;
+      margin: 0;
+    }
+
+    [data-scroll-section] {}
+
+    [data-scroll-section] h1 {
+      margin-top: 0;
+    }
+
+    [data-scroll-section]:nth-child(1),
+    [data-scroll-section]:nth-child(3) {
+      background: linear-gradient(to bottom, darkorchid, #6b238f);
+    }
+
+    [data-scroll-section]:nth-child(2),
+    [data-scroll-section]:nth-child(4) {
+      background: linear-gradient(to bottom, CornflowerBlue, #1f66e5);
+    }
+
+    .header {
+      width: 100%;
+      height: 100px;
+      z-index: 10;
+      position: fixed;
+      transition: transform 0.6s ease-in;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .header.bg-dark.navbar-dark {
+      background: black;
+      color: white;
+    }
+
+    .header.bg-light.navbar-light {
+      background: yellow;
+      color: black;
+    }
+
+    .header.unpinned {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    #scroll-direction {
+      height: 200vh;
+    }
+
+    #scroll-direction [data-scroll-sticky] {
+      height: 60vh;
+      background: red;
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- <div class="o-scroll" id="js-scroll" data-scroll-container> -->
   <div class="container" id="scroll-zone" data-scroll-container>
-    <header class="ds-n">
-      <h1 class="logo texthide">
-        <a href="index.html">Rehome</a>
-      </h1>
 
-      <ul class="navbar">
-        <li>
-          <a class="modal_open">
-            <img src="./images/cloversky/icon-search_black.svg" alt="search_icon">
-          </a>
-        </li>
-        <li>
-          <a href="project_shopcart.html">
-            <img src="./images/cloversky/icon-cart_black.svg" alt="cart_icon">
-            <div class="shopart_amount"></div>
-          </a>
-        </li>
 
-      </ul>
-      <button class="nav-btn" id="triger_opennav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <!-- mobile work -->
+          <header style="position: fixed; top: 0; left: 0; z-index: 900; max-width: 1920px;">
+            <a href="#Intro" data-scroll-to="" id="logo">
+              <svg id="enefc6xyui381" width="69" height="44" stroke="#ffffff" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 69 44" shape-rendering="geometricPrecision"
+                text-rendering="geometricPrecision">
+                <g id="enefc6xyui382" display="none">
+                  <rect id="enefc6xyui383" width="68.920000" height="44" rx="0" ry="0"
+                    transform="matrix(1 0 0 1 0.02000000000000 0.01000000000000)" clip-rule="evenodd" fill="rgb(75,98,173)"
+                    fill-rule="evenodd" stroke="none" stroke-width="1" />
+                </g>
+                <g id="enefc6xyui384">
+                  <g id="enefc6xyui385">
+                    <g id="enefc6xyui386">
+                      <path id="enefc6xyui387"
+                        d="M303.130000,398.790000L289.430000,398.790000L289.430000,408.260000L277.840000,398.790000L264.240000,398.790000L264.240000,443.190000L277.930000,443.190000L277.910000,433.050000L289.520000,443.190000L303.120000,443.180000L303.120000,433.330000L322.770000,433.350000L303.120000,418.360000L303.130000,398.790000ZM314.090000,408.650000L333.350000,424.610000L333.360000,408.630000L314.090000,408.650000Z"
+                        clip-rule="evenodd" fill="rgb(255,255,255)" fill-rule="evenodd" stroke="none" stroke-width="1" />
+                    </g>
+                  </g>
+                  <g id="enefc6xyui388">
+                    <g id="enefc6xyui389">
+                      <path id="enefc6xyui3810"
+                        d="M38.830000,0.010000L25.160000,0.010000L25.160000,9.400000L13.590000,0.010000L0.020000,0.010000L0.020000,44.020000L13.690000,44.020000L13.670000,33.970000L25.260000,44.020000L38.840000,44.010000L38.840000,34.240000L58.450000,34.260000L38.820000,19.410000L38.830000,0.010000ZM49.770000,9.780000L68.990000,25.590000L69,9.750000L49.770000,9.780000Z"
+                        clip-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1" fill-rule="evenodd" stroke="rgb(255,255,255)"
+                        stroke-width="1" stroke-dashoffset="281.530000" stroke-dasharray="281.530000" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </a>
+            <div id="switch-colors" class="is-active">
+              <span class="onoffswitch-text">Color</span>
+              <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
+                <label class="onoffswitch-label" for="myonoffswitch">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          
+            <nav id="nav-socials">
+              <ul>
+                <li>
+                  <a href="https://www.behance.net/sabev">
+                    <svg version="1.1" stroke="#ffffff" width="18" height="18" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.958 511.958"
+                      style="enable-background:new 0 0 511.958 511.958;" xml:space="preserve">
+                      <g>
+                        <g>
+                          <g>
+                            <path
+                              d="M210.624,240.619c10.624-5.344,18.656-11.296,24.16-17.728c9.792-11.584,14.624-26.944,14.624-45.984
+                                                          c0-18.528-4.832-34.368-14.496-47.648c-16.128-21.632-43.424-32.704-82.016-33.28H0v312.096h142.56
+                                                          c16.064,0,30.944-1.376,44.704-4.192c13.76-2.848,25.664-8.064,35.744-15.68c8.96-6.624,16.448-14.848,22.4-24.544
+                                                          c9.408-14.656,14.112-31.264,14.112-49.76c0-17.92-4.128-33.184-12.32-45.728C238.912,255.627,226.752,246.443,210.624,240.619z
+                                                          M63.072,150.187h68.864c15.136,0,27.616,1.632,37.408,4.864c11.328,4.704,16.992,14.272,16.992,28.864
+                                                          c0,13.088-4.32,22.24-12.864,27.392c-8.608,5.152-19.776,7.744-33.472,7.744H63.072V150.187z M171.968,348.427
+                                                          c-7.616,3.68-18.336,5.504-32.064,5.504H63.072v-83.232h77.888c13.568,0.096,24.128,1.888,31.68,5.248
+                                                          c13.44,6.08,20.128,17.216,20.128,33.504C192.768,328.651,185.856,341.579,171.968,348.427z" />
+                            <rect x="327.168" y="110.539" width="135.584" height="38.848" />
+                            <path
+                              d="M509.856,263.851c-2.816-18.08-9.024-33.984-18.688-47.712c-10.592-15.552-24.032-26.944-40.384-34.144
+                                                        c-16.288-7.232-34.624-10.848-55.04-10.816c-34.272,0-62.112,10.72-83.648,32c-21.472,21.344-32.224,52.032-32.224,92.032
+                                                        c0,42.656,11.872,73.472,35.744,92.384c23.776,18.944,51.232,28.384,82.4,28.384c37.728,0,67.072-11.232,88.032-33.632
+                                                        c13.408-14.144,20.992-28.064,22.656-41.728H446.24c-3.616,6.752-7.808,12.032-12.608,15.872
+                                                        c-8.704,7.04-20.032,10.56-33.92,10.56c-13.216,0-24.416-2.912-33.76-8.704c-15.424-9.28-23.488-25.536-24.512-48.672h170.464
+                                                        C512.16,289.739,511.52,274.411,509.856,263.851z M342.976,269.835c2.24-15.008,7.68-26.912,16.32-35.712
+                                                        c8.64-8.768,20.864-13.184,36.512-13.216c14.432,0,26.496,4.128,36.32,12.416c9.696,8.352,15.168,20.48,16.288,36.512H342.976z" />
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+                <li><a href="https://codepen.io/k0ko88/"><svg id="regular" stroke="#ffffff" width="18" height="18"
+                      enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="m24 7.598c-.044-.264-.08-.47-.36-.641-11.449-6.791-11.287-7.297-12.03-6.848-8.677 5.394-11.092 6.597-11.439 7.017-.315.323-.171.818-.171 8.298-.021.851 7.743 5.462 11.519 8.404.333.237.752.199 1.003-.029 11.224-7.956 11.497-7.636 11.478-8.375 0 0-.012-7.927 0-7.826zm-1.5 6.491-3.876-2.359 3.876-2.697zm-5.277-3.212-4.473-2.722v-6.07l9.126 5.555zm-5.223 3.633-3.876-2.697 3.876-2.359 3.876 2.359zm-.75-12.426v6.074c-1.739 1.079-3.209 1.98-4.451 2.734l-4.675-3.252zm-5.857 9.658c-1.874 1.127-3.098 1.843-3.893 2.32v-5.029zm1.33.924 4.527 3.149v5.999l-9.126-6.349zm6.027 9.149v-5.999l4.527-3.149 4.599 2.799z" />
+                    </svg></a></li>
+                <li><a href="https://www.linkedin.com/in/nikolay-sabev-a895872b/"><svg viewBox="-21 -35 682.66669 682"
+                      stroke="#ffffff" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="m77.613281-.667969c-46.929687 0-77.613281 30.816407-77.613281 71.320313 0 39.609375 29.769531 71.304687 75.8125 71.304687h.890625c47.847656 0 77.625-31.695312 77.625-71.304687-.894531-40.503906-29.777344-71.320313-76.714844-71.320313zm0 0" />
+                      <path d="m8.109375 198.3125h137.195313v412.757812h-137.195313zm0 0" />
+                      <path
+                        d="m482.054688 188.625c-74.011719 0-123.640626 69.546875-123.640626 69.546875v-59.859375h-137.199218v412.757812h137.191406v-230.5c0-12.339843.894531-24.660156 4.519531-33.484374 9.917969-24.640626 32.488281-50.167969 70.390625-50.167969 49.644532 0 69.5 37.851562 69.5 93.339843v220.8125h137.183594v-236.667968c0-126.78125-67.6875-185.777344-157.945312-185.777344zm0 0" />
+                    </svg></a></li>
+              </ul>
+            </nav>
+            <nav id="navigation">
+              <button class="hamburger hamburger--collapse hamburger--accessible js-hamburger" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+                <span class="hamburger-label">Menu</span>
+              </button>
+              <ul>
+                <li><a href="#About" data-scroll-to="" data-scroll-speed="1">About me</a></li>
+                <li><a href="#sectionPin" data-scroll-to="" data-scroll-speed="1">Portfolio</a></li>
+                <li><a href="#Contacts" data-scroll-to="" data-scroll-speed="1">Contacts</a></li>
+              </ul>
+            </nav>
+            <span id="animated-arrow">
+              <svg width="60" height="30" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                <g>
+                  <g>
+                    <path d="M508.875,248.458l-160-160c-4.167-4.167-10.917-4.167-15.083,0c-4.167,4.167-4.167,10.917,0,15.083l141.792,141.792
+                                              H10.667C4.771,245.333,0,250.104,0,256s4.771,10.667,10.667,10.667h464.917L333.792,408.458c-4.167,4.167-4.167,10.917,0,15.083
+                                              c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125l160-160C513.042,259.375,513.042,252.625,508.875,248.458z
+                                              " />
+                  </g>
+                </g>
+              </svg>
+              <span>Scroll Down</span>
+            </span>
+          </header>
 
-    </header>
+    <div class="header bg-light navbar-light home" id="header">
+      <div class="sticky-header">HEADER</div>
+    </div>
+
+
     <section class="wrapper">
       <!-- <div class="mircle"></div> -->
       <div class="logo_bg" data-scroll data-scroll-speed="-1.5">
@@ -51,13 +520,13 @@
 
       <div class="main_ds" data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
         <h2 class="wrap_word">
-          <span class="copy-wrap">Creating</span>
+          <span class="copy-wrap">Creating </span>
         </h2>
         <h2 class="wrap_word">
-          <span class="copy-wrap">Sustainable</span>
+          <span class="copy-wrap">Sustainable </span>
         </h2>
         <h2 class="wrap_word">
-          <span class="copy-wrap">Designed</span>
+          <span class="copy-wrap">Designed </span>
         </h2>
       </div>
 
@@ -1250,62 +1719,44 @@
     <section id="sectionPin">
       <div class="pin-wrap">
         <div class="flex_alink3">
-          <!-- <h2 class='textpanel' data-scroll data-scroll-speed="0.5" data-scroll-delay="0.05">
+          <h2 data-scroll data-scroll-speed="0.5" data-scroll-delay="0.05">
             Dressing the home
-          </h2> -->
-          <div class='textpanel' >
-            <h2 data-splitting='words'>Dressing the home</h2>
-          </div>
-
-          <p data-scroll data-scroll-speed="2" data-scroll-delay="0.07">
-            クローバースカイは、1950〜70年代に生産されたデザイナーズアイテムを中心に、
-            自社のバイヤーが北欧各地で直接現地ディーラーから仕入れ輸入したヴィンテージ家具を、
-            自社工房にて専属の家具職人が一点一点心を込めて修理・メンテナンスを行なっております。
-          </p>
+          </h2>
+          <span data-scroll data-scroll-speed="2" data-scroll-delay="0.07">Want to take your bedroom to the next level?
+            Start with a new bed
+            or headboard. Then get layering
+            with just-washed
+            bedding, plump cushions
+            and a fluffy rug (or two)
+          </span>
         </div>
 
         <div class="flex_alink3">
           <div class="flex_list_card">
             <img src="./images/cloversky/flex_list_img01.jpeg" alt="stories_1">
-            <span class="unsplash_info">
-              Photo by <a href="https://unsplash.com/@insideweather" target="_blank">Inside Weather</a></br>on
-              <a href="https://unsplash.com/@insideweather" target="_blank">Unsplash</a>
-            </span>
           </div>
 
           <div class="flex_list_descript">
-            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Discover </br>More Love</h2>
+            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Discover more from the collection</h2>
           </div>
         </div>
-
         <div class="flex_alink3">
           <div class="flex_list_card">
             <img src="./images/cloversky/flex_list_img02.jpeg" alt="stories_1">
-            <span class="unsplash_info">
-              Photo by <a href="https://unsplash.com/@beccatapert" target="_blank">
-                Becca Tapert</a> </br>
-              on <a href="https://unsplash.com/@beccatapert" target="_blank">Unsplash</a>
-            </span>
           </div>
 
           <div class="flex_list_descript">
-            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Make Every Fabulous</h2>
+            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.2">Make every fabulous</h2>
           </div>
         </div>
-
         <div class="flex_alink3">
-          <div class="flex_list_card">   
-            <img src="./images/cloversky/flex_list_img03.jpg" alt="stories_1">
-            <span class="unsplash_info">
-              Photo by <a
-                href="https://unsplash.com/@srosinger3997" target="_blank">Samantha
-                Gades</a> </br>on <a
-                href="https://unsplash.com/@srosinger3997" target="_blank">Unsplash</a>
-            </span>
+          <div class="flex_list_card">
+            <img src="./images/cloversky/flex_list_img01.jpeg" alt="stories_1">
           </div>
 
           <div class="flex_list_descript">
-            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Dressing The</br>Home</h2>
+            <h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.2">Dressing the home</h2>
+            <!-- <h3>Simple changes for a more sustainable life</h3> -->
           </div>
         </div>
       </div>
@@ -1314,11 +1765,13 @@
     <section class="intro_section">
       <div class='textpanel' data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
         <h2 data-splitting='words'>NEW ARRVIALS</h2>
+        <!-- <div class="circle"></div> -->
       </div>
 
       <div class="newimgs"></div>
       <a href="./collections.html" class="explore-button">view more<i class="fas fa-arrow-right"></i></a>
     </section>
+
 
     <section class="intro_section">
       <div class='textpanel' data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
@@ -1343,72 +1796,73 @@
       </div>
     </section>
 
-    <!-- <footer class="flex-layout">  
-      <div class="footer_item">
-        <h2 class="logo">
-          <a href="index.html" class="texthide">Rehome</a>
-        </h2>
 
-        <p>株式会社クライマックス</p>
-        <p>〒541-0059 大阪市中央区博労町1-7-2</p>
-        <p>TEL 06-6271-5070（10:00～19:00）</p>
+    <footer>
+      <div class="flex-layout">
+        <div class="footer_item">
+          <h2>CUSTOMER SUPPORT</h2>
+          <p>Tel:+27-211111-424-1037</p>
+          <p>Fax:+27-21-424-1036</p>
+          <p>Contact by Mail</p>
+        </div>
+        <div class="footer_item">
+          <h2>BUSINESS HOURS</h2>
+          <p>Mon-Fri.08:00-17:00</p>
+          <p>Saturday.08:00-12:00</p>
+        </div>
+        <div class="footer_item">
+          <h2>RESOURCES</h2>
+          <ul>
+            <li><a href="#">Reservatiob and Booking</a></li>
+            <li><a href="#">Booking Condition</a></li>
+            <li><a href="#">Visa and Passport</a></li>
+            <li><a href="#">About Siyabona Africa (Pty) Ltd</a></li>
+          </ul>
+        </div>
+        <div class="footer_item">
+          <h2>CONTACT</h2>
+          <p class="icontype" data-icon="&#xf041">732/21 Second Street, Manchester, King Street, Kingston United Kingdom
+          </p>
+          <p class="icontype" data-icon="&#xf10b">345-677-554</p>
+          <p class="icontype" data-icon="&#xf095">323-678-567</p>
+          <p class="icontype" data-icon="&#xf0e0">info@altairtheme.com</p>
+          <p class="icontype" data-icon="&#xf0ac">themegoods.com</p>
+        </div>
       </div>
 
-      <div class="footer_item">
-        <h2>CONTACT</h2>
-        <div class="menu-link">
-          <a href="https://www.makeshop.jp/ssl/popup_mailmagazine.html?db=clover2016">メルマガ登録</a>
-          <a href="javascript:ssl_login('mypage')">会員登録</a>
-        </div>
-
+      <div class="footer_link">
         <ul class="ct-connect">
           <li><a><i class="fab fa-twitter"></i></a></li>
           <li><a><i class="fab fa-twitter-square"></i></a></li>
           <li><a><i class="fab fa-instagram"></i></a></li>
           <li><a><i class="fab fa-facebook"></i></a></li>
         </ul>
-
-
+        <p>&copy;2020 Reira.Co.,Ltd. All Rights Reserved.</p>
       </div>
-
-      <div class="footer_item">
-        <h2>HOME</h2>
-        <ul>
-          <li><a href="#">ショッピングガイド</a></li>
-          <li><a href="#">プライバシーポリシー</a></li>
-          <li><a href="#">会社概要</a></li>
-          <li><a href="#">サイトマップ</a></li>
-        </ul>
-      </div>
-
-      <small>&copy;2020 Reira.Co.,Ltd. All Rights Reserved.</small>
-
-    </footer>   -->
-    <footer class='flex-layout'></footer>
+    </footer>
   </div>
 
   <div class="cursorFront"></div>
   <div class="cursorBack"></div>
   <script src="./js/jquery.min.js"></script>
-    <!-- <script src="./footerall.js"></script> -->
   <!-- GSAP -->
   <script src="./js/format.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>  -->
+
+  <!-- 
+		<script src="https://unpkg.com/splitting@1.0.5/dist/splitting.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+		<script src="https://unpkg.com/gsap/dist/ScrollTrigger.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+	 -->
   <script src="./js/splitting.min.js"></script>
   <script src="./js/gsap.min.js"></script>
   <script src="./js/ScrollTrigger.min.js"></script>
-  <script src="./js/locomotive-scroll.min.js"></script>
+  <!-- <script src="./js/locomotive-scroll.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1/dist/locomotive-scroll.min.js"></script>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1/dist/locomotive-scroll.min.js"></script> -->
 
   <script>
-    // $(document).ready(function () {
-    $(function () {
-      $("footer").load("footer.html");
-
-      $("header").load("headers.html");
-      $('header').appendTo('body');
-
-    // });
     // GSAP
     gsap.registerPlugin(ScrollTrigger);
     Splitting();
@@ -1418,6 +1872,9 @@
     const locoScroll = new LocomotiveScroll({
       el: pageContainer,
       smooth: true,
+      smartphone: {
+      	smooth: true
+      },
       getSpeed: true,
       getDirection: true,
       reloadOnContextChange: true
@@ -1442,90 +1899,140 @@
       pinType: pageContainer.style.transform ? "transform" : "fixed"
     });
 
-    //header 
-    const header = document.querySelector('header');
+    // ///////header 
+    const header = document.getElementById('header');
+    console.log(header)
+    let hidden = false, static = true;
     locoScroll.on('scroll', (instance) => {
-      // let headerHeight = header.getBoundingClientRect().height;
-      if (instance.direction === 'down' && instance.scroll.y > 140) {
-        header.classList.add('ds-f');
-        header.classList.remove('ds-n');
-      } else {
-        header.classList.remove('ds-f')
-        header.classList.add('ds-n');
+      let headerHeight = header.getBoundingClientRect().height;
+      console.log("headerHeight" + headerHeight)
+      console.log(instance.scroll.y)
+      if (instance.direction === 'down' && static) {
+        if (instance.scroll.y > 140) {
+
+          header.classList.remove('navbar-light', 'bg-light');
+          header.classList.add('navbar-dark', 'bg-dark');
+        }
+
       }
+      // if (instance.direction === 'up' && !static) {
+      // 	if (instance.scroll.y <= headerHeight) {
+      // 		header.classList.remove('pinned');
+      // 		if (header.classList.contains('home')) {
+      // 			header.classList.remove('navbar-dark', 'bg-dark');
+      // 			header.classList.add('navbar-light', 'bg-light');
+      // 		}
+      // 		static = true;
+      // 	}
+      // }
+      // if (instance.direction === 'down' && !hidden) {
+      // 	if (instance.scroll.y > (headerHeight + 200)) {
+      // 		//console.log('hidden');
+      // 		header.classList.remove('pinned');
+      // 		header.classList.add('unpinned');
+      // 		hidden = true;
+      // 	}
+      // }
+      // if (instance.direction === 'up' && hidden) {
+      //console.log('show');
+      // header.classList.remove('unpinned');
+      // header.classList.add('pinned');
+      // hidden = false;
+      // }
     });
+
+
 
 
     ////////////////////////////////////
     $(window).on('load', function () {
+      // $("header").load("header.html");
       // horizon scroll 手機不流暢 所以限定桌機
-      ScrollTrigger.matchMedia({
-        "(min-width: 800px)": function () {
-          let horizonWidth = document.querySelector(".pin-wrap").offsetWidth - window.innerWidth;
-          const images = gsap.utils.toArray(".pin-wrap > .flex_alink3 img");
-          const imagesLen = images.length;
-          const t1 = document.querySelector(".pin-wrap").offsetHeight;
-          const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
-          const ani_word = document.querySelectorAll(".flex_list_descript > h2");
+      // ScrollTrigger.matchMedia({
+      // only desktop
+      // "(min-width: 800px)": function () {
+      let horizonWidth = document.querySelector(".pin-wrap").offsetWidth - window.innerWidth;
+      const images = gsap.utils.toArray(".pin-wrap > .flex_alink3 img");
+      const imagesLen = images.length;
 
-          console.log(imagesLen)//3
-          // ******* horizon scroll
-          gsap.to(".pin-wrap", {
-            x: -horizonWidth,
-            scrollTrigger: {
-              scroller: pageContainer, //locomotive-scroll
-              scrub: true,
-              trigger: "#sectionPin",
-              pin: true,
-              id: "XXXXX",
-              markers: true,
-              start: "top top",
-              end: () => "+=" + document.querySelector('.pin-wrap').scrollHeight,
-              ease: Linear.easeNone,
-              onUpdate: (self) => {
-                // console.l  og(self.progress )
-                // 最接近的整數 Math.ceil
-                // if (self.progress >= 0.15 && self.progress <= 0.75) {
-                  let xindex = Math.ceil(self.progress * 0.9 * imagesLen);
-          
-                  if (!!xindex){
-                    images[xindex - 1].classList.add('active');
-                    ani_word[xindex - 1].classList.add('active');
-                  }
+      const t1 = document.querySelector(".pin-wrap").offsetHeight;
+      const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
 
-                  // images.forEach((item, index) => {
-                  //   console.log(index)
-                  //   if (index !== xindex - 1) {
-                  //     images[index].classList.remove('active');
-                  //     ani_word[index].classList.remove('active');
-                  //   }
-                  // })
-                // }
-              }
-            },
-            ease: "none"
-          });
+      const ani_word = document.querySelectorAll(".flex_list_descript > h2");
+
+      console.log(imagesLen)
+      // let s = document.querySelector('.pin-wrap')
+      gsap.to(".pin-wrap", {
+        x: -horizonWidth,
+        scrollTrigger: {
+          scroller: pageContainer, //locomotive-scroll
+          scrub: true,
+          trigger: "#sectionPin",
+          pin: true,
+          // markers: true,
+          start: "top top",
+          end: horizonWidth,
+          // end: () => `+=${horizonWidth}`,
+          id: "XXXXXXhorizonbox",
+          // toggleActions: "play none none reverse",
+          ease: Linear.easeNone,
+          onUpdate: (self) => {
+            // console.log(self.progress)
+            // 最接近的整數 Math.ceil
+            let xindex = Math.ceil(self.progress * imagesLen)
+            //控制第一張圖g
+            if (self.progress <= 0.15) {
+              // images[0].style.setProperty("transform", 'scale(1)')
+              // images[imagesLen-1].style.setProperty("transform", 'scale(1)')
+              images[0].classList.remove('active');
+              images[imagesLen - 1].classList.remove('active');
+
+            } else {
+              // images[xindex - 1].style.setProperty("transform", 'scale(1.2)')
+              images[xindex - 1].classList.add('active');
+              ani_word[xindex - 1].classList.add('active');
+              images.forEach((item, index) => {
+                if (index != xindex - 1) {
+                  // images[index].style.setProperty("transform", 'scale(1)')
+                  images[index].classList.remove('active');
+                }
+              })
+            }
+          }
         }
       });
+      // 	}
+      // });
 
-      // section words
       gsap.utils.toArray(".textpanel").forEach((section, index) => {
-        console.log(section)
-         console.log(index)
         gsap.to(this, {
           scrollTrigger: {
             trigger: section,
             scroller: pageContainer,
-            id: "textpanel ",
-            markers: true,
             start: "top 100%",
             end: "bottom 25%",
-            scrub: 0,
             onUpdate: (self) => {
               section.style.setProperty("--progress", self.progress);
             }
-
           }
+        });
+      });
+
+      gsap.utils.toArray(".circle").forEach((section, index) => {
+        gsap.to(this, {
+          scrollTrigger: {
+            trigger: '.textpanel',
+            scroller: pageContainer,
+            start: "top 50%",
+            end: "bottom 25%",
+            // markers: true,
+            id: "circle",
+            onUpdate: (self) => {
+              // section.style.setProperty("--progress", self.progress);
+              section.style.setProperty("transform", 'scale(15)');
+            }
+          },
+          // scale: 15,
         });
       });
 
@@ -1534,7 +2041,7 @@
     });
 
 
-    /* mouse  */
+    /* 滑鼠事件 */
     $(window).mousemove(function (e) {
       let frontPosY = `${e.clientY - ($('.cursorFront').height() / 2)}px`;
       let frontPosX = `${e.clientX - ($('.cursorFront').width() / 2)}px`;
@@ -1547,64 +2054,226 @@
     });
 
     $("h2").mouseover(function (e) {
-      // hovFlag = true;
+      hovFlag = true;
       $(".cursorFront").addClass("hov");
     });
 
     $("h2").mouseout(function (e) {
-      // hovFlag = false;
+      hovFlag = false;
       $(".cursorFront").removeClass("hov");
     });
 
-    // **** ani start *********
+    // ********************* ani start *********
     var cursorFront = $(".cursorFront");
     function start() {
       var tl = new TimelineMax();
-      //#f2c9c9
-      tl.to(".svg_bg path", { duration: 2.6, strokeDashoffset: "0" , ease: Linear.easeNone })
+      tl.to(".svg_bg path", { duration: 1.6, strokeDashoffset: "0", stroke: "#f2c9c9", ease: Linear.easeNone })
+        .to(".rehome", { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.3")
+        .to(".rehome", {
+          opacity: 0,
+          xPercent: 100,
+          duration: 0.5,
+          ease: "power1.out",
+          yoyo: true
+        }, "+=0.3")
+        // .to(".sign_block", { duration: 1,yPercent: -100,width: '10%' }, 'end-label')
         .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
-        .to(".logo_bg", 1, { 'clip-path': 'circle(75% at 50% 50%)', ease: "power1.out", }, 'end-label+=0.3')
-        
-        .to(".svg_bg path", {stroke: '#ffe6e6'})
-        .to('.wrapper', { backgroundColor: '#cbbcbc12', duration: 0.3 }, 'end-label+=0.1')
-        // slogan
-        .to('.wrap_word .copy-wrap', { color: '#f2e6e1', duration: 0.3, yPercent: 0, x: 0, y: 0, stagger: 0.1 })
-        .to('.wrap_word .copy-wrap', { opacity: 0 }, "+=0.2")
-        
-        .to('.rehome', { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.6")
-        .to(".cursorBack", { duration: 0.3, scale: 100 , opacity: 0.2, x: 100, y: 100}) 
-        .to(".cursorFront", { duration: 0.2, scale: 50, opacity: 0.5, x: 100, y: 100 })
-        .to(".cursorBack", { duration: 0.1, scale: 1 , opacity: 1, x: '50vw', y: '50vh'}) 
-        .to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
+        .to(".logo_bg", 1, { 'clip-path': 'circle(75% at 50% 50%)', ease: "power1.out", }, 'end-label')
+
+        // .to(".logo_bg", 0.8, { 'clip-path': 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' }, 'end-label')
+
+        // .to(".rehome", 0.1, { display: "none" })
+        // .to('.header', 0.6, { yPercent: 0, x: 0, y: 0 , ease: Linear.easeNone}, "end-label+=0.1")
+
+        .to('.wrap_word .copy-wrap', { color: '#ffffff45', duration: 0.3, yPercent: 0, x: 0, y: 0, stagger: 0.1 }, "end-label+=0.3")
+      // .to('.header', 0.3, { yPercent: 100, ease: "power1.out", yoyo: true } ,"end-label+=0.3")
+      //  tl.to($(this), { yPercent: 0, x: 0, y: 0 }, "+=0.1");
+      // });
+
     }
     start();
+    $("#replay").click(() => { start() });
 
     // one page style
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // $.ajax({
+    //     url: "https://reqres.in/api/login",
+    //     type: "POST",
+    //      dataType: 'json',
+    //       async: false,
+    //     data: {
+    //     "email": "eve.holt@reqres.in",
+    //     "password": "cityslicka"
+    // },
+    //     success: function(response){
+    //         console.log(response);
+    //     }
+    // });
 
-    // render collections
-    searchAPI().then((res) => {
-      const myResponse = res.items;
-      console.log(myResponse)
-      myResponse.sort((ele1, elem2) => Math.random() - Math.random())
-      for (p = 0; p < 8; p++) {
-        $('.newimgs').append(
-          `<figure class="grid_list">
-              <a href="./products.html?item_id=${myResponse[p].id}">
-                <img src='./images/cloversky/${myResponse[p].id}_1.jpg' alt="${myResponse[p].title}" data-pno=${myResponse[p].id}>
-                <figcaption>
-                    <p>${myResponse[p].title}</p>
-                    <p>${myResponse[p].price}</p>
-                </figcaption>
-              <a>
-            </figure>`);
+
+    // 	const getTras = async () => {
+    // 		const response1 = await fetch('	https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=30&$format=JSON');
+    // 		const json1 = await response1.json();
+    // 		console.log(json1)
+    // 	}
+
+    //  getTras();
+
+    var domainName1 = window.location.href;
+    var locx = domainName1.indexOf(':', 6);
+    domainName1 = domainName1.slice(0, locx) + ":8080";
+    console.log(domainName1)
+    const dataurl = !!(allurl == "http://localhost:8080")
+      ? allurl + '/reirasys_api/shopitems.php'
+      : "https://reiracode.github.io/ajax/allitems.json"
+
+    const getAllPoints = async () => {
+      const response = await fetch(dataurl);
+      const json = await response.json();
+
+      // <p>${myResponse[p].price}</p>
+      // <p><i class="fas fa-search"></i><p>	
+      try {
+        console.log(json.items)
+        myResponse = json.items;
+        myResponse.sort((ele1, elem2) => Math.random() - Math.random())
+        for (p = 0; p < 8; p++) {
+          $('.newimgs').append(
+            `<figure class="grid_list">
+									<img src='./images/cloversky/${myResponse[p].id}_1.jpg' alt="${myResponse[p].title}" data-pno=${myResponse[p].id}>
+									<figcaption>
+											<p>${myResponse[p].title}</p>
+
+									</figcaption>		
+							</figure>`);
+        }
+      } catch (err) {
+        //失敗
+        console.error(error);
       }
+    };
+    getAllPoints();
+
+    //quick buy
+    $('.newimgs').on('click', '.list_img, .newimgs_side', function (e) {
+      $('.newimgs').addClass('left_mode');
+
+      var this_index = $(".list_img").index(this);
+      console.log(this_index);
+      // scroll to top
+      var $this = $(this);
+      var position = $this.offset().top;
+      var leftx = $this.offset().left;
+      var scrollY = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (scrollY > position - windowHeight - windowHeight / 5) {
+        $('html, body').animate({
+          scrollTop: (position - 85)
+        }, 2000);
+      }
+
+      var id = $(this).find('img').attr("data-pno");
+
+      console.log($this)
+      // 只執行一次而已，如果已有class，未執行
+      if ($(".newimgs_side").hasClass('active')) {
+        console.log($this)
+        console.log($(this).find('img'))
+        $(".newimgs_side").find('img').removeClass('active')
+          .delay(100)
+          .queue(function () {
+            console.log($this)
+            console.log($(this))
+            $(".newimgs_side").find('img').attr("src", "./images/cloversky/" + id + "_1.jpg")
+              .addClass('active').dequeue();
+          })
+      } else {
+        $(".newimgs_side").addClass('active')
+          .find('img').attr("src", "./images/cloversky/" + id + "_1.jpg")
+      }
+
+      $('.newimgs_side').html(` 
+			<button class="modal_close">
+					<span></span>
+					<span></span>
+			</button>
+			<figure class="list_img1 h_third">
+					<img src="./images/cloversky/${myResponse[this_index].id}_1.jpg" alt="${myResponse[this_index].id}"  class="active">
+			</figure>
+			<p class='product_title'>${myResponse[this_index].title}</p>
+			<p class='card-text'>$${myResponse[this_index].price}</p>
+			<button class="btn_type  btn-100 add_car" data-price=${myResponse[this_index].price} data-id=${myResponse[this_index].id}>
+			<i class="fas fa-shopping-cart"></i> Add to Cart
+			</button>
+			<li>CLASS：${myResponse[this_index].class}</li>
+			<li>SIZE：${myResponse[this_index].size}</li>
+			<li>COLOR：${myResponse[this_index].color}</li>
+			<li>Material：${myResponse[this_index].material}</li>`
+      );
+
+      $('.modal_close').click(function () {
+        $(".newimgs_side").removeClass('active')
+        $(".newimgs").removeClass('left_mode')
+      })
+
+
+
+      // 加入購物車
+      $(".add_car").click(function () {
+
+        // var cart = [];
+        // if (localStorage.getItem("cart")) {
+        //     cart = JSON.parse(localStorage.getItem("cart"));
+        // }
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let newItem = {
+          name: $(".product_title").text(),
+          price: $(this).data("price"),
+          amount: 1,
+          item_no: $(this).data("id")
+        };
+        console.log(newItem)
+        // // 如果沒   0==>1 有效果      空的==>1 沒效果
+        // !cart= null  first 0->1
+        var this_new = newItem.name;
+        console.log("this_new" + this_new)
+        // var data = JSON.parse(localStorage.getItem("cart"));
+        console.log(cart)
+        var result2 = $.map(cart, function (item, index) {
+          return item.name
+        }).indexOf(this_new);
+
+        console.log("this_new" + this_new)
+        console.log("result2:" + result2)
+
+        if (result2 >= 0) {
+          alert("已訂購量，請修改購物車")
+          window.location.href = "project_shopcart.html";
+        } else {
+          cart.push(newItem);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          //  setCart();
+          var data1 = JSON.parse(localStorage.getItem("cart"));
+          console.log(data1)
+
+          $('.shopart_amount').css("display", "block")
+          $('.shopart_amount')
+            .text(data1.length)
+            .addClass("cart-run");
+
+        }
+
+
+      });
+
+
     })
 
+
     // 手機時 remove hover 屬性
-    $('.newimgs').on('touchstart', '.grid_list', function (e) {
+    $('.newimgs').on('touchstart', '.list_img', function (e) {
       // $('.newimgs').index
       // var link = $(this); //preselect the link
       // if (link.hasClass('hover')) {
@@ -1627,43 +2296,42 @@
     // https://ithelp.ithome.com.tw/articles/10185668
 
     // 在JS/jQuery中，怎麽觸發input的keypress/keydown/keyup事件
-    // $("#search1_btn").on("click", function (e) {
-    //   console.log($(this))
-    //   let curId = $(this).attr("id").replace("_button", "")
-    //   console.log(curId)
-    //   var e = $.Event("keyup");
-    //   e.keyCode = 13;
-    //   $("#" + curId).trigger(e);
-    // })
-
-    // enter
-    // $("#MakeShopSearch").keypress(e => {
-    //   if (e.keyCode == 13 || e.which == 13) {
-    //     search_Item()
-    //   }
-    // })
-
-    // click search
-    // $("#MakeShopSearch_btn").click((e) => {
-    //   search_Item()
-    // })
-
-    // function search_Item() {
-    //   var keystring = $("#MakeShopSearch").val();
-    //   console.log("keystring" + keystring)
-    //   // console.log(people)
-    //   if (!keystring) {
-    //     alert("null")
-    //     return false;
-    //   }
-    //   window.location.href = "products.html?item_id=" + keystring;
-    // }
- 
-
- 
-
+    $("#search1_btn").on("click", function (e) {
+      console.log($(this))
+      let curId = $(this).attr("id").replace("_button", "")
+      console.log(curId)
+      var e = $.Event("keyup");
+      e.keyCode = 13;
+      $("#" + curId).trigger(e);
     })
 
+    // enter
+    $("#MakeShopSearch").keypress(e => {
+      if (e.keyCode == 13 || e.which == 13) {
+        search_Item()
+      }
+    })
+
+    // click search
+    $("#MakeShopSearch_btn").click((e) => {
+      search_Item()
+    })
+
+    function search_Item() {
+      var keystring = $("#MakeShopSearch").val();
+      console.log("keystring" + keystring)
+      // console.log(people)
+      if (!keystring) {
+        alert("null")
+        return false;
+      }
+      window.location.href = "project_cloversky_searchItem.html?search=" + keystring;
+    }
+// })
+
+      $(window).on("load", function () {
+        $('header').appendTo('body');
+      });
   </script>
 </body>
 

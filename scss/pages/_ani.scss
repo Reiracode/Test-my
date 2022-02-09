@@ -7,6 +7,8 @@
   box-shadow: 0px 6px 24px rgba(166, 161, 161, 0.6);
   overflow: hidden;
   position: relative;
+	// background-color: $stroke-color;
+		background-color: #dfcece;
   // margin-bottom: 5vh;
 	.logo_bg {
 		width: 100%;
@@ -36,7 +38,7 @@
 	justify-content: center;
 	position:absolute; 
 	width:100%;
-	height: 100%;
+	height: 100%; 
 	// z-index: 1;
 	/* svg signature*/
 		.sign_svg {
@@ -44,7 +46,8 @@
 			height: 100%;
 			width: 500px;
 			padding-top: 80px;      
-			filter: drop-shadow(6px 6px #ffffff47);
+			// filter: drop-shadow(6px 6px #ffffffe3);
+			filter: drop-shadow(6px 6px #ffffffd0);
 			@include phone{
 						position: unset;
 						width:80vw;	
@@ -52,15 +55,17 @@
 	}
 	/* letters paths clip animation */
 	// #squiggle {
-			.rehome {
+		.rehome {
 			stroke-dasharray: 1280;
 			// t1.to
 			stroke-dashoffset: 1280;
 			// stroke-dashoffset: 0;
 			fill:none;
-			// stroke:#fff;
+
+			// stroke: #fdd0d8;
+			stroke:#fecece;
 			//t1.to
-			stroke:#f5b5b5fa;
+			// stroke:#f5b5b5fa;
 			stroke-miterlimit:10;
 			stroke-width:12pt;
 	}
@@ -74,14 +79,12 @@
 				width:unset;
 		}
     path{
-			stroke-dasharray: 10000;
-			// t1.to
-			// stroke-dasharray: 0;
-			stroke-dashoffset:10000;
+			stroke-dasharray: 13000;
+			stroke-dashoffset:13000;
 			fill: none;
-			// stroke:#f2c9c9;
-			stroke:#c7b2b2;
 			stroke-width: 5pt;
+			// stroke:#ffe6e6;
+			stroke:#fff;
 		}
 }
 

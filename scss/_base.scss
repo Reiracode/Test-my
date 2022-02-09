@@ -27,6 +27,10 @@ a{
 			cursor: pointer;
 	}
 }
+a, a:link, a:visited, a:focus, a:hover, a:active {
+    text-decoration: unset;
+    color: inherit;
+}
 :focus{
     outline: none;
 }

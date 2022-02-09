@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content='developer' name='reiracode' />
+    <link rel="icon" href="./images/logo.png" type="image/png" />
+    <meta name="description" content="F2E Desinger in Taiwan">
+    <title>Rehome</title>
+    <link rel="stylesheet" href="css/all.css">
+    <link type="text/css" rel="stylesheet" href="./js/simplePagination.css" />
+    <!-- //取得allitem 及分類 再分頁
+    defal_render()
+    render_tag():下拉選單
+    format.js current_page()
+    -->  
+</head>
+
+<body>
+    <div class="second_mains">
+        <header></header>
+        <div class="top_page">
+            <div class="select-tool">
+                <nav class="items">
+                    <ul>
+                        <li><a href="./index.html">top</a>
+                            <ul>
+                                <li><a href="./collections.html">商品目錄</a>
+                                    <ul>
+                                        <li><a href="./products.html">商品細節</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="breadcrumb"></div>
+                <div class="select-div">
+                    <!-- <li data-target='all' class="typebutton">ALL</li> -->
+                </div>
+            </div>
+            <div id="product-all"></div>
+        </div>
+
+        <div class="pagination-holder clearfix">
+            <div id="light-pagination" class="paginationss"></div>
+        </div>
+
+        <footer class='flex-layout'></footer>
+    </div>
+
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.simplePagination.js"></script>
+    <script type="text/javascript" src="./js/format.js"></script>
+    <script>
+
+    $(document).ready(function () {
+        let myResponse, filterdata, query_renderdata;
+        $("header").load("headers.html");
+        $("footer").load("footer.html");
+        //判斷資料來源
+        const dataurl = !!(allurl == "http://localhost:8080")
+            ? allurl + '/reirasys_api/shopitems.php'
+            : "https://reiracode.github.io/ajax/allitems.json"
+        // console.log(dataurl)
+        site_map()
+        
+        // breadcrumb
+        let currentItem = $(".items").find("[href$='" + myUrl.main + "']");
+        $(currentItem.parents("li").get().reverse()).each(function () {
+            $(".breadcrumb").append($(this).children("a"));
+        });
+
+        //**************判斷有沒登入way1**
+        var categoryList = login_status();
+        categoryList.then(function (data) {
+            console.log('呼び出し先', data);
+            if (data.success) {
+                console.log("login success sucess")
+            }
+        }).fail(function () {
+            console.log('err');
+        });
+        //********** way2
+        getLogin_status().done(function (data) {
+            last_id = data;
+            console.log(last_id)
+        });
+        //判斷有沒登入 **
+
+        // dealut query to API/json
+        let this_page = $(".paginationss")
+
+        async function relocate() {
+            try {
+                console.log("relocate")
+                let json = await getProd();
+                myResponse = json.items;
+                console.log(myResponse)
+                defal_render()
+                // render_tag(myResponse)
+            } catch (e) {//失敗
+                console.log(e);
+            }
+        }
+        relocate();
+
+        // ******* *****?id=GE240** 搜尋keyword***  ***** *******
+        //如果aseaarch時 數量不同 把result傳入
+        function defal_render() {
+            let results = [],filterdata;
+            // query all
+            if (myUrl.id == ''){                
+                render_tag(myResponse);
+                mainPagenation(myResponse, '');
+            } else {
+                // filter 全文檢索 by myUrl.id
+                for (var i = 0; i < myResponse.length; i++) {
+                    for (key in myResponse[i]) {
+                        if (myResponse[i][key].indexOf(myUrl.id) != -1) {
+                            results.push(myResponse[i]);
+                        }
+                    }
+                }
+                // console.log(results)
+                // ******* ******* 去除重複  ******* ******* ******* ******* ******* *******
+                // const data = [...new Map(results.map(item => [item.id, item])).values()]
+                // console.log(data)
+                // !data.length == true ? alert("no data") : mainPagenation(data);
+                filterdata= [...new Map(results.map(item => [item.id, item])).values()]
+                console.log(filterdata)
+                
+                //產生tag
+                render_tag(filterdata)
+                //Pagenation
+                !filterdata.length == true ? alert("no data") : mainPagenation(filterdata);
+            }
+        }
+        function query_render() {
+            let results=[];
+            for (var i = 0; i < myResponse.length; i++) {
+                for (key in myResponse[i]) {
+                    if (myResponse[i][key].indexOf(myUrl.id) != -1) {
+                        results.push(myResponse[i]);
+                    }
+                }
+            }
+            // ******* ******* 去除重複 duplicate 
+            query_renderdata = [...new Map(results.map(item => [item.id, item])).values()]
+            console.log(query_renderdata)
+        }
+
+
+        // 産生tag:不同分類 item.id
+        function render_tag(objs) {
+            $(".select-div").empty();
+
+            console.log(objs)
+            const taglist = Object.values(objs).map(items => items.class);
+            console.log(taglist)
+
+            let index = Array.from(new Set(taglist));
+            console.log(index)
+
+            $(".select-div").append('<li data-target=all class="typebutton">ALL</li>')
+            for (i = 0; i < index.length; i++) {
+                $(".select-div").append('<li data-target= ' + index[i] + ' class="typebutton">' + index[i] + '</li>')
+            }
+        }
+
+        //click function data-target 
+        $(document).on('click', '.typebutton', function (e) {
+            //id12 tag
+            $(this).addClass('active').siblings('li').removeClass('active');
+            // This will work!
+            var indextag = $(".typebutton").index(this);
+            console.log("index" + indextag);
+            // if (indextag == 0){
+            //     window.location.href = "collections.html";
+            // }
+            // tag class
+            console.log($(this).data("target"))
+            // filter by target
+            selectorfilter($(this).data("target"));
+            //search by id + tag 
+            //?id=20#page-1
+            var url = location.href;
+            console.log(url)
+            if (myUrl.id !== "") {
+                selectorfilter($(this).data("target"));
+            }
+        });
+
+        // ?id=GE240#page-3  
+        // tag filter  selectorfilter(table)=> 算頁數mainPagenation()
+        function selectorfilter(q_tag) {
+            console.log(q_tag)//table =tag
+            console.log(myResponse)
+            
+            if (myUrl.id !== '') {
+                query_render();
+                myResponse =  query_renderdata;
+                console.log(query_renderdata)
+            }
+            let filterClass;
+
+            if (q_tag == "all") {
+                filterClass = myResponse;
+            } else {
+                // 下拉選單分類
+                filterClass = myResponse.filter(function (item, index, array) {
+                    return item.class == q_tag;
+                });
+            }
+
+
+            console.log(filterClass);
+            mainPagenation(filterClass)
+            // pass data    page : defal_render
+        }
+
+        // var product=[];
+        //  console.log(usersname)
+        // 選擇頁數
+        function mainPagenation(data, page) {
+            $(".product_allitem").remove();
+            console.log(data)
+            var currentPageNumber = page
+            // product = data;
+            var total = data.length;
+            // 每頁顯示筆數:
+            var perpage_item = 8;
+            //  total page 總頁數 = 總筆數/每頁顯示筆數 
+            var totalpage = Math.ceil(total / perpage_item);
+
+            //  total items
+            var total = data.length;
+            // 每頁顯示筆數:6
+            var perpage_item = 8;
+            //  total page 總頁數 = 總筆數/每頁顯示筆數 
+            var totalpage = Math.ceil(total / perpage_item);
+
+            var $pages = 0;//tool bar 顯示位子 除非pass page otherwise page 的
+            if (page > 0) {
+                $pages = page
+            }
+
+            this_page.pagination({
+                items: data.length / perpage_item,
+                displayedPages: 1,
+                currentPage: $pages,
+                prevText: "<",
+                nextText: ">",
+                cssStyle: 'light-theme',
+                onPageClick: function (currentPageNumber) {
+                    //  alert("onPageClick"+currentPageNumber)
+                    showPage(currentPageNumber);
+                }
+            })
+
+            // append per page structure 總頁數
+            for (p = 1; p <= totalpage; p++) {
+                $('#product-all').append(`<div class="product_allitem"  id='page-${p}'></div>`);
+                for (x = 0; x < perpage_item; x++) {
+                    var max_num = p * perpage_item + (x + 1) - perpage_item;
+                    // var max_num = p * perpage_item - x + perpage_item;
+                    // p:第幾頁 perpage_item:每頁幾筆  
+                    // p1  1*6-(1-6)~(6-6)  ==> 1~6
+                    // p2 max  2*6 - (1-6) ==> 7
+                    // max:8 len:7
+                    // console.log("max:" + max_num + "len:" + data.length)
+                    if ((max_num - data.length) > 0) {
+                        break;
+                    }
+
+                    $("#page-" + p).append(`
+                        <div class='search_div'> 
+                            <figure class='search_items'><img class='kv_image' src='./images/cloversky/${data[max_num - 1].id}_1.jpg'>
+                            </figure>
+                            <div>
+                                <p class='list_item_name'>${data[max_num - 1].title}</p>
+                                <p class='list_item_price'>$${number_format(data[max_num - 1].price)}</p >
+                            </div>
+                        </div>`)
+
+                    $(".search_div").click(function () {
+                        var index = $(".search_div").index(this);
+                        console.log("index" + index);
+                        window.location.href = './products.html?item_id=' + (data[index].id);
+                    });
+                }
+            }
+
+            if (!page) {
+                showPage(1)
+            } else {
+                showPage(page)
+            }
+        }
+
+        function showPage(currentPageNumber) {
+            console.log("currentPageNumber--" + currentPageNumber)
+            var page = "#page-" + currentPageNumber;
+            $('.product_allitem').hide();
+            $(page).show();
+            $('html, body').animate({
+                scrollTop: 0
+            }, 200);
+        }
+
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shopcar</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
+<!-- <link rel="stylesheet" href="css/cloversky.css">   -->
+<link rel="stylesheet" href="css/all.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+    <div class="second_mains">
+        <header></header>
+        <div class="top_page">
+            <form class="myForm">
+                <p>購物車</p>
+                <table class="tb_shopcart">
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th></th>
+                            <th>数量</th>
+                            <th>小計</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <div class="bill-item">
+                    <button id="btn_Clearall" type="button">
+                        <i class="far fa-trash-alt"></i><span>移除所有產品</span>
+                    </button>          
+                    <div>
+                        <span id = "label">合計金額</span>
+                        <span id = "car_total"></span> 
+                    </div>    
+                </div>
+                <button id="btn_checkout" class='btn_type' type="button">結帳</button>
+            </form>
+        </div>
+        <footer class='flex-layout'></footer>
+    </div>
+    
+<script src="./js/jquery.min.js"></script>
+<script src="./js/format.js"></script>
+<script>
+$(document).ready(function () {   
+    $("header").load("headers.html");
+    $("footer").load("footer.html");
+     //safari 100vh bug
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    var cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log(cart)
+    setCart();
+
+    // http://localhost:8080/dashboard/F2E_project/cloversky/project_cloversky_searchitems.html?item_id=000000000122
+    $.each(cart, function (i, val) {           
+        $(".tb_shopcart tbody").append(`<tr><td id='fname0'>
+                <a href='./products.html?item_id=${cart[i].item_no}'>
+                    <img src='./images/cloversky/${cart[i].item_no}_1.jpg' alt=''>
+                </a>             
+            </td> 
+            <td id='fname1'>
+                <p>${cart[i].name}</p>
+                <p>${number_format(cart[i].price)}</p>
+            </td>
+            <td id='fname2'  > 
+                <div class='price_col'> 
+                    <button class='add_minus_btn shop_cart_btn minus_cal'><span>-</span></button> 
+                    <input type='num' class='carlist_amount' min='1' value='${cart[i].amount}' disabled='disabled'> 
+                    <button class='add_minus_btn shop_cart_btn   add_cal'><span>+</span></button> 
+                </div>
+            </td>                                    
+            <td id='fname3'   >${number_format(cart[i].amount * cart[i].price)}</td> 
+            <td id='fname4'><button class='btn_remove'><i class='fas fa-times'></i></button></td>
+        </tr>`)
+    });
+
+        
+    function setCart() {
+        console.log(cart)
+        //var cart 之後，localStorage setItem更新
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"));
+        }
+        console.log(cart)
+        
+        var cartList = "", s_price = 0, total = 0;
+        for (let $i = 0; $i < cart.length; $i++) {
+            s_price = cart[$i]["price"] * cart[$i]["amount"];
+            total += s_price;
+        }
+        $("#car_total").text(number_format(total));
+         $("header").load("headers.html");
+    }
+
+    // 變更數量
+    $('.carlist_amount').on('input', function (e) {
+        e.preventDefault();
+        var e_content = $(this).val();
+        var row_index = $(this).closest("tr").index();
+        var new_price = number_format(e_content * cart[row_index].price)
+        $(this).parent().next().text(new_price)
+            //第 2 個節點
+        var amount_old = JSON.parse(localStorage.getItem("cart"))
+        amount_old[row_index].amount = e_content ;
+
+        localStorage.setItem("cart", JSON.stringify(amount_old));  
+        setCart();
+    })
+
+    // 移除
+    $(".btn_remove").click(function(e){  
+        e.preventDefault();
+        // 取得刪除的row index
+        var row_index = $(this).closest("tr").index();
+        var old =JSON.parse(localStorage.getItem("cart"))
+        old.splice(row_index, 1);
+        console.log(old)
+        localStorage.setItem("cart", JSON.stringify(old));
+        $(this).closest('tr').remove();
+        setCart();       
+    })
+
+    // 變更數量 加金額
+    $(".add_minus_btn").click(function (e) {
+        e.preventDefault();
+        var row_index = $(this).closest("tr").index();
+        console.log(row_index);
+        var $a = $(".carlist_amount");
+        // var a = $a[0];
+        var new_amt = parseInt($a.eq(row_index).val());
+        console.log(new_amt)
+
+        var $a_btn = $(".minus_cal");             
+        $a_btn.eq(row_index).attr("disabled", false);
+
+        if ($(this).hasClass("add_cal")) {             
+            $a.eq(row_index).val(new_amt + 1);
+        } else {
+            if (new_amt > 1) {
+                $a_btn.eq(row_index).attr("disabled", false);
+                $a.eq(row_index).val(new_amt - 1);
+            } else {
+                $a_btn.eq(row_index).attr("disabled", "true");
+            }
+        } 
+
+        var new_price =number_format(cart[row_index].price * $(".carlist_amount:eq(" + row_index + ")").val());
+        console.log("new_price"+new_price)
+
+        // $(this).parent().next().text(new_price)
+        $(this).closest("td").next().text(new_price)
+
+        // 寫入local storage
+        var amount_old = JSON.parse(localStorage.getItem("cart"))
+        amount_old[row_index].amount = $a.eq(row_index).val();;
+        console.log(amount_old)
+
+        localStorage.setItem("cart", JSON.stringify(amount_old));
+        setCart();
+    
+    })        
+
+    var ss_total=0;
+    
+    // JSON.parse 將 JSON 字串轉換為物件。 if 沒登入data:n,data.IsLogin:undefined
+    // JSON.stringify 將陣列轉換為 JSON 字串
+    var categoryList = login_status();
+    
+    //判斷有沒登入way2
+    // getLogin_status().done(function(data) {
+    //     last_id = data;
+    //     console.log(last_id)
+    // });
+    // clear cart
+    // $("#btn_Clearall").on("click",function (e) {
+    //     cart=[];
+    //     localStorage.removeItem("cart");
+
+    //     setCart();
+        
+    // })
+    // --- 清除購物車 ---
+    $("#btn_Clearall").on("click",function() {
+        console.log("clearall")
+        $(this).closest("tr").remove();
+        cart=[];
+        localStorage.removeItem("cart");
+
+        $(".tb_shopcart tbody").empty();
+        setCart();
+    });
+
+
+    $("#btn_checkout").on("click", function(e) {
+        const dataurl = !!(allurl == "http://localhost:8080") 
+                ?  true
+                :  false
+
+        if (dataurl){
+            categoryList.then(function(data) {
+                // console.log('呼び出し先', data);
+                console.log(data.IsLogin);
+                if (data.IsLogin){
+                    console.log("login success sucess")
+                    window.location.href = "project_shopcart_step1.html";
+                    $("button#log_out").text("logout");
+                }else{
+                    console.log("fail")
+                    alert("請先登入");
+                    window.location.href = "login.html";
+                }
+            }).fail(function() { 
+                console.log('catch data err');
+            });
+        }else{
+            console.log(localStorage.getItem("githublogin"))
+            if (localStorage.getItem("githublogin")){
+                // JSON.parse(githublogin);
+                window.location.href = "project_shopcart_step1.html";
+            }else{
+                alert("API請先登入");
+                window.location.href = "login.html";
+            }
+        }
+    });
+
+});
+
+</script>
+</body>
+
+</html>

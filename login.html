@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>login</title>
+  <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css">
+</head>
+<!-- 
+1、數量=0 or ""不能加入購物車
+2、add TO CART 加入相同品項的清單 跳轉至購物車 修改數量
+-->
+
+<body>
+  <div class="second_mains">
+    <header></header>
+    <div class="login_style">
+      <div class="tabs-container">
+        <div class="tabs-pages">
+          <div class="tab-label active">login</div>
+          <div class="tab-label">sign in</div>
+        </div>
+
+        <div class="tabs-contents">
+          <div class="tab-inner active">
+            <div class="inner-content">
+              <form id="form_login">
+                <label class="userdata">
+                  <i class="fas fa-user fa-lg"></i>
+                  <input type="text" placeholder="Username" name="userno" class="userno" id="userno" required />
+                </label>
+                <label class="userdata">
+                  <i class="fas fa-unlock-alt toogle_pwd"></i>
+                  <input type="password" placeholder="Password" name="password" class="password" id="password"
+                    required />
+                </label>
+
+                <button id="login_btn" class="btn_type">login</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-inner">
+            <div class="inner-content">
+              <form id="form_register">
+                <label class="userdata">
+                  <i class="fas fa-user fa-lg"></i>
+                  <input type="text" placeholder="Userno" name="userno" class="userno" id="userno" required />
+                </label>
+
+                <label class="userdata">
+                  <i class="fas fa-users fa-lg"></i>
+                  <input type="text" placeholder="Username" name="username" class="username" id="username" required />
+                </label>
+
+                <label class="userdata">
+                  <i class="fas fa-unlock-alt fa-lg toogle_pwd"></i>
+                  <input type="password" placeholder="Password" name="password" required />
+                </label>
+
+                <label class="userdata">
+                  <i class="fas fa-envelope fa-lg"></i>
+                  <input type="email" placeholder="Email" name="email" class="email" id="email" required />
+                </label>
+
+                <label class="userdata">
+                  <i class="fas fa-desktop fa-lg"></i>
+                  <input type="text" placeholder="Depno" name="depno" class="depno" id="depno" required />
+                </label>
+
+                <button id="regis_btn" class="btn_type">register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class='flex-layout'></footer>
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/format.js"></script>
+  <script>
+    //safari 100vh bug
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    $("header").load("headers.html");
+    $("footer").load("footer.html");
+
+    var categoryList = login_status();
+    categoryList.then(function (data) {
+      // console.log('呼び出し先', data);
+      if (data.success) {
+        console.log("login success sucess")
+      }
+    }).fail(function () {
+      console.log('err');
+    });
+
+    $('.toogle_pwd').click(function (e) {
+      var el = $(this);
+      (el.hasClass('fa-unlock-alt'))
+        ? el.removeClass('fa-unlock-alt')
+          .addClass('fa-eye')
+          .next().prop('type', 'text')
+        : el.removeClass('fa-eye')
+          .addClass('fa-unlock-alt')
+          .next().prop('type', 'password');
+    })
+
+
+    $(".tab-label").each(function (index) {
+      $(this).click(function (e) {
+        triggletab();
+        $(this).toggleClass("active");
+        $(".tab-inner")
+          .eq(index)
+          .toggleClass("active");
+      });
+    });
+    //to remove all tab headers
+    function triggletab() {
+      $(".tab-label").each(function () {
+        $(this).removeClass("active");
+      });
+      // triggle the tab content
+      $(".tab-inner").each(function () {
+        $(this).removeClass("active");
+      });
+    }
+
+    // 註冊
+    $("#regis_btn").click(function (e) {
+      console.log(e)
+      e.preventDefault();
+      var str = $("form#form_register").serialize();
+      console.log("str" + str)
+      // $("#results").text(str);
+
+      $.ajax({
+        type: 'POST',
+        url: allurl + '/reirasys_api/reg_api.php',
+        // url: allurl + '/reirasys_api/register_api.php',
+        // data: r_form.serialize(),
+        data: str,
+        dataType: 'json',
+        error: function (xhr) { console.log(xhr) },      // 錯誤後執行的函數
+        success: function (response) {
+          console.log(response)
+          console.log(response.IsLogin)
+          // if (response.IsLogin)
+          // window.location.href = "project_shopcart.html";            
+        }// 成功後要執行的函數
+      })
+    });
+
+
+    // $form.sealized()
+    $("button#login_btn").click(function (e) {
+      e.preventDefault();
+      var str = $("form#form_login").serialize();
+      console.log("str" + str)
+      // $("#results").text(str);
+      const dataurl = !!(allurl == "http://localhost:8080")
+        ? allurl + '/reirasys_api/login_api.php'
+        : "https://reiracode.github.io/ajax/login.json"
+      const loginstyle = !!(allurl == "http://localhost:8080")
+        ? 'POST'
+        : 'GET'
+
+      console.log(loginstyle)
+      // 同步與非同步 type: 'POST',
+      var login_status;
+      $.ajax({
+        type: loginstyle,
+        //  type: 'POST',
+        // url: allurl + '/reirasys_api/login_api.php',
+        // url: "https://reiracode.github.io/ajax/login.json",
+        url: dataurl,
+        data: str,
+        dataType: 'json',
+        async: false,
+        success: function (response) {
+          console.log(response)
+          console.log(response.IsLogin)
+          login_status = response.IsLogin
+
+          if (response.IsLogin) {
+            // if localStorage有資料就可以下一戊
+            if (loginstyle) {
+              localStorage.setItem("githublogin", JSON.stringify(login_status));
+            }
+
+            var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            alert(response.LoginMessage)
+
+
+            if (!cart.length) {
+              window.location.href = "project_cloversky_member.html";
+            } else {
+              window.location.href = "project_shopcart_step1.html";
+            }
+
+
+
+          } else {
+            alert(response.LoginMessage)
+          }
+        }
+      })
+    });
+
+
+
+
+    console.log("allurl" + allurl)
+  </script>
+</body>
+
+</html>
