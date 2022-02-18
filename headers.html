@@ -88,6 +88,7 @@
       $('.modal_bg').click((e) => {
         if (!$(e.target).closest('.expand').length) {
           $(".modal_bg").removeClass('active');
+           $("body").css("overflow", "auto");
         }
       });
 
