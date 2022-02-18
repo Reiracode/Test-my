@@ -41,11 +41,10 @@
         font-family: "Bodoni Moda";
         display: block;
         color:#ffe1fe96;
-        // color: #f2e6e1;
-        // transition: all 0.7s 0s ease-in-out;
-        
-        // position: relative;
         transform: translate3d(0, -100%, 0);
+        @include mobile{
+          font-size:60px;
+        }
       }
     }
 

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../scss/components/X_newsside.scss"
-    ],
-    "names": [],
-    "file": "X_newsside.css"
-}

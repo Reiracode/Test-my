@@ -44,9 +44,9 @@
       <span></span>
     </button>
 
-    <div class="modal_box start" id="search">
-      <form action="./collections.html" id="more_form" method="get">
-        <input type="text" name="id" id="id">
+    <div class="modal_box expand">
+      <form action="./collections.html" class="more_form" method="get">
+        <input type="text" name="findid" class="findid">
         <span class="icon-search"></span>
       </form>
     </div>
@@ -61,10 +61,7 @@
         }
       }
 
-
-      var url = location.href;
-      // console.log(url)
-      var data = JSON.parse(localStorage.getItem("cart"));
+      let data = JSON.parse(localStorage.getItem("cart"));
       // console.log(data)
       // console.log(data.length)
       if (!data) {
@@ -89,14 +86,7 @@
       })
 
       $('.modal_bg').click((e) => {
-        console.log($(e.target))
-        console.log($(e.target).closest('.start'))
-        console.log($(e.target).closest('.start').length)
-        console.log(!$(e.target).closest('.start').length)
-
-        if (!$(e.target).closest('.start').length) {
-          // console.log("filter")
-          // $('.modal_bg').css('display', 'none');
+        if (!$(e.target).closest('.expand').length) {
           $(".modal_bg").removeClass('active');
         }
       });
@@ -116,7 +106,7 @@
         }
       })
 
-       
+
 
     })
   </script>

@@ -23,14 +23,14 @@
     width: 100%;
     overflow: hidden;
     border-radius: 5px;
-}
-.search_items img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: all 0.5s;
-    &:hover{
-        transform: scale(1.1);
+    & img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: all 0.5s;
+        &:hover{
+            transform: scale(1.1);
+        }
     }
 }
 
@@ -51,6 +51,13 @@
     box-shadow: none !important;
     border-radius: 0 !important;
     border: 1px solid lightcoral !important;
+    // @include mobile{
+    //     width: 50px;
+    //     height: 50px;
+    //     text-align: center!important;
+    //     line-height: 50px!important;
+    //     font-size: 50px!important;
+    // }
 }
 .light-theme .current {
     background: #ea9999 !important;
