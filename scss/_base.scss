@@ -29,7 +29,7 @@ a{
 }
 a, a:link, a:visited, a:focus, a:hover, a:active {
     text-decoration: unset;
-    color: inherit;
+    // color: inherit;
 }
 :focus{
     outline: none;
@@ -74,9 +74,9 @@ input[type=checkbox]:checked:before {
 
 
 select{
-  background-color:#fff!important;
-  appearance:none;
-  -webkit-appearance:none;
-  background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) ;
+    background-color:#ffffff!important;
+//   appearance:none;
+//   -webkit-appearance:none;
+//   background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) ;
 }
 

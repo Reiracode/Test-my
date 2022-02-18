@@ -5,22 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>STEP1</title>
-    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+    <meta content='developer' name='reiracode' />
+    <link rel="icon" href="./images/logo.png" type="image/png" />
+    <meta name="description" content="F2E Desinger in Taiwan">
+    <title>Rehome</title>
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css">
-    <style>
-    </style>
 </head>
 
 <body>
-    <div class="second_mains">
+    <div class="second_layout">
         <header></header>
         <div class="top_page">
             <ul class="process3">
-                <!-- <span></span> -->
                 <li><a href="./project_shopcart_step1.html">1</a></li>
                 <li><a href="./project_shopcart_step2.html">2</a></li>
                 <li><a href="./project_shopcart_step3.html">3</a></li>
@@ -35,14 +32,27 @@
 
                     <label class="userdata">
                         <i class="step1_member far fa-address-card"></i>
-                        <input type="text" placeholder="住所" name="recip_street" id="recip_street" required>
+                        <input type="text" placeholder="住所" name="recip_street" id="recip_street" required>                  
                     </label>
 
-                    <label class="userdata recip_city">
-                        <i class="step1_member  far fa-address-book"></i>
-                        <input type="text" placeholder="city" name="recip_city" id="recip_city" required>
-                        <input type="mobile" placeholder="state" name="recip_state" id="recip_state" required>
-                    </label>
+                    <!-- <div class="form_group" > -->
+                        <label class="userdata recip_city">
+                            <i class="step1_member  far fa-address-book"></i>
+                            <div class="list_selector">
+                                <select class="county select-selected"></select>
+                                <select class="district select-selected"></select>
+                            </div>
+                        </label>
+                        <!-- <label class="userdata recip_city">
+                            <i class="step1_member  far fa-address-book"></i>
+                            <input type="text" placeholder="city" name="recip_city" id="recip_city" required>
+                        </label>
+                        <label class="userdata recip_city">
+                            <i class="step1_member  far fa-address-book"></i>
+                            <input type="mobile" placeholder="state" name="recip_state" id="recip_state" required>
+                        </label> -->
+                    <!-- </div> -->
+
 
                     <label class="userdata">
                         <i class="step1_member fas fa-mobile-alt"></i>
@@ -59,11 +69,10 @@
                         <input type="text" placeholder="備註" name="recip_ps" id="recip_ps">
                     </label>
 
-                    <!-- <button id="login_btn">儲存連絡人資訊</button> -->
                     <button id="btn_Show">送出訂單</button>
                 </form>
             </div>
-            <!-- TB_COLLAPSE -->
+
             <div class="div_shopcar_detail">
                 <table class="tb_shopcart">
                     <caption class="order_detail">購買明細</caption>
@@ -76,220 +85,243 @@
                         </tr>
                     </thead>
                     <tbody></tbody>
-                    <!-- <button id="btnShow" type='submit'>Try</button> -->
                 </table>
+
                 <div class="bill-item">
-                    <span id="label">合計金額</span>
+                    <span id="label">合計</span>
                     <span id="car_total"><strong></strong></span>
                 </div>
 
             </div>
-            <!-- <button id="btn_Show" class='btn_type' type="button">下一步</button> -->
 
         </div>
         <footer class='flex-layout'></footer>
     </div>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/format.js"></script>
+    <!-- <script src="https://code.essoduke.org/js/twzipcode/twzipcode.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.0/dist/tw-city-selector.min.js"></script>
+
+
     <script>
-        $(document).ready(function () {
-            $("header").load("headers.html");
-            $("footer").load("footer.html");
+    $(document).ready(function () {
+        $("header").load("headers.html");
+        $("footer").load("footer.html");
+        process_color();
 
-            process_color();
-            var thisform = $('#form_checkout1 input:required')
-            console.log(thisform)
-
-            // var thisform1 =$('#form_checkout1')
-            // console.log(thisform1)
-            // var validata = [...document.querySelectorAll('input:required')];
-            // var reformattedArray = validata.map(function(obj) {
-            //     var rObj = {};
-            //     rObj[obj.name] = obj.id;
-            //     rObj[obj.name] = obj.getAttribute("type");
-            //     return rObj;
-            // });
-
-            //  $('#btn_Show').prop('disabled',true ) 不可送單;   
-            // 針對每一筆，再for all 
-            // $('#form_checkout1 input:required').bind('keyup',validInput);
-            $('#form_checkout1 input:required')
-                .keyup(validInput)
-                .keyup();
-
-            //預設就先執行keyup  .keyup(function(){}).keyup();  
-            function validInput() {
-                //判斷這次input的值 
-                let allowsubmit = false; //預設不可送單
-                let this_type = $(this).attr('type');
-                let this_name = $(this).attr('name');;
-                let this_val = $(this).val();
-
-                !this_val.trim()
-                    ? allowsubmit = false
-                    : allowsubmit = !checkAlIInput() ? false : true
-
-                !allowsubmit ? console.log("不可送單") : console.log("可送單")
-
-                $('#btn_Show').prop('disabled', !allowsubmit);
-            }
-
-
-            function checkAlIInput() {
-                let validsubmit = true;
-
-                thisform.each(function () {
-                    let type = $(this).attr('type');
-                    let val = $(this).val();
-                    let name = $(this).attr('name');
-                    console.log(type + ":" + val + ":" + name)
-                    if (type != 'text') {
-                        // validsubmit = !validataType(type,val)? false : true;
-                        if (!validataType(type, val)) validsubmit = false
-                    } else {
-                        // !val.trim()? console.log("val==空白 不送") :   console.log("val<>空白 ok送");
-                        // validsubmit = !val.trim()? false : true;
-                        if (!val.trim()) validsubmit = false
-                    }
-                })
-
-                console.log("validsubmit 送" + validsubmit);
-                return validsubmit;
-            }
-
-
-
-            // 判斷每一筆資料是否符合型態
-            function validataType(type, val) {
-                // console.log(type,val)
-                var regmm;
-                switch (type) {
-                    case "mobile":
-                        regmm = '((?=(09))[0-9]{10})$';
-                        break;
-                    case "mail":
-                        regmm = '[a-zA-Z0-9]+\@gmail.com';
-                        break;
-                    default:
-                        break;
-                }
-
-                var regmob = new RegExp(regmm);
-                if (regmob.test(val)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-
-            //******  購物明細****** 
-            var data = JSON.parse(localStorage.getItem("cart"));
-            console.log(data)
-            var total = 0;
-            var total_amount = 0;
-            $.each(data, function (i, val) {
-                console.log(i)
-                console.log(val.name)
-                console.log(data[i].name)
-                console.log("amout:" + data[i].amount + "price:" + data[i].price + "xx" + data[i].amount * data[i].price)
-                total_amount += data[i].amount;
-                console.log(total_amount)
-                total += data[i].amount * data[i].price;
-
-                $(".tb_shopcart tbody")
-                    .append(`<tr> 
-                    <td name='fname0' id='fname0'>
-                        <img src='./images/cloversky/${data[i].item_no}_1.jpg' alt=''>
-                    </td> 
-                    <td name='fname1' id='fname1'>
-                        <p>${data[i].name}</p>
-                        <p>${number_format(data[i].price)}</p>
-                    </td>
-                    <td name='fname2' id='fname2'> ${data[i].amount}</td>                                   
-                    <td name='fname3' id='fname3'>${number_format(data[i].amount * data[i].price)}</td> 
-                    </tr> `)
-
-
-            })
-            console.log("total--" + number_format(total));
-
-
-            $("#car_total").text(number_format(total));
-
-            // var tr_len = $('table.tb_shopcart tbody tr').length
-            // console.log("tr_len" + tr_len);
-
-            var ss_total = 0;
-            $('.tb_shopcart td[id^=fname]').each(function () {
-                //   formVals +=  this.id + '=' + ($(this).text()) + ";";
-                ss_total += $(this).text();
-                console.log(this)
-            });
-            console.log(ss_total)
-
-            $("#btn_Show").on("click", function (e) {
-                e.preventDefault();
-                // if input value "" return
-                for (i = 0; i < thisform.length; i++) {
-                    if (!thisform[i].value) {
-                        // alert("沒有資料")
-                        return
-                    }
-                }
-
-                console.log(formTrim($('#form_checkout1').serializeArray()))
-                var alldatas = formTrim($('#form_checkout1').serializeArray())
-                console.log($('#form_checkout1').serialize())
-                // login
-                var categoryList = login_status();
-
-                categoryList.then(function (data) {
-                    console.log('呼び出し先', data);
-                    if (data.success == "N") {
-                        alert("請先登入");
-                        window.location.href = "project_cloversky_login.html";
-                    } else {
-                        $.ajax({
-                            url: allurl + '/reirasys_api/registered_Checkout1.php',
-                            type: 'post',
-                            dataType: 'json',
-                            data: $('#form_checkout1').serialize(),
-                            success: function (response) {
-                                if (!response.success) {
-                                    console.log(response.err);
-                                    // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
-                                    // for (const [key, value] of Object.entries(response.err)) {
-                                    //     console.log(key, value);
-                                    //     $("input[name='"+ key+"']")
-                                    //     .css('background','pink')
-                                    //     .val($("input[name='"+ key+"']").val()+ value)
-
-                                    // }
-                                    let obj = response.err;
-                                    for (const property in obj) {
-                                        console.log(`obj[${property}] = ${obj[property]}`);
-                                        $(`input[name='${property}']`)
-                                            .css('background', 'pink')
-                                            .val($(`input[name='${property}']`).val() + `${obj[property]}`)
-                                    }
-
-                                } else {
-                                    window.location.href = "project_shopcart_step2.html";
-                                }
-
-                            }
-                        });
-                    }
-                }).fail(function () {
-                    console.log('err');
-                });
-
-            });
-
+        new TwCitySelector();
+        //select city
+        new TwCitySelector({
+            el: ".list_selector",
+            elCounty: ".county",
+            elDistrict: ".district",
         });
 
-    </script>
+
+
+
+
+        const thisform = $('#form_checkout1 input:required')
+// 方法一:keyup 判斷資料是否符合
+// 針對每一筆，再for all 
+//預設就先執行keyup  .keyup(function(){}).keyup();  
+        // thisform.keyup(submittf)
+        //         .keyup();
+
+        // function submittf() {
+        //     //判斷這次input的值 
+        //     let allowsubmit = false; //預設不可送單
+        //     let this_val = $(this).val();
+        //     !this_val.trim()
+        //         ? allowsubmit = false
+        //         : allowsubmit = !checkAlIInput() ? false : true
+        //     // !allowsubmit ? console.log("不可送單") : console.log("可送單")
+        //     $('#btn_Show').prop('disabled', !allowsubmit);
+        // }
+
+        // function checkAlIInput() {
+        //     let validsubmit = true;
+        //     thisform.each(function () {
+        //         let type = $(this).attr('type');
+        //         let val = $(this).val();
+        //         let name = $(this).attr('name');
+        //         if (type != 'text') {
+        //             if (!validataType(type, val)) validsubmit = false
+        //         } else {
+        //             console.log(type + ":" + val + ":" + name)
+        //             if (!val.trim()) validsubmit = false
+        //         }
+        //     })
+        //     console.log("validsubmit 送" + validsubmit);
+        //     return validsubmit;
+        // }
+
+// new RegExp判斷input是否符合型態 (mail,XXXXX)
+        function validataType(type, val) {
+            let regmm;
+            let msg;
+            switch (type) {
+                case "mobile":
+                    regmm = '((?=(09))[0-9]{10})$';
+                    msg="手機格式不對"
+                    break;
+                case "mail":
+                    regmm = '[a-zA-Z0-9]+\@gmail.com';
+                    msg = "mail格式不對"
+                    break;
+                default:
+                    break;
+            }
+            // const regmob = new RegExp(regmm);
+            // if (regmob.test(val)) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+            const regmob = new RegExp(regmm);
+            if (regmob.test(val)) {
+                return true;
+            } else {
+                // console.log(msg)
+                return msg;
+            }
+        }
+        
+        // 方法二:送出btn 再
+        $("#btn_Show").on("click", function (e) {
+            e.preventDefault();
+            // for (i = 0; i < thisform.length; i++) {
+            //     if (!thisform[i].value) {
+            //         console.log("NULL")
+            //         // return
+            //     }else{
+            //         // let type = $(this).attr('type');
+            //         // let val = $(this).val();
+            //         // let name = $(this).attr('name');
+            //         // console.log(type+name);
+
+            //         console.log(thisform[i])
+            //         const thiscol = thisform[i].id;
+            //         console.log(thiscol)
+            //         let a = $("#{thiscol}`").attr('type');
+            //         console.log(a)
+            //     }
+            // }
+
+            thisform.each(function () {
+                let type = $(this).attr('type');
+                let val = $(this).val();
+                let name = $(this).attr('name');
+                if (type != 'text') {
+                    console.log(this)
+                    !validataType(type, val)
+                    console.log(name)
+                    console.log(validataType(type, val))
+                
+                //  $(`#${name}`)
+                    // $('input[name=' + name + ']').attr('data-content', validataType(type, val)); 
+                    $('input[name=' + name + ']').parent('label').attr('data-content', validataType(type, val)); 
+                    // $('input [name="' + name + '"]').next().css("background-color", "red");;
+                        // if (!validataType(type, val)){
+                        // }  
+                } else {
+                    console.log(type + ":" + val + ":" + name)
+                    if (!val.trim()) validsubmit = false
+                }
+            })
+
+            const alldatas = formTrim($('#form_checkout1').serializeArray())
+            console.log($('#form_checkout1').serialize())
+        })
+
+
+
+
+
+
+
+
+
+        //******  購物明細****** 
+        const data = JSON.parse(localStorage.getItem("cart"));
+        console.log(data)
+        let total = 0;
+        $.each(data, function (i, val) {
+            total += data[i].amount * data[i].price;
+            $(".tb_shopcart tbody")
+                .append(`<tr> 
+                <td name='fname0' id='fname0'>
+                    <img src='./images/cloversky/${data[i].item_no}_1.jpg' alt=''>
+                </td> 
+                <td name='fname1' id='fname1'>
+                    <p>${data[i].name}</p>
+                    <p>${number_format(data[i].price)}</p>
+                </td>
+                <td name='fname2' id='fname2'> ${data[i].amount}</td>                                   
+                <td name='fname3' id='fname3'>${number_format(data[i].amount * data[i].price)}</td> 
+                </tr> `)
+        })
+        $("#car_total").text(number_format(total)); 
+
+// 送出單據
+        // $("#btn_Show").on("click", function (e) {
+        //     e.preventDefault();
+        //     for (i = 0; i < thisform.length; i++) {
+        //         if (!thisform[i].value) {
+        //             return
+        //         }
+        //     }
+        //     console.log(formTrim($('#form_checkout1').serializeArray()))
+        //     var alldatas = formTrim($('#form_checkout1').serializeArray())
+        //     console.log($('#form_checkout1').serialize())
+
+        //     // login
+        //     var categoryList = login_status();
+        //     categoryList.then(function (data) {
+        //         console.log('呼び出し先', data);
+        //         if (data.IsLogin == "N") {
+        //             alert("請先登入");
+        //             window.location.href = "project_cloversky_login.html";
+        //         } else {
+        //             $.ajax({
+        //                 url: allurl + '/reirasys_api/registered_Checkout1.php',
+        //                 type: 'post',
+        //                 dataType: 'json',
+        //                 data: $('#form_checkout1').serialize(),
+        //                 success: function (response) {
+        //                     if (!response.IsLogin) {
+        //                         console.log(response.err);
+        //                         // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
+        //                         // for (const [key, value] of Object.entries(response.err)) {
+        //                         //     console.log(key, value);
+        //                         //     $("input[name='"+ key+"']")
+        //                         //     .css('background','pink')
+        //                         //     .val($("input[name='"+ key+"']").val()+ value)
+        //                         // }
+        //                         let obj = response.err;
+        //                         for (const property in obj) {
+        //                             console.log(`obj[${property}] = ${obj[property]}`);
+        //                             $(`input[name='${property}']`)
+        //                                 .css('background', 'pink')
+        //                                 .val($(`input[name='${property}']`).val() + `${obj[property]}`)
+        //                         }
+
+        //                     } else {
+        //                         window.location.href = "project_shopcart_step2.html";
+        //                     }
+
+        //                 }
+        //             });
+        //         }
+        //     }).fail(function () {
+        //         console.log('err');
+        //     });
+
+        // });
+
+    });
+
+</script>
 </body>
 
 </html>

@@ -32,37 +32,44 @@
 
 
 @media screen and (max-width: 420px) {
-  .col-2 {
-    padding: 2rem 0;
-  }
-
-  .col-2-img figcaption {
-    margin: 0 0 10px 20px;
-  }
+    .col-2 {
+        padding: 2rem 0;
+    }
+    .col-2-img figcaption {
+        margin: 0 0 10px 20px;
+    }
 }
-
-
 
 .top_page {
     flex: 1;
     margin: $header-height 0 0;
     padding: 0 2rem;
+    width: 80%;
+    margin: $header-height auto 0;
+
     @include phone{
         width:100%;
     }
 }
-//search 
-.main_body {
-    display: flex;
-    flex-direction: column;
-    background-color: $background-color;
-} 
+//search products.html
+//  main_body =>second_layout+bg-c
+// .main_body {
+//     display: flex;
+//     flex-direction: column;
+//     background-color: $background-color;
+// } 
 
-//pro catelogy
-.second_mains {
+.bg-c{
+    background-color: $background-color;
+}
+//  collection page3
+// min-height: 100vh;針對不足一頁的補
+
+.second_layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    // background-color: #d08080;
+    // height: 100vh;
     min-height: 100vh;
 }
 
@@ -76,6 +83,7 @@
     width: 100%;
     background: center / cover no-repeat url(../images/cloversky/top2.jpg);
 }
+
 .login_style::before {
     content: "";
     position: absolute;
@@ -104,7 +112,6 @@
     &:hover {
         background-color: #e89f9f;
     }
-
 }
 
 .tabs-container {
@@ -174,20 +181,33 @@
 .userdata {
     position: relative;
     display: block;
-    margin: 15px 0;
-}
-.userdata::before {
-    height: 80%;
-    content: "";
-    width: 1px;
-    border-right: 1px solid white;
-    position: absolute;
-    left: 45px;
-    top: 50%;
-    transform: translateY(-50%);
-}
+    margin: 35px 0;
+    &::before {
+        height: 80%;
+        content: "";
+        width: 1px;
+        border-right: 1px solid white;
+        position: absolute;
+        left: 45px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-//shop step 
+    &::after {
+        content: attr(data-content);
+        height: 30px;
+        width: 100%;
+        color: pink;
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translateY(100%);
+    }
+}
+//shop cart step 
+// [data-width="large"]::before {
+//     width:50vw;
+// }
 .process3 {
     width: 100%;
     display: flex;
@@ -195,13 +215,21 @@
     justify-content: space-between;
     margin-bottom: 50px;
     position: relative;
+    &[data-width="large"]::before{
+        width:50%;
+    }
+    &[data-width="xlarge"]::before{
+        width:100%;
+    }
     &::before{
         content: "";
         position: absolute;
         height: 2px;
         background-color: pink;
-        // width: calc(50% - 40px);
+        // content: attr(data-content);
     }
+
+    
     li {
         width: 80px;
         height: 80px;
@@ -246,8 +274,16 @@
     padding: 12px;
     text-indent: 45px;
     background: #ddd;
-    // border: none;
-    // outline: none;
+    // &::before {
+    //     height: 80%;
+    //     content: "";
+    //     width: 1px;
+    //     border: 1px solid rgb(150, 45, 45);
+    //     position: absolute;
+    //     left: 45px;
+    //     top: 50%;
+    //     transform: translateY(-50%);
+    // }
 }
 .step1_member {
     position: absolute;
@@ -261,6 +297,10 @@
 .recip_city {
     display: flex;
     align-content: space-around;
+    flex: 1 0 calc(50% - 10px);
+    margin-right: 10px;
+
+
 }
 .fa-user:before {
     content: "\f007";
@@ -278,3 +318,84 @@
     background-color: #aaa;
     cursor: not-allowed;
 }
+
+.form_group{
+    display: flex;
+    justify-content: space-around;
+    label{
+        margin: 0 auto; 
+    }
+    label:nth-child(2){
+        margin-left: 10px
+    }
+}
+
+
+// shopcart step2
+/* step3 */
+.order_detail {
+  padding: 10px;
+  background-color: #f3f6f9;
+  letter-spacing: 1rem;
+  margin: 15px 0;
+  text-align: center;
+}
+/* flex table */
+.flex-table {
+  display: flex;
+  flex-direction: row;
+//   height: 100%;
+  margin-bottom: 100px;
+  margin: 0 auto;
+  border: 1px solid #dedbdb;
+}
+
+.flex-table thead {
+  flex: 1 0 30%;
+  background: #f3f6f9;
+}
+
+.flex-table tbody {
+  flex: 1 1 70%;
+}
+
+.flex-table thead tr,
+.flex-table tbody tr {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  border-bottom: 1px solid #dedbdb;
+}
+
+.flex-table tr {
+  justify-content: center;
+}
+
+.flex-table th {
+  width: 150px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+.flex-table td {
+  word-break: break-all;
+  padding-left: 20px;
+}
+
+
+
+// select 
+.list_selector {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    select{
+        font-size: 16px;
+        padding: 10px;
+        border: 1px solid #cdfa06;
+        width: 100%;
+        border-radius: 0.25rem;
+        outline: none;
+    }
+}
+ 

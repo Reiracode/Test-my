@@ -24,7 +24,7 @@
 -->
 
 <body>
-    <div class="main_body">
+    <div class="second_layout bg-c">
         <header></header>
         <nav class="items">
             <ul>
@@ -137,14 +137,11 @@
             site_map();
 
             // breadcrumb
-            let currentItem = $(".items").find("[href$='" + current_page() + "']");
-            console.log(currentItem)
+            let currentItem = $(".items").find("[href$='" +  myUrl.main + "']");
             $(currentItem.parents("li").get().reverse()).each(function () {
-                console.log($(this));
                 $(".breadcrumb").append($(this).children("a"));
-                // $(".breadcrumb").append($(this).children("li"));
             });
-
+            $(currentItem).attr("href", "")
 
             // product no
             let search_id = (location.search).substr(9, 13)
@@ -305,7 +302,7 @@
                     console.log(result2)
                     if (result2 >= 0) {
                         //已有相同品項
-                        alert("已訂購，請修改購物車")
+                        alert("已訂購 請修改購物車")
                         window.location.href = "project_shopcart.html";
                     } else {
                         //沒有的話就加入購物車
@@ -342,7 +339,7 @@
                     prevEl: '.swiper-button-prev',
                 },
                 loop: true,
-            });
+            });s
             
             function setCart() {
                 $("header").load("headers.html");

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+    onclick 事件https://www.fooish.com/jquery/events.html
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta content='developer' name='reiracode' />
+<link rel="icon" href="./images/logo.png" type="image/png" />
+<meta name="description" content="F2E Desinger in Taiwan">
+<title>Rehome</title>
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+<link rel="stylesheet" href="css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css">    <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+    <!-- <script src="./js/all.js"></script> -->
+</head>
+
+<body>
+    <div class="second_layout">
+        <header></header>
+        <div class="top_page">
+            <ul class="process3">
+                <li><a href="./project_shopcart_step1.html">1</a></li>
+                <li><a href="./project_shopcart_step2.html">2</a></li>
+                <li><a href="./project_shopcart_step3.html">3</a></li>
+            </ul>
+
+            <div class="order_detail">訂單資料</div>
+
+            <table class="flex-table" id="customers">
+                <thead>
+                    <tr><th>訂單編號</th></tr>
+                    <tr><th>訂購人編號</th></tr>
+                    <tr><th>訂購人姓名</th></tr>
+                    <tr><th>地址</th></tr>
+                    <tr><th>state</th></tr>
+                    <tr><th>stree</th></tr>  
+                    <tr><th>電話</th></tr>  
+                    <tr><th>電話1</th></tr>
+                    <tr><th>email</th></tr>  
+                    <tr><th>訂購時間</th></tr>  
+                </thead>
+
+                <tbody></tbody>
+            </table>
+
+            <form id="myForm">
+                <table class="tb_shopcart">
+                    <caption class="order_detail">訂購明細</caption>
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th></th>
+                            <th>数量</th>
+                            <th>小計</th> 
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </form>
+        </div>
+        <footer class='flex-layout'></footer>
+    </div>  
+<script src="./js/jquery.min.js"></script>
+<script src="./js/format.js"></script>
+<script>
+    $(document).ready(function () {
+        $("header").load("headers.html");
+        $("footer").load("footer.html");
+
+        process_color();
+
+        $.ajax({
+            type: 'get',
+            url: allurl + '/reirasys_api/order_no.php', 
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)   //訂購人資料
+                console.log(data.list) 
+
+                $.each(data, function (i, val) {
+                    // console.log(i) //key
+                    // console.log(val) //value
+                    // console.log(!val)
+                    if (i !="list" ){
+                        var valx = (!val) ? " " :  val;
+                        console.log(valx)
+                        // 訂購人資料obj
+                        $("#customers>tbody")
+                        .append(
+                            "<tr><td>" +  valx  + "</td></tr>"
+                        )
+                    } else{
+                        // 訂購明細
+                        $.each(data.list, function (i, val) {
+                            console.log(i) //key
+                            console.log(val) //value
+                            // console.log(data[i].name)
+                            // $("#myForm .tb_shopcart tbody")
+                            // .append("<tr><td name='fname0' id='fname0'><img src='./images/cloversky/" + val.item_no + "_1.jpg'  alt=''><p>"+ val.name +"</p></td>"+
+                            //         "<td name='fname1' id='fname1'>" + number_format(val.price) + "</td>"+
+                            //         "<td name='fname2' id='fname2'>"+ val.amount + "</td>" +
+                            //         "<td name='fname3' id='fname3'>" + number_format(val.amount *  val.price)  + "</td >"+
+                            //         "</tr>"
+                            // )
+ 
+                            $("#myForm .tb_shopcart  tbody")
+                                    .append(`<tr><td name='fname0' id='fname0'><img src='./images/cloversky/${val.item_no }_1.jpg' alt=''>
+                                            </td> 
+                                            <td name='fname1' id='fname1'>
+                                                <p>${val.name}</p>
+                                                <p>${number_format(val.price)}</p>
+                                            </td> 
+                                            <td name='fname2' id='fname2'>${val.amount }</td> 
+                                            <td name='fname3' id='fname3'>${number_format(val.amount *  val.price)}</td > 
+                                            </tr> `
+                               )
+                        })
+                    }
+                })
+            }
+        })
+
+    });
+
+    </script>
+</body>
+
+</html>

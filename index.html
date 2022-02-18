@@ -49,7 +49,7 @@
         <img src="./images/cloversky/top2.jpg" alt="logo_picture">
       </div>
 
-      <div class="main_ds" data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
+      <div class="main_ds" >
         <h2 class="wrap_word">
           <span class="copy-wrap">Creating</span>
         </h2>
@@ -1387,8 +1387,8 @@
     <footer class='flex-layout'></footer>
   </div>
 
-  <div class="cursorFront"></div>
-  <div class="cursorBack"></div>
+  <div class="cursortype cursorFront"></div>
+  <div class="cursortype cursorBack"></div>
   <script src="./js/jquery.min.js"></script>
     <!-- <script src="./footerall.js"></script> -->
   <!-- GSAP -->
@@ -1397,21 +1397,46 @@
   <script src="./js/gsap.min.js"></script>
   <script src="./js/ScrollTrigger.min.js"></script>
   <script src="./js/locomotive-scroll.min.js"></script>
-
   <!-- <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1/dist/locomotive-scroll.min.js"></script> -->
-
   <script>
-    // $(document).ready(function () {
     $(function () {
       $("footer").load("footer.html");
-
       $("header").load("headers.html");
       $('header').appendTo('body');
 
-    // });
     // GSAP
     gsap.registerPlugin(ScrollTrigger);
     Splitting();
+    // **** ani start *********
+    var cursorFront = $(".cursorFront");
+//  circle(200 % at center center)   
+    // width: 300px;
+    //   height: 300px;
+    //   transition: all 1s cubic - bezier(0.4, 0.39, 0.37, 1.11);
+    //   z - index: 1;
+    //   border - radius: 100 %;
+    // clip - path: circle(0px at center center);
+    function start() {
+      const tl = new TimelineMax();
+      //#f2c9c9
+      tl.to(".svg_bg path", { duration: 2, strokeDashoffset: "0", ease: Linear.easeNone })
+        .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
+        .to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=0.2')
+
+        .to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
+        .to('.wrapper', { backgroundColor: '#cbbcbc12', duration: 0.1 }, 'end-label+=0.1')
+        // slogan , stagger: 0.1 each item delay 0.1s
+        .to('.wrap_word .copy-wrap', { color: '#ffe1fe96', duration: 0.5, yPercent: 0, x: 0, y: 0, stagger: 0.1, ease: Linear.easeNone })
+        .to('.wrap_word .copy-wrap', { opacity: 0 }, "+=0.2")
+
+        .to('.rehome', { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.6")
+
+        .to(".cursorBack", { duration: 0.33, scale: 100, opacity: 0.2, x: Math.floor((Math.random() * 600) - 300) })
+        .to(".cursorFront", { duration: 0.3, scale: 50, opacity: 0.4, x: Math.floor((Math.random() * 600) - 200) })
+        .to(".cursorBack", { duration: 0.2, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
+        .to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
+    }
+    start();
 
     const pageContainer = document.querySelector('#scroll-zone');
     /* SMOOTH SCROLL */
@@ -1454,7 +1479,6 @@
         header.classList.add('ds-n');
       }
     });
-
 
     ////////////////////////////////////
     $(window).on('load', function () {
@@ -1511,7 +1535,7 @@
       // section words
       gsap.utils.toArray(".textpanel").forEach((section, index) => {
         console.log(section)
-         console.log(index)
+        console.log(index)
         gsap.to(this, {
           scrollTrigger: {
             trigger: section,
@@ -1556,28 +1580,7 @@
       $(".cursorFront").removeClass("hov");
     });
 
-    // **** ani start *********
-    var cursorFront = $(".cursorFront");
-    function start() {
-      var tl = new TimelineMax();
-      //#f2c9c9
-      tl.to(".svg_bg path", { duration: 2.6, strokeDashoffset: "0" , ease: Linear.easeNone })
-        .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
-        .to(".logo_bg", 1, { 'clip-path': 'circle(75% at 50% 50%)', ease: "power1.out", }, 'end-label+=0.3')
-        
-        .to(".svg_bg path", {stroke: '#ffe6e6'})
-        .to('.wrapper', { backgroundColor: '#cbbcbc12', duration: 0.3 }, 'end-label+=0.1')
-        // slogan
-        .to('.wrap_word .copy-wrap', { color: '#f2e6e1', duration: 0.3, yPercent: 0, x: 0, y: 0, stagger: 0.1 })
-        .to('.wrap_word .copy-wrap', { opacity: 0 }, "+=0.2")
-        
-        .to('.rehome', { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.6")
-        .to(".cursorBack", { duration: 0.3, scale: 100 , opacity: 0.2, x: 100, y: 100}) 
-        .to(".cursorFront", { duration: 0.2, scale: 50, opacity: 0.5, x: 100, y: 100 })
-        .to(".cursorBack", { duration: 0.1, scale: 1 , opacity: 1, x: '50vw', y: '50vh'}) 
-        .to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
-    }
-    start();
+
 
     // one page style
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit

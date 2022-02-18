@@ -25,24 +25,31 @@
 
     .wrap_word {
       color: transparent;
-      font-family: "Bodoni Moda";
       font-weight: 400;
       font-size: 100px;
       -webkit-font-smoothing: antialiased;
-      // -webkit-text-stroke: 1.2px #fff;
-				-webkit-text-stroke: 2px #fff;
+      -webkit-text-stroke: 2px #fff;
       overflow: hidden;
       line-height: 120px;
+      .copy-wrap {
+        font-weight: 400;
+        font-size: 100px;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke: 2px #fff;
+        overflow: hidden;
+        line-height: 120px;
+        font-family: "Bodoni Moda";
+        display: block;
+        color:#ffe1fe96;
+        // color: #f2e6e1;
+        // transition: all 0.7s 0s ease-in-out;
+        
+        // position: relative;
+        transform: translate3d(0, -100%, 0);
+      }
     }
 
 
-    .wrap_word .copy-wrap {
-      font-family: "Bodoni Moda";
-      display: block;
-      transition: all 0.7s 0s ease-in-out;
-      position: relative;
-      transform: translate3d(0, -100%, 0);
-    }
 
 
 // .circle {
@@ -63,32 +70,32 @@
 // }
 
 
-.spotlight-text {
-    // font-family: "Bogart-Semibold";
-		font-family: 'Nova Mono', monospace;
-    text-transform: uppercase;
-    background: #a28b73;
-    font-size: 38px;
-    -webkit-background-clip: text;
-    width: 100%;
-    height: 100%;
-    font-weight: 900;
-    -webkit-text-stroke: 1px #a28b73;
-    margin-left: 50px;
-}
+// .spotlight-text {
+//     // font-family: "Bogart-Semibold";
+// 		font-family: 'Nova Mono', monospace;
+//     text-transform: uppercase;
+//     background: #a28b73;
+//     font-size: 38px;
+//     -webkit-background-clip: text;
+//     width: 100%;
+//     height: 100%;
+//     font-weight: 900;
+//     -webkit-text-stroke: 1px #a28b73;
+//     margin-left: 50px;
+// }
 
-.spotlight-container {
-    background: #fff;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-    display: inline-block;
-    position: relative;
-    z-index: 10;
-    height: 90px;
-    // margin-bottom: 500px;
-    position: relative;
-}
+// .spotlight-container {
+//     background: #fff;
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+//     text-align: center;
+//     display: inline-block;
+//     position: relative;
+//     z-index: 10;
+//     height: 90px;
+//     // margin-bottom: 500px;
+//     position: relative;
+// }
 
 @font-face {
   font-family: "Bogart-Semibold";
@@ -100,9 +107,10 @@
 // #b69e90
 .textpanel{
 		height: 30vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center; 
     h2{
       font-size: 80px;
       position: relative;
@@ -111,15 +119,15 @@
       @include 	phone{
         font-size: 60px;
       }
-    & span.word {
-      font-family: "Bodoni Moda";
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      color: transparent;
-      padding: 20px 0;
-      margin: -20px 0;
-      &:before {
+      span.word {
+        font-family: "Bodoni Moda";
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        color: transparent;
+        padding: 20px 0;
+        margin: -20px 0;
+        &:before {
           content: attr(data-word);
           position: absolute;
           top: 50%;
@@ -128,19 +136,14 @@
           color: transparent;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          // background-image: linear-gradient(to bottom, transparent 25%, #cbbcbc 25%, #cbbcbc 75%, transparent 75%);
+          -webkit-text-stroke: 1px #cbbcbc;  
           background-image: linear-gradient(to bottom, #cbbcbc 50%, transparent 50%);
-          // background-size: 100% 250%;
           background-size: 100% 200%;
           background-repeat: no-repeat;
-          // background-position: 50% calc((var(--progress) * 200px) - 10  0px);
-
           background-position: 50% calc(100px - (var(--progress) * 100px));
-
           transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           transition-delay: 1.25s;
 
-          -webkit-text-stroke: 1px #cbbcbc;  
       }
     }
   }
@@ -281,78 +284,40 @@ section:not(#sectionpin) {
 }
 
 
-.mircle {
-		border: 10vw solid white;
-    background-color: #93484808;
-    width: 150vw;
-    height: 150vw;
-    border-radius: 50%;
-    z-index: 1;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-
-}
-
-
-.cursorFront {
+.cursortype{
+  z-index: 9999;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  isolation: isolate;
+  transition: transform 350ms;
+  &.cursorFront {
     width: 28px;
     height: 28px;
-    position: fixed;
-		top: -8px;     //座標調節（カーソル位置と円の中心を合わせる）
+    top: -8px;     //座標調節（カーソル位置と円の中心を合わせる）
     left: -8px; 
-		// background-color: rgb(209, 178, 119);
-		background-color: rgb(255, 215, 197);
-		pointer-events: none;
+    background-color: #ffd7c5;
     mix-blend-mode: hard-light;
-    // mix-blend-mode: screen;
-		// mix-blend-mode:darken;
-    isolation: isolate;
-    z-index: 9999;
-    border-radius: 50%;
-    transition: transform 350ms;
-}
+  }
 
-
-.cursorBack {
-    z-index: 9999;
+  &.cursorBack {
     width: 32px;
     height: 32px;
-    position: fixed;
     top: 0;
     left: 0;
-		background-color: #facdd4;
-    pointer-events: none;
-    mix-blend-mode:screen;
-    isolation: isolate;
-    border-radius: 50%;
-		transition: all .5s	;
-}
-.cursorFront.hov{
-  width:150px;
-  height:150px;
-	background-color: pink;
+    background-color: #facdd4;
+    mix-blend-mode:screen; 
+  }
+
+  &.cursorFront.hov{
+    width:150px;
+    height:150px;
+    background-color: pink;
+  }
 }
 
 
-.intro_section{
-	// margin:50px 20px;
-	// background-color: #fff;
-	// @include media-breakpoint-up(lg) {
-  //       padding-top: 80px;
-  //       padding-bottom: 60px;
-  //   }
 
-}
-.block_magic{
-	position: absolute;
-	width:100%;
-	height: 100%;
-	background-color: cadetblue;
-
-}
 // grid
 .newimgs {
   display: grid;

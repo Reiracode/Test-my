@@ -123,6 +123,9 @@ figure.list_img1 {
     object-fit: cover;
     overflow: hidden;
     width: 100%;
+    &:hover{
+        cursor: pointer;
+    }
     // height: 100%;
     img {
         width: 100%;
@@ -144,6 +147,7 @@ figure.list_img1 {
     font-family: "Cinzel", serif;
     color: white;
     letter-spacing: 1px;
+    margin: 10px 0;
 }
 .form-row {
     display: flex;
@@ -197,20 +201,19 @@ figure.list_img1 {
     width: 40px;
     font-size: 1.6rem;
     color: #bb7777;
+    &.minus_cal {
+        left: 0;
+        border-right: 1px solid #d6b8b8;
+    }
+    &.add_cal {
+        right: 0;
+        border-left: 1px solid #d6b8b8;
+    }
+    &:active,&:focus,&:hover{
+        background: #fae5e8;
+    }
 }
-.add_minus_btn.minus_cal {
-    left: 0;
-    border-right: 1px solid #d6b8b8;
-}
-.add_minus_btn.add_cal {
-    right: 0;
-    border-left: 1px solid #d6b8b8;
-}
-button.add_minus_btn.add_cal:active, 
-button.add_minus_btn.add_cal:focus, 
-button.add_minus_btn.add_cal:hover {
-    background: #fae5e8;
-}
+
 
 input.carlist_amount {
     color: red;

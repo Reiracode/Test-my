@@ -1194,7 +1194,7 @@ footer {
 }
 
 /* shopcar */
-.second_mains {
+.second_layout {
   /* position: relative; */
   display: flex;
   flex-direction: column;
@@ -1203,7 +1203,7 @@ footer {
   /* padding: 85px 0 0; */
 }
 
-#second_mains {
+#second_layout {
   /* position: relative; */
   display: flex;
   flex-direction: column;
@@ -1217,7 +1217,7 @@ footer {
 }
 
 /* prod_detail and _login.html*/
-/* second_mainss ==> prod_detail */
+/* second_layouts ==> prod_detail */
 .prod_detail {
   display: flex;
   height: 100%;

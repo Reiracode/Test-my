@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+    onclick 事件https://www.fooish.com/jquery/events.html
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content='developer' name='reiracode' />
+    <link rel="icon" href="./images/logo.png" type="image/png" />
+    <meta name="description" content="F2E Desinger in Taiwan">
+    <title>Rehome</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+    <link rel="stylesheet" href="css/all.css">
+    <script src="./js/all.js"></script>
+    <style>
+/*    */   
+</style>
+</head>
+<body>
+    <div class="second_layout" class="shop_process">
+        <header></header>
+        <div class="top_page">
+            <ul class="process3">
+                <!-- <span></span> -->
+                <li><a href="./project_shopcart_step1.html">1</a></li>
+                <li><a href="./project_shopcart_step2.html">2</a></li>
+                <li><a href="./project_shopcart_step3.html">3</a></li>
+            </ul>
+
+            <table class="flex-table" id="customers">
+                <thead>
+                    <tr><th>訂購人姓名</th></tr>
+                    <tr><th>地址</th></tr>
+                    <tr><th>state</th></tr>
+                    <tr><th>電話</th></tr>  
+                    <tr><th>電話1</th></tr>
+                    <tr><th>email</th></tr>  
+                    <tr><th>PS</th></tr>
+                </thead>
+
+                <tbody></tbody>
+            </table>
+            <!-- <form id="myForm" method="post"> -->
+            <form id="myForm">
+                <table class="tb_shopcart">
+                    <caption class="order_detail">付款方式</caption>
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th>価格</th>
+                            <th>数量</th>
+                            <th>小計</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <!-- <button id="btnShow" type='submit'>Try</button> -->
+                </table>
+                <button id="btn_Show" class='btn_type' type="button">送出訂單</button>
+                <!-- <div class="submit-button"><input type="submit" id="submit" value="Submit" /></div> -->
+            </form>
+    
+        
+        </div>
+        <footer class='flex-layout'></footer>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/format.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("header").load("headers.html");
+            $("footer").load("footer.html");
+
+            process_color();
+
+            $.ajax({
+                type: 'get',
+                url: allurl + '/reirasys_api/user_info.php', 
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)   
+
+                    $.each(data, function (i, val) {
+                        // console.log(i) //key
+                        // console.log(val) //value
+                        if (i != "list"){
+                            var valx = (!val) ? " " :  val;
+                            console.log(valx)
+                            $("#customers").append(
+                                `<tr><td>${valx}</td></tr>`
+                            )
+                        } else{
+                            $.each(data.list, function (i, val) {
+                                console.log(i) //key
+                                console.log(val) //value
+                                console.log(number_format((val.amount) * (val.price)))
+                                $(".tb_shopcart tbody").append
+                                    (`<tr><td name='fname0' id='fname0'><img src='./images/cloversky/${val.item_no}_1.jpg'  alt=''><p>${val.name}</p></td>
+                                        <td name='fname1' id='fname1'>${number_format(val.price)}</td>
+                                        <td name='fname2' id='fname2'>${val.amount}</td>
+                                        <td name='fname3' id='fname3'>${number_format(val.amount * val.price)}</td >
+                                        </tr>`
+                                    )
+                            })
+                        }
+                    })
+                }
+            })
+
+            var data = JSON.parse(localStorage.getItem("cart"));
+            console.log(data)
+            // console.log(data[1].price)
+
+            $.each(data, function (i, val) {
+                console.log(i)
+                console.log(val.name)
+                console.log(data[i].name)
+ 
+                console.log(number_format(data[i].amount * data[i].price))
+                $(".tb_shopcart tbody")
+                .append(`<tr> 
+                    <td name='fname0' id='fname0'>
+                        <img src='./images/cloversky/${data[i].item_no}_1.jpg' alt=''>
+                    </td> 
+                    <td name='fname1' id='fname1'>
+                        <p>${data[i].name}</p>
+                        <p>${number_format(data[i].price)}</p>
+                    </td>
+                    <td name='fname2' id='fname2'> ${data[i].amount}</td>                                   
+                    <td name='fname3' id='fname3'>${number_format(data[i].amount * data[i].price)}</td> 
+                    </tr> `)
+            })
+            
+
+            var tr_len = $('table.tb_shopcart tbody tr').length
+            console.log("tr_len" + tr_len);
+                // $('table.tb_shopcart tr')
+        
+
+            var ss_total=0;
+            $('.tb_shopcart td[id^=fname]').each(function () {
+                    //   formVals +=  this.id + '=' + ($(this).text()) + ";";
+                    // ss_total += $(this).text() ;    
+                    console.log(this)       
+            });
+            // console.log("ss_total" + ss_total);
+
+            $("#btn_Show").on("click", function(e) {
+                var loginStatus = login_status();
+                loginStatus.then(function(data) {
+                    console.log('loginStatus:', data);
+                    console.log(data.IsLogin)
+                    if (!data.IsLogin){
+                    // if (data.success=="N"){
+                        alert("請登入會員");
+                        window.location.href = "project_cloversky_login.html";
+                        // $("button#log_out").text("login");
+                    }else{
+                        alert("送單");
+                        console.log(localStorage.getItem("cart"))
+                        //送出訂單
+                        $.ajax({
+                            url: allurl +'/reirasys_api/add_to_shopcart.php',
+                            type: 'post',
+                            // contentType: 'application/json',
+                            // headers: {
+                            // 'Content-Type': 'application/x-www-form-urlencoded'
+                            // },
+                            dataType: 'json',
+                            // 直接用localstorage 傳
+                            data: { data: localStorage.getItem("cart") },
+                            // data: {data: postData},
+                            // data: JSON.stringify(postData),
+                            // data: { id: "111", user: "frank" },
+                            success: function (data) {
+                                // console.log(data)
+                                localStorage.removeItem("cart");
+                                document.location.href= "project_shopcart_step3.html";
+                                //    window.location.href = "project_shopcart_step3.html";
+                                // alert(data)
+                                // $('#output').html(data);
+                            },
+                            // success: function (result) {
+                            //     console.log(result); // result是json物件
+                            // }
+                        });
+                }
+                }).fail(function() { 
+                    console.log('err');
+                });
+                
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>

@@ -45,23 +45,30 @@ footer{
             border:1px solid #fff;
             padding: 10px 15px;
             flex: 1;
-            text-align: center; 
+            // text-align: center; 
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            &:hover{
+                background-color: #f9d8deaf;
+            }
         }
     }
 
 }
-  .ct-connect{
+
+.ct-connect{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    li a{
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        li a{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            padding: 10px;
-            i{
-                font-size: 20px;
-            }
+        justify-content: center;
+        color: #fff;
+        padding: 10px;
+        i{
+            font-size: 20px;
         }
     }
+}
