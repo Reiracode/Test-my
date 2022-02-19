@@ -39,10 +39,15 @@ async function searchAPI() {
 }
 
 //products.html filter items
+// localhost
 const searchitemurl = allurl + `/reirasys_api/shopitemkey.php`;
 async function searchId(id) {
   return await fetch(`${searchitemurl}?id=${id}`).then((data) => data.json());
 }  
+// github
+
+
+
 
 let url = location.href;
 if (url.indexOf("/") != -1) {

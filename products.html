@@ -9,7 +9,6 @@
     <link rel="icon" href="./images/logo.png" type="image/png" />
     <meta name="description" content="F2E Desinger in Taiwan">
     <title>Rehome</title>
-    <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
@@ -144,13 +143,39 @@
             $(currentItem).attr("href", "")
 
             // product no
+
             let search_id = (location.search).substr(9, 13)
             let myResponse;
+// localhost
+console.log(allurl)
+            if (allurl=="http://localhost:8080"){
+                searchId(search_id).then((res) => {
+                    myResponse = res;
+                    renderpage();
+                });
+            }else{
+                $.ajax({
+                    type: "GET",
+                    url: 'https://reiracode.github.io/ajax/allitems.json',
+                    dataType: 'json',
+                    success: function (data) {
+                        myResponse = data.items;
+                        myResponse = myResponse.find(function (item, index, array) {
+                            return item.id == search_id;
+                        }) 
+                        console.log(myResponse)                       
+                        renderpage();
 
-            searchId(search_id).then((res) => {
-                myResponse = res;
-                renderpage();
-            });
+                    }
+                });
+
+
+
+            }
+
+// github
+
+
 
             function renderMinimg(search_item) {
                 let htmlContent = ''
