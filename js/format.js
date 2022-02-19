@@ -117,13 +117,13 @@ let login_status = function () {
 };
 
 // ==>使用方式
-login_status().then(function (data) {
-    if (data.IsLogin) {
-        console.log(data);
-    }
-}).fail(function () {
-    console.log('err');
-});
+// login_status().then(function (data) {
+//     if (data.IsLogin) {
+//         console.log(data);
+//     }
+// }).fail(function () {
+//     console.log('err');
+// });
 //==>呼び出し先 000002
 //==collections.html:59 login success sucess
 
