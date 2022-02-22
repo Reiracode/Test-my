@@ -16,8 +16,9 @@
 </head>
 
 <body>
+    <header></header>
     <div class="second_layout">
-        <header></header>
+
         <div class="top_page">
             <form class="myForm">
                 <p>ショッピングカート</p>
@@ -117,7 +118,13 @@ $(document).ready(function () {
         let amount_old = JSON.parse(localStorage.getItem("cart"))
         amount_old[row_index].amount = e_content ;
 
-        localStorage.setItem("cart", JSON.stringify(amount_old));  
+        localStorage.setItem("cart", JSON.stringify(amount_old));
+        
+        // k1 localstorage setitem
+        window.localStorage.setItem('k1', JSON.stringify(amount_old));
+        window.dispatchEvent(evt);
+         // k1 localstorage
+
         setCart();
     })
 
@@ -130,6 +137,13 @@ $(document).ready(function () {
         old.splice(row_index, 1);
         console.log(old)
         localStorage.setItem("cart", JSON.stringify(old));
+
+        // k1 localstorage setitem
+        window.localStorage.setItem('k1', JSON.stringify(old));
+        window.dispatchEvent(evt);
+        // k1 localstorage
+
+
         $(this).closest('tr').remove();
         setCart();       
     })
@@ -170,6 +184,12 @@ $(document).ready(function () {
         console.log(amount_old)
 
         localStorage.setItem("cart", JSON.stringify(amount_old));
+         // k1 localstorage setitem
+        window.localStorage.setItem('k1', JSON.stringify(amount_old));
+        window.dispatchEvent(evt);
+        // k1 localstorage
+
+
         setCart();
     
     })        
@@ -225,6 +245,20 @@ $(document).ready(function () {
             }
         }
     });
+
+
+
+// k1 localstorage
+    window.addEventListener('storage', function (e) {
+        // document.getElementById('displayValue').innerHTML = localStorage.getItem('k1');
+        console.log(localStorage.getItem('k1'))
+    }, false);
+
+    var evt = document.createEvent('StorageEvent');
+    evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
+    window.dispatchEvent(evt);
+// k1 localstorage
+
 
 });
 

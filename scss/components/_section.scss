@@ -49,53 +49,6 @@
     }
 
 
-
-
-// .circle {
-//     width: 250px;
-//     height: 250px;
-//     background-color: #d7cfcf;
-//     mix-blend-mode: color;
-//     isolation: isolate;
-//     z-index: 9999;
-//     // border-radius: 50%;
-//     transition: all .5s;
-//     position: absolute;
-// 		transition: all .6s cubic-bezier(.5,.2,.1,1.14);
-// }
-// .circle:hover {
-// 		transform: rotate(90deg) scale(1.6);
-// 		border-radius: 100%;
-// }
-
-
-// .spotlight-text {
-//     // font-family: "Bogart-Semibold";
-// 		font-family: 'Nova Mono', monospace;
-//     text-transform: uppercase;
-//     background: #a28b73;
-//     font-size: 38px;
-//     -webkit-background-clip: text;
-//     width: 100%;
-//     height: 100%;
-//     font-weight: 900;
-//     -webkit-text-stroke: 1px #a28b73;
-//     margin-left: 50px;
-// }
-
-// .spotlight-container {
-//     background: #fff;
-//     -webkit-background-clip: text;
-//     -webkit-text-fill-color: transparent;
-//     text-align: center;
-//     display: inline-block;
-//     position: relative;
-//     z-index: 10;
-//     height: 90px;
-//     // margin-bottom: 500px;
-//     position: relative;
-// }
-
 @font-face {
   font-family: "Bogart-Semibold";
   src: url("../../bogart-semibold.woff2") format("woff2");
@@ -104,8 +57,14 @@
 }
 
 // #b69e90
+ 
+
+
+
+
+
 .textpanel{
-		height: 30vh;
+		// height: 30vh;
     text-align: center;
     // display: flex;
     // align-items: center;
@@ -116,7 +75,7 @@
       color: transparent;
       // transform: translateY(calc(100px - (var(--progress) * 200px)));
       @include 	phone{
-        font-size: 60px;
+        font-size: 70px;
       }
       span.word {
         font-family: "Bodoni Moda";
@@ -135,6 +94,11 @@
           color: transparent;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          -webkit-box-decoration-break: clone;
+  
+
+
+
           -webkit-text-stroke: 1px #cbbcbc;  
           background-image: linear-gradient(to bottom, #cbbcbc 50%, transparent 50%);
           background-size: 100% 200%;
@@ -186,6 +150,9 @@
     &:first-child{
         background-color: transparent;
         width:60vw;
+        @include phone{
+          width:80%;
+        }
       p{
         color:darkgray;
       }
@@ -311,7 +278,7 @@ section:not(#sectionpin) {
   &.cursorFront.hov{
     width:150px;
     height:150px;
-    background-color: pink;
+    background-color: #e48393;
   }
 }
 

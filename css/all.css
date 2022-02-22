@@ -120,6 +120,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   padding: 5px 10px;
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
   -webkit-transition: -webkit-transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: -webkit-transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -196,7 +198,7 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  z-index: 9;
+  z-index: 9999;
 }
 
 .menu span {
@@ -387,6 +389,15 @@ header {
   }
 }
 
+.modal_closes {
+  width: 40px;
+  height: 40px;
+  background-color: pink;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
 .modal_close {
   background: transparent;
   position: absolute;
@@ -432,24 +443,26 @@ header {
 .overlay-test {
   position: fixed;
   top: 0;
-  left: 0px;
+  right: 0px;
   background-image: -webkit-gradient(linear, left top, right top, from(#ffffff), to(#ffd9ce));
   background-image: linear-gradient(to right, #ffffff, #ffd9ce);
-  -webkit-clip-path: circle(0px at top right);
-          clip-path: circle(0px at top right);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100vw;
   height: 100vh;
   -webkit-transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
   transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
-  z-index: 1;
 }
 
 .overlay-test.open {
-  -webkit-clip-path: circle(200% at top right);
-          clip-path: circle(200% at top right);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .overlay-test ul {
@@ -460,6 +473,12 @@ header {
       flex-wrap: wrap;
   max-width: 100%;
   margin: 100px;
+}
+
+@media (max-width: 767px) {
+  .overlay-test ul {
+    margin: 20px;
+  }
 }
 
 .overlay-test li {
@@ -510,18 +529,9 @@ header {
 @media (max-width: 767px) {
   .overlay-test li {
     width: 50%;
-  }
-}
-
-@media (max-width: 480px) {
-  .overlay-test {
-    overflow-y: scroll;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-  }
-  .overlay-test li {
-    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
@@ -636,7 +646,6 @@ header {
 }
 
 .textpanel {
-  height: 30vh;
   text-align: center;
 }
 
@@ -648,7 +657,7 @@ header {
 
 @media (max-width: 767px) {
   .textpanel h2 {
-    font-size: 60px;
+    font-size: 70px;
   }
 }
 
@@ -672,6 +681,7 @@ header {
   color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
   -webkit-text-stroke: 1px #cbbcbc;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #cbbcbc), color-stop(50%, transparent));
   background-image: linear-gradient(to bottom, #cbbcbc 50%, transparent 50%);
@@ -750,6 +760,12 @@ header {
 .pin-wrap .flex_alink3:first-child {
   background-color: transparent;
   width: 60vw;
+}
+
+@media (max-width: 767px) {
+  .pin-wrap .flex_alink3:first-child {
+    width: 80%;
+  }
 }
 
 .pin-wrap .flex_alink3:first-child p {
@@ -895,7 +911,7 @@ section:not(#sectionpin) {
 .cursortype.cursorFront.hov {
   width: 150px;
   height: 150px;
-  background-color: pink;
+  background-color: #e48393;
 }
 
 .newimgs {
@@ -1587,7 +1603,6 @@ footer .menu-link a:hover {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  margin: 60px 0 0;
   padding: 0 2rem;
   width: 80%;
   margin: 60px auto 0;
@@ -1596,6 +1611,7 @@ footer .menu-link a:hover {
 @media (max-width: 767px) {
   .top_page {
     width: 100%;
+    min-height: 70vh;
   }
 }
 
@@ -1622,10 +1638,17 @@ footer .menu-link a:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 60px 0 0;
   height: 100%;
   width: 100%;
+  min-height: 600px;
+  margin: 60px auto 0;
   background: center/cover no-repeat url(../images/cloversky/top2.jpg);
+}
+
+@media (max-width: 480px) {
+  .login_style {
+    margin: 0;
+  }
 }
 
 .login_style::before {
@@ -1664,7 +1687,12 @@ footer .menu-link a:hover {
   z-index: 2;
   margin-top: 20px;
   width: 600px;
-  height: 400px;
+}
+
+@media (max-width: 480px) {
+  .tabs-container {
+    margin-top: 60px;
+  }
 }
 
 .tabs-pages {
@@ -1690,7 +1718,6 @@ footer .menu-link a:hover {
   left: 0;
   opacity: 0;
   width: 100%;
-  height: auto;
   color: black;
   -webkit-transition: opacity 1s;
   transition: opacity 1s;
@@ -1704,7 +1731,6 @@ footer .menu-link a:hover {
 }
 
 .inner-content {
-  position: relative;
   padding: 2em;
 }
 
@@ -1990,6 +2016,63 @@ footer .menu-link a:hover {
   border-color: pink;
 }
 
+.mainbody {
+  margin: 60px auto 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.main2 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 20px;
+}
+
+.member_link {
+  padding: 0.5em 1.2em;
+  color: white;
+  background-color: #dac9c9;
+  font-size: 1rem;
+  text-align: center;
+  margin: 20px;
+}
+
+table.dataTable tbody tr.odd-row {
+  background-color: #f8ebeb;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
+  background-color: #c19a8a !important;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before {
+  background-color: #f8a979 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  margin-left: 3px;
+}
+
+.paginate_button:hover {
+  background: #ea9999 !important;
+  border: none !important;
+}
+
 .items {
   display: none;
 }
@@ -2105,6 +2188,12 @@ footer .menu-link a:hover {
 @media (max-width: 992px) {
   .prod_detail {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .prod_detail {
+    margin: 0;
   }
 }
 

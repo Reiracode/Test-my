@@ -17,7 +17,7 @@
 
 <body>
   <div class="container" id="scroll-zone" data-scroll-container>
-    <header class="ds-n"></header>
+    <header ></header>
 
     <section class="wrapper">
       <!-- <div class="mircle"></div> -->
@@ -1226,9 +1226,6 @@
     <section id="sectionPin">
       <div class="pin-wrap">
         <div class="flex_alink3">
-          <!-- <h2 class='textpanel' data-scroll data-scroll-speed="0.5" data-scroll-delay="0.05">
-            Dressing the home
-          </h2> -->
           <div class='textpanel' >
             <h2 data-splitting='words'>Dressing the home</h2>
           </div>
@@ -1289,7 +1286,7 @@
 
     <section class="intro_section">
       <div class='textpanel' data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
-        <h2 data-splitting='words'>NEW ARRVIALS</h2>
+        <h2 data-splitting='words'>Inspiration</h2>
       </div>
 
       <div class="newimgs"></div>
@@ -1319,47 +1316,6 @@
       </div>
     </section>
 
-    <!-- <footer class="flex-layout">  
-      <div class="footer_item">
-        <h2 class="logo">
-          <a href="index.html" class="texthide">Rehome</a>
-        </h2>
-
-        <p>株式会社クライマックス</p>
-        <p>〒541-0059 大阪市中央区博労町1-7-2</p>
-        <p>TEL 06-6271-5070（10:00～19:00）</p>
-      </div>
-
-      <div class="footer_item">
-        <h2>CONTACT</h2>
-        <div class="menu-link">
-          <a href="https://www.makeshop.jp/ssl/popup_mailmagazine.html?db=clover2016">メルマガ登録</a>
-          <a href="javascript:ssl_login('mypage')">会員登録</a>
-        </div>
-
-        <ul class="ct-connect">
-          <li><a><i class="fab fa-twitter"></i></a></li>
-          <li><a><i class="fab fa-twitter-square"></i></a></li>
-          <li><a><i class="fab fa-instagram"></i></a></li>
-          <li><a><i class="fab fa-facebook"></i></a></li>
-        </ul>
-
-
-      </div>
-
-      <div class="footer_item">
-        <h2>HOME</h2>
-        <ul>
-          <li><a href="#">ショッピングガイド</a></li>
-          <li><a href="#">プライバシーポリシー</a></li>
-          <li><a href="#">会社概要</a></li>
-          <li><a href="#">サイトマップ</a></li>
-        </ul>
-      </div>
-
-      <small>&copy;2020 Reira.Co.,Ltd. All Rights Reserved.</small>
-
-    </footer>   -->
     <footer class='flex-layout'></footer>
   </div>
 
@@ -1373,25 +1329,30 @@
   <script src="./js/gsap.min.js"></script>
   <script src="./js/ScrollTrigger.min.js"></script>
   <script src="./js/locomotive-scroll.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1/dist/locomotive-scroll.min.js"></script> -->
-  <script>
-    $(function () {
-      $("footer").load("footer.html");
-      $("header").load("headers.html");
-      $('header').appendTo('body');
+
+<script>
+  $(function () {
+    $("footer").load("footer.html");
+    $("header").load("headers.html");
+    $('header').appendTo('body');
+
+    // $("body").on({
+    //   "touchstart": function () {
+    //     return $(this).off("mouseover mouseout");
+    //   },
+    //   "touchstart mouseover": function () {
+    //     return $(this).addClass("hover");
+    //   },
+    //   "touchend touchmove mouseout click": function () {
+    //     return $(this).removeClass("hover");
+    //   }
+    // }, ".touch-hover");
+
 
     // GSAP
     gsap.registerPlugin(ScrollTrigger);
     Splitting();
-    // **** ani start *********
-    var cursorFront = $(".cursorFront");
-//  circle(200 % at center center)   
-    // width: 300px;
-    //   height: 300px;
-    //   transition: all 1s cubic - bezier(0.4, 0.39, 0.37, 1.11);
-    //   z - index: 1;
-    //   border - radius: 100 %;
-    // clip - path: circle(0px at center center);
+
     function start() {
       const tl = new TimelineMax();
       //#f2c9c9
@@ -1449,10 +1410,10 @@
       // let headerHeight = header.getBoundingClientRect().height;
       if (instance.direction === 'down' && instance.scroll.y > 140) {
         header.classList.add('ds-f');
-        header.classList.remove('ds-n');
+        // header.classList.remove('ds-n');
       } else {
         header.classList.remove('ds-f')
-        header.classList.add('ds-n');
+        // header.classList.add('ds-n');
       }
     });
 
@@ -1492,15 +1453,6 @@
                     images[xindex - 1].classList.add('active');
                     ani_word[xindex - 1].classList.add('active');
                   }
-
-                  // images.forEach((item, index) => {
-                  //   console.log(index)
-                  //   if (index !== xindex - 1) {
-                  //     images[index].classList.remove('active');
-                  //     ani_word[index].classList.remove('active');
-                  //   }
-                  // })
-                // }
               }
             },
             ease: "none"
@@ -1533,35 +1485,49 @@
       ScrollTrigger.refresh();
     });
 
-
     /* mouse  */
-    $(window).mousemove(function (e) {
-      let frontPosY = `${e.clientY - ($('.cursorFront').height() / 2)}px`;
-      let frontPosX = `${e.clientX - ($('.cursorFront').width() / 2)}px`;
+    // $(window).mousemove(function (e) {
+    //   let frontPosY = `${e.clientY - ($('. ').height() / 2)}px`;
+    //   let frontPosX = `${e.clientX - ($('.cursorFront').width() / 2)}px`;
 
-      let backPosY = `${e.clientY - ($('.cursorBack').height() / 2)}px`;
-      let backPosX = `${e.clientX - ($('.cursorBack').width() / 2)}px`;
+    //   let backPosY = `${e.clientY - ($('.cursorBack').height() / 2)}px`;
+    //   let backPosX = `${e.clientX - ($('.cursorBack').width() / 2)}px`;
 
-      $('.cursorFront').css('transform', `translateY(${frontPosY}) translateX(${frontPosX})`);
-      $('.cursorBack').css('transform', `translateY(${backPosY}) translateX(${backPosX})`);
-    });
+    //   $('.cursorFront').css('transform', `translateY(${frontPosY}) translateX(${frontPosX})`);
+    //   $('.cursorBack').css('transform', `translateY(${backPosY}) translateX(${backPosX})`);
+    // });
 
-    $("h2").mouseover(function (e) {
-      // hovFlag = true;
-      $(".cursorFront").addClass("hov");
-    });
+    // $("h2").mouseover(function (e) {
+    //   $(".cursorFront").addClass("hov");
+    // });
 
-    $("h2").mouseout(function (e) {
-      // hovFlag = false;
-      $(".cursorFront").removeClass("hov");
-    });
+    // $("h2").mouseout(function (e) {
+    //   $(".cursorFront").removeClass("hov");
+    // });
 
+
+      // $('h2').bind('mouseenter touchstart ', function () {
+      //   // $(this).find(".menu_underline").fadeIn();
+      //   $(".cursorFront").addClass("hov");
+      //   // alert("touchstart")
+      // });
+
+      // //Mouse Out   
+      // $('h2').bind('mouseleave touchend click', function (event) {
+      //   event.preventDefault();
+      //   // $(this).find(".menu_underline").fadeOut();
+      //   $(".cursorFront").removeClass("hov");
+      //   // alert("touchmove")
+      // });
+      // $('h2').on('click touchend', function (e) {
+      //   $(".cursorFront").addClass("hov");
+      // });
 
 
     // one page style
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // let vh = window.innerHeight * 0.01;
+    // document.documentElement.style.setProperty('--vh', `${vh}px`);
 
     // render collections
     searchAPI().then((res) => {
@@ -1570,7 +1536,7 @@
       myResponse.sort((ele1, elem2) => Math.random() - Math.random())
       for (p = 0; p < 8; p++) {
         $('.newimgs').append(
-          `<figure class="grid_list">
+          `<figure class="grid_list touch-hover">
               <a href="./products.html?item_id=${myResponse[p].id}">
                 <img src='./images/cloversky/${myResponse[p].id}_1.jpg' alt="${myResponse[p].title}" data-pno=${myResponse[p].id}>
                 <figcaption>
@@ -1583,63 +1549,9 @@
     })
 
     // 手機時 remove hover 屬性
-    $('.newimgs').on('touchstart', '.grid_list', function (e) {
-      // $('.newimgs').index
-      // var link = $(this); //preselect the link
-      // if (link.hasClass('hover')) {
-      //     return true;
-      // } else {
-      //     link.addClass('hover');
-      //     $('.newimgs').not(this).removeClass('hover');
-      //     return false; //extra, and to make sure the function has consistent return points
-      // }
-      $(this).addClass('hover').siblings().removeClass('hover');
-    });
-
-
-    var param = location.search
-    console.log(param)
-    // 將選取出來的元素快取到記憶體中
-    // 如果元素會重複使用到，而且選取出來的結果不會產生變化時，盡量將已經選取出來的元素儲存到變數中
-    // ，避免每次使用時都必須再選取一次、再重新解析一次文件。
-    // ps.最常用的應該是：$this = $(this);
-    // https://ithelp.ithome.com.tw/articles/10185668
-
-    // 在JS/jQuery中，怎麽觸發input的keypress/keydown/keyup事件
-    // $("#search1_btn").on("click", function (e) {
-    //   console.log($(this))
-    //   let curId = $(this).attr("id").replace("_button", "")
-    //   console.log(curId)
-    //   var e = $.Event("keyup");
-    //   e.keyCode = 13;
-    //   $("#" + curId).trigger(e);
-    // })
-
-    // enter
-    // $("#MakeShopSearch").keypress(e => {
-    //   if (e.keyCode == 13 || e.which == 13) {
-    //     search_Item()
-    //   }
-    // })
-
-    // click search
-    // $("#MakeShopSearch_btn").click((e) => {
-    //   search_Item()
-    // })
-
-    // function search_Item() {
-    //   var keystring = $("#MakeShopSearch").val();
-    //   console.log("keystring" + keystring)
-    //   // console.log(people)
-    //   if (!keystring) {
-    //     alert("null")
-    //     return false;
-    //   }
-    //   window.location.href = "products.html?item_id=" + keystring;
-    // }
- 
-
- 
+    // $('.newimgs').on('touchstart', '.grid_list', function (e) {
+    //   $(this).addClass('hover').siblings().removeClass('hover');
+    // });
 
     })
 

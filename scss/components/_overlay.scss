@@ -1,26 +1,29 @@
-// open menu
+// // open menu
 .overlay-test {
     position: fixed;
     top: 0;
-    left: 0px;
+    right: 0px;
     background-image: linear-gradient(to right, #ffffff, #ffd9ce);
-    clip-path: circle(0px at top right);
-    display: flex;
+    // clip-path: circle(0px at top right);
+    display:none;
+    justify-content:center;
+    align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100vh;  
     transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
-    z-index: 1;
-
     &.open {
-      // display: flex;
-      clip-path: circle(200% at top right);
-      // opacity: 0.9;
+      display: flex;
+      // clip-path: circle(200% at top right);
     }
     ul { 
       display: flex;
       flex-wrap: wrap;
       max-width: 100%;
       margin: 100px;
+      @include phone{
+        margin: 20px;
+      }
+
     }
     li{
       margin: 15px 0;
@@ -30,14 +33,14 @@
       display: flex;
       align-items: center;
       a{
-      width: 100%;
-      font-size: 1rem;
-      display: block;
-      padding: 15px 15px 12px;
-      cursor: pointer;
-      position: relative;
-      color: var(--color-p);
-      transition: all 0.5s;
+        width: 100%;
+        font-size: 1rem;
+        display: block;
+        padding: 15px 15px 12px;
+        cursor: pointer;
+        position: relative;
+        color: var(--color-p);
+        transition: all 0.5s;
         &::after{
           content: "";
           width: 100%;
@@ -56,30 +59,14 @@
           display: block;
         }
       }
+      //  @include mobile{
       @include phone{
         width: 50%;
-      }
-    }
-    @include mobile{
-      overflow-y: scroll;
-      align-items: flex-start;     
-      li{
-        width: 100%;
+        align-items: center; 
+
       }
     }
 }
-
-
-// @media screen and (max-width: 480px) {
-//   .overlay-test {
-//     overflow-y: scroll;
-//     align-items: flex-start;
-//   }
-//   .overlay-test ul li {
-//     width: 100%;
-//   }
-// }
-
 
 // animation: floatLayerFrame 19000ms ease 3000ms infinite forwards;
 @keyframes floatLayerFrame {

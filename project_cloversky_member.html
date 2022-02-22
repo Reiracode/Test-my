@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content='developer' name='reiracode' />
+    <link rel="icon" href="./images/logo.png" type="image/png" />
+    <meta name="description" content="F2E Desinger in Taiwan">
+    <title>Rehome</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="css/cloversky.css"> -->
+    <link rel="stylesheet" href="css/all.css">
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.7/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+</head>
+
+<body>
+    <header></header>
+    <div class="second_layout">
+        <div class="mainbody">
+            <div class="member_link">
+                <h3>會員中心</h3 >
+                <!-- <nav class="member-nav nav justify-content-center">
+                    <a class="nav-link active" href="#">訂單查詢</a>
+                    <a class="nav-link" href="#">修改資料</a>
+                    <a class="nav-link disabled" href="#">Disabled link</a>
+                </nav> -->
+            </div>
+
+            <div  class="main2">
+                <!-- <caption>會員資料</caption>   -->
+                <table class="table_member" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>訂單號碼</th>
+                            <!-- <th>品項</th> -->
+                            <th>品名</th>
+                            <th>價格</th>
+                            <th>數量</th>
+                            <th>訂購時間</th>
+                            <th>地址</th>
+                            <th>訂購人</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            
+        </div>
+        <footer class='flex-layout'></footer>
+    </div>
+    
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/format.js"></script>
+    <script src="./js/members.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+
+
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.1/js/dataTables.buttons.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+    
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.flash.min.js"></script>  
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.print.min.js"></script> 
+
+
+    <script>
+
+          $("header").load("headers.html");
+            $("footer").load("footer.html");
+        var categoryList = login_status();
+    categoryList.then(function(data) {
+        console.log('呼び出し先', data);
+        if (data.success){
+            console.log("login success sucess")
+        }
+    }).fail(function() { 
+        console.log('err');
+    });
+
+
+const dataurl = !!(allurl == "http://localhost:8080") 
+                    ?  allurl +'/reirasys_api/user_buy_item.php'
+                    : "https://reiracode.github.io/ajax/user_buy_item.json"
+
+
+        var myResponse;
+        $.ajax({
+            type: "GET",
+            // url: allurl + '/reirasys_api/user_buy_item.php',
+            // url: "https://reiracode.github.io/ajax/user_buy_item.json",
+            url:dataurl,
+            dataType: 'json',             
+            success: function (data) {               
+                console.log(data)
+
+            }
+        });
+
+
+
+    var table = $('#myTable').DataTable({
+            dom: 'Bfrtip',
+            responsive: true,
+            // rowReorder: true,
+            "stripeClasses": [ 'odd-row', 'even-row' ],
+            'processing': true,
+            "ajax": {
+                "type" : "GET",
+                // "url" :  allurl + "/reirasys_api/user_buy_item.php",
+                "url": "https://reiracode.github.io/ajax/user_buy_item.json",
+                "dataSrc": function ( json ) {
+                },
+                // "data" : function( d ) {
+                //     },
+                "dataSrc": ""       
+            },
+            "columns": [
+                { "data": 'id' },
+                { "data": 'name' },
+                { "data": 'price' },
+                { "data":  'amount'},
+                { "data": 'datatime' },
+                { "data": 'recip_street' },
+                { "data": 'userno' }
+            ]
+           
+        // buttons: [
+        //     'copy', {
+        //         extend: 'csv',
+        //         text: 'CSV',
+        //         bom : true
+        //         }, 
+        //     'excel', 'pdf', 'print'
+        //     ],
+
+    });
+
+    table.ajax.reload() 
+
+</script>
+</body>
+
+</html>

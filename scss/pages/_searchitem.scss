@@ -3,8 +3,12 @@
     max-width: 900px;
     margin: $header-height auto 0;
     flex-flow: row wrap;
+    // position: relative;
     @include pad{
         width: 100%;
+    }
+    @include mobile{
+        margin:0;
     }
 }
 

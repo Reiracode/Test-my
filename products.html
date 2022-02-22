@@ -23,8 +23,9 @@
 -->
 
 <body>
+    <header></header>
     <div class="second_layout bg-c">
-        <header></header>
+       
         <nav class="items">
             <ul>
                 <li><a href="./index.html">top</a>
@@ -111,29 +112,30 @@
         <footer class='flex-layout'></footer>
     </div>
     <script src="./js/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <script src="./js/format.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
     <script>
-        $(document).ready(function () {
-        //   $(".buttonsss").click(function () {
-        //         history.go(0);
-        //         alert('Reloading Page');
-        //     });
-        // window.onpageshow = function (event) {
-        //     if (event.persisted){
-        //         // alert("reload")
-        //         window.location.reload();
-        //     }
-        // }
-            // location.reload();
-        // $(window).on('load', function () {
+    $(function () {
             $("header").load("headers.html");
             $("footer").load("footer.html");
             setCart();
             //safari 100vh bug
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            // let vh = window.innerHeight * 0.01;
+            // document.documentElement.style.setProperty('--vh', `${vh}px`);
             site_map();
+            // const header = document.querySelector('header');
+            // if (window.matchMedia('(max-width: 480px)').matches) {
+            //     $(window).scroll(function (e) {
+            //         if ($(this).scrollTop() > 140) {
+            //             $("header").addClass('ds-f');
+            //         }else{
+            //             $("header").removeClass('ds-f');
+            //         }
+            //     });     
+            // }else{
+            //     $("header").addClass('ds-f');
+            // }
 
             // breadcrumb
             let currentItem = $(".items").find("[href$='" +  myUrl.main + "']");
@@ -329,6 +331,12 @@ console.log(allurl)
                         cart.push(newItem);
                         localStorage.setItem("cart", JSON.stringify(cart));
 
+                        // k1 localstorage setitem
+                        window.localStorage.setItem('k1', JSON.stringify(cart));
+                        window.dispatchEvent(evt);
+                        // k1 localstorage
+
+
                         let data1 = JSON.parse(localStorage.getItem("cart"));
                         console.log(data1)//1 
                         $('.shopart_amount').css("display", "block")
@@ -339,8 +347,6 @@ console.log(allurl)
                 }
 
             });
-
-
 
             let swiper = new Swiper('.swiper-container', {
                 loop: true,
@@ -363,8 +369,21 @@ console.log(allurl)
             function setCart() {
                 $("header").load("headers.html");
             }
-        })
 
+
+        // k1 localstorage
+        window.addEventListener('storage', function (e) {
+            // document.getElementById('displayValue').innerHTML = localStorage.getItem('k1');
+            console.log(localStorage.getItem('k1'))
+        }, false);
+
+        var evt = document.createEvent('StorageEvent');
+        evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
+        window.dispatchEvent(evt);
+        // k1 localstorage
+
+
+        })
     </script>
 </body>
 
