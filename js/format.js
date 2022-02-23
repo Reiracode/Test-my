@@ -1,3 +1,4 @@
+// console.log(" format:" + localStorage.getItem("cart"));
 //千分位
 function number_format(n) {
   n += "";
@@ -23,7 +24,7 @@ const allitem = !!(allurl == "http://localhost:8080")
 const getAllitems = async () => {
   const response = await fetch(allitem);
   const json = await response.json();
-  return json
+  return json;
   // try {
   //   console.log(json.items);
   //   return json.items;
@@ -43,11 +44,8 @@ async function searchAPI() {
 const searchitemurl = allurl + `/reirasys_api/shopitemkey.php`;
 async function searchId(id) {
   return await fetch(`${searchitemurl}?id=${id}`).then((data) => data.json());
-}  
+}
 // github
-
-
-
 
 let url = location.href;
 if (url.indexOf("/") != -1) {
@@ -60,18 +58,18 @@ if (url.indexOf("/") != -1) {
 function process_color() {
   site_map();
 
-  if ((myUrl.main).indexOf("step") != -1) {
-    let step = (myUrl.main).split("_");
+  if (myUrl.main.indexOf("step") != -1) {
+    let step = myUrl.main.split("_");
     step = step[step.length - 1];
 
     let now_step = step.substr(4, 1);
     for (let i = now_step - 1; i >= 0; i--) {
-      $(".process3 li").eq(i).css({ backgroundColor: "#efc1c1", opacity: "1" });     
+      $(".process3 li").eq(i).css({ backgroundColor: "#efc1c1", opacity: "1" });
     }
 
     if (now_step == "2") {
       $(".process3").attr("data-width", "large");
-    } else if (now_step == "3") { 
+    } else if (now_step == "3") {
       $(".process3").attr("data-width", "xlarge");
     }
   }
@@ -89,7 +87,6 @@ function process_color() {
 // }
 // getLogin_format();
 
-
 //判斷登入way2 * 建議用此作法，較清楚
 // 定義
 function getLogin_status() {
@@ -99,7 +96,7 @@ function getLogin_status() {
     dataType: "json",
     success: function (data) {
       data.userno;
-    }
+    },
   });
 }
 // ==>使用方式
@@ -107,7 +104,6 @@ getLogin_status().then(function (data) {
   console.log("getLogin_status:" + data.userno);
 });
 // ==>getLogin_status:000002
-
 
 // 判斷登入way1**
 let login_status = function () {
@@ -145,7 +141,9 @@ function formTrim(formValueall) {
 
 // allitem.html
 function current_page() {
-  let url = location.href,ustring,ary1;
+  let url = location.href,
+    ustring,
+    ary1;
   if (url.indexOf("/") != -1) {
     //split在此直接將各自的參數資料切割放進ary中
     let ary = url.split("/");
@@ -191,7 +189,7 @@ function current_page() {
 let myUrl = new Object();
 function site_map() {
   let url = location.href;
-  let urlstring,querykey;
+  let urlstring, querykey;
   if (url.indexOf("/") != -1) {
     let ary = url.split("/");
     urlstring = ary[ary.length - 1].split("?");

@@ -333,11 +333,12 @@ console.log(allurl)
 
                         // k1 localstorage setitem
                         window.localStorage.setItem('k1', JSON.stringify(cart));
-                        window.dispatchEvent(evt);
+                        window.dispatchEvent(event);
                         // k1 localstorage
 
 
-                        let data1 = JSON.parse(localStorage.getItem("cart"));
+                        // let data1 = JSON.parse(localStorage.getItem("cart"));
+                        let data1 = JSON.parse(localStorage.getItem("k1"));
                         console.log(data1)//1 
                         $('.shopart_amount').css("display", "block")
                         $('.shopart_amount')
@@ -372,14 +373,28 @@ console.log(allurl)
 
 
         // k1 localstorage
-        window.addEventListener('storage', function (e) {
-            // document.getElementById('displayValue').innerHTML = localStorage.getItem('k1');
-            console.log(localStorage.getItem('k1'))
-        }, false);
+        // window.onstorage = () => {
+        // // window.addEventListener('storage', function (e) {
+        //     console.log(localStorage.getItem('k1'))
+        // // }, false);
+        // }
+        // var evt = document.createEvent('StorageEvent');
+        // evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
+        // window.dispatchEvent(evt);
 
-        var evt = document.createEvent('StorageEvent');
-        evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
-        window.dispatchEvent(evt);
+        const event = new Event('Storage', {
+            // detail: {
+                key: "key",
+                oldValue: "oldValue",
+                newValue: "newValue",
+                url: "url",
+                Storage: localStorage
+            // }
+        });
+        window.dispatchEvent(event);
+        // window.dispatchEvent(new Event('cart', { key: "key", oldValue: "oldValue", newValue: "newValue", url: "http://localhost:8080", Storage: localStorage }));
+        // const event = new Event('StorageEvent');
+        // window.dispatchEvent(new Event('StorageEvent', { key: "key", oldValue: "oldValue", newValue: "newValue", url: "http://localhost:8080", Storage: localStorage }));
         // k1 localstorage
 
 
