@@ -1428,7 +1428,7 @@
           const t1 = document.querySelector(".pin-wrap").offsetHeight;
           const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
           const ani_word = document.querySelectorAll(".flex_list_descript > h2");
-
+					// markers: true,  標記線
           console.log(imagesLen)//3
           // ******* horizon scroll
           gsap.to(".pin-wrap", {
@@ -1439,7 +1439,7 @@
               trigger: "#sectionPin",
               pin: true,
               id: "XXXXX",
-              markers: true,
+              // markers: true,
               start: "top top",
               end: () => "+=" + document.querySelector('.pin-wrap').scrollHeight,
               ease: Linear.easeNone,
@@ -1469,7 +1469,7 @@
             trigger: section,
             scroller: pageContainer,
             id: "textpanel ",
-            markers: true,
+            // markers: true,
             start: "top 100%",
             end: "bottom 25%",
             scrub: 0,

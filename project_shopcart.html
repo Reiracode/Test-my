@@ -10,7 +10,6 @@
     <title>Rehome</title>
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/cloversky.css">   -->
     <link rel="stylesheet" href="css/all.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 </head>
@@ -64,7 +63,6 @@ $(document).ready(function () {
     console.log(cart)
     setCart();
 
-    // http://localhost:8080/dashboard/F2E_project/cloversky/project_cloversky_searchitems.html?item_id=000000000122
     $.each(cart, function (i, val) {           
         $(".tb_shopcart tbody").append(`<tr><td id='fname0'>
                 <a href='./products.html?item_id=${cart[i].item_no}'>
@@ -88,15 +86,11 @@ $(document).ready(function () {
             <td id='fname4'><button class='btn_remove'><i class='fas fa-times'></i></button></td>
         </tr>`)
     });
-//        
         
     function setCart() {
-        console.log(cart)
-        //let cart 之後，localStorage setItem更新
         if (localStorage.getItem("cart")) {
             cart = JSON.parse(localStorage.getItem("cart"));
         }
-        console.log(cart)
         
         let cartList = "", s_price = 0, total = 0;
         for (let $i = 0; $i < cart.length; $i++) {
@@ -105,6 +99,12 @@ $(document).ready(function () {
         }
         $("#car_total").text(number_format(total));
         $("header").load("headers.html");
+        //  let data1 = JSON.parse(localStorage.getItem("k1"));
+        // console.log(data1)//1 
+        // $('.shopart_amount').css("display", "block")
+        // $('.shopart_amount')
+        //     .text(data1.length)
+        //     .addClass("cart-run");
     }
 
     // 變更數量
@@ -144,8 +144,9 @@ $(document).ready(function () {
         // k1 localstorage
 
 
-        $(this).closest('tr').remove();
-        setCart();       
+       
+        setCart();     
+         $(this).closest('tr').remove();  
     })
 
     // 變更數量 加金額
@@ -246,35 +247,14 @@ $(document).ready(function () {
         }
     });
 
-
-
-// k1 localstorage
-    // window.addEventListener('storage', function (e) {
-    //     // document.getElementById('displayValue').innerHTML = localStorage.getItem('k1');
-    //     console.log(localStorage.getItem('k1'))
-    // }, false);
-
-    // window.onstorage = () => {
-    //     // window.addEventListener('storage', function (e) {
-    //     console.log(localStorage.getItem('k1'))
-    //     // }, false);
-    // }
-
-
-
-
-    // var evt = document.createEvent('StorageEvent');
-    // evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
-    // window.dispatchEvent(evt);
-
     // const event = new Event('StorageEvent', {
-         const event = new Event('Storage', {
+    const event = new Event('Storage', {
         // detail: {
-            key: "key",
-            oldValue: "oldValue",
-            newValue: "newValue",
-            url: "http://localhost:8080",
-            Storage: localStorage
+        key: "key",
+        oldValue: "oldValue",
+        newValue: "newValue",
+        url: "url",
+        storageArea: localStorage
         // }
     });
     window.dispatchEvent(event);

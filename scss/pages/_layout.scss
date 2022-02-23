@@ -384,6 +384,15 @@
         letter-spacing: 1px;
         border: 1px solid #e6a652;
         border-radius: 4px;
+
+
+
+   width: 100%;
+    font-size: 18px;
+    height: 54px;
+    padding: 12px;
+    text-indent: 45px;
+    border: 1px solid #841e1e;
         &:focus{
             border-color: pink;
         }

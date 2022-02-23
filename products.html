@@ -119,23 +119,11 @@
     $(function () {
             $("header").load("headers.html");
             $("footer").load("footer.html");
-            setCart();
+
             //safari 100vh bug
             // let vh = window.innerHeight * 0.01;
             // document.documentElement.style.setProperty('--vh', `${vh}px`);
             site_map();
-            // const header = document.querySelector('header');
-            // if (window.matchMedia('(max-width: 480px)').matches) {
-            //     $(window).scroll(function (e) {
-            //         if ($(this).scrollTop() > 140) {
-            //             $("header").addClass('ds-f');
-            //         }else{
-            //             $("header").removeClass('ds-f');
-            //         }
-            //     });     
-            // }else{
-            //     $("header").addClass('ds-f');
-            // }
 
             // breadcrumb
             let currentItem = $(".items").find("[href$='" +  myUrl.main + "']");
@@ -145,11 +133,10 @@
             $(currentItem).attr("href", "")
 
             // product no
-
             let search_id = (location.search).substr(9, 13)
             let myResponse;
-// localhost
-console.log(allurl)
+            // localhost
+            console.log(allurl)
             if (allurl=="http://localhost:8080"){
                 searchId(search_id).then((res) => {
                     myResponse = res;
@@ -167,16 +154,9 @@ console.log(allurl)
                         }) 
                         console.log(myResponse)                       
                         renderpage();
-
                     }
                 });
-
-
-
             }
-
-// github
-
 
 
             function renderMinimg(search_item) {
@@ -246,13 +226,13 @@ console.log(allurl)
                             console.log($(e.target));
                             $(e.target).addClass("active")
                                 .siblings("p") //find sibling h3 elements
-                                .removeClass("active") // an++
+                                .removeClass("active"); // an++
 
                             let pro_tile = $(e.target).attr("data-active");
-                            console.log(pro_tile)
+                            // console.log(pro_tile)
                             $('#' + pro_tile).addClass("active")
                                 .siblings("div") //find sibling h3 elements
-                                .removeClass("active") //
+                                .removeClass("active"); //
                         }
                     });
 
@@ -267,7 +247,6 @@ console.log(allurl)
                 }
             }
 
-            // error  $(".add_minus_btn").click(()=> {
             $(".add_minus_btn").click(function () {
                 let new_amt = parseInt($(".amount").val())
                 console.log("new_amt" + new_amt)
@@ -313,21 +292,17 @@ console.log(allurl)
                     console.log("this_new" + this_new)
                     let data = JSON.parse(localStorage.getItem("cart"));
                     // console.log(data)//null 現在的購物車0
-                    // console.log(data.length)
-                    // if (data.length=0) return;
-                    //q: 購物車更新後，按上一頁回到商品頁面 沒有更新
                     //判斷是否購物車中已有相同品項
                     let result2 = $.map(data, function (item, index) {
-                        return item.name
-                    }).indexOf(this_new);
-                    console.log(result2)
+                                        return item.name
+                                    }).indexOf(this_new);
                     if (result2 >= 0) {
                         //已有相同品項
                         alert("已訂購 請修改購物車")
                         window.location.href = "project_shopcart.html";
                     } else {
                         //沒有的話就加入購物車
-                        console.log(newItem)
+                        // console.log(newItem)
                         cart.push(newItem);
                         localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -336,10 +311,11 @@ console.log(allurl)
                         window.dispatchEvent(event);
                         // k1 localstorage
 
-
                         // let data1 = JSON.parse(localStorage.getItem("cart"));
                         let data1 = JSON.parse(localStorage.getItem("k1"));
-                        console.log(data1)//1 
+                        // console.log(data1)//1 
+
+
                         $('.shopart_amount').css("display", "block")
                         $('.shopart_amount')
                             .text(data1.length)
@@ -367,35 +343,29 @@ console.log(allurl)
                 loop: true,
             });
             
-            function setCart() {
-                $("header").load("headers.html");
-            }
+            // function setCart() {
+            //     $("header").load("headers.html");
+            // }
 
 
         // k1 localstorage
-        // window.onstorage = () => {
-        // // window.addEventListener('storage', function (e) {
-        //     console.log(localStorage.getItem('k1'))
-        // // }, false);
-        // }
-        // var evt = document.createEvent('StorageEvent');
-        // evt.initStorageEvent('storage', false, false, 'k1', 'oldValue', 'newValue', null, window.localStorage);
-        // window.dispatchEvent(evt);
 
         const event = new Event('Storage', {
-            // detail: {
+            // desxxxx:{
                 key: "key",
                 oldValue: "oldValue",
                 newValue: "newValue",
                 url: "url",
-                Storage: localStorage
+                storageArea: localStorage
             // }
         });
+        console.log(event)
         window.dispatchEvent(event);
-        // window.dispatchEvent(new Event('cart', { key: "key", oldValue: "oldValue", newValue: "newValue", url: "http://localhost:8080", Storage: localStorage }));
-        // const event = new Event('StorageEvent');
-        // window.dispatchEvent(new Event('StorageEvent', { key: "key", oldValue: "oldValue", newValue: "newValue", url: "http://localhost:8080", Storage: localStorage }));
-        // k1 localstorage
+ 
+        // window.addEventListener('storage', event => {
+        //     console.log(event);
+        //     console.log(event.newValue);
+        // })
 
 
         })

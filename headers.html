@@ -58,22 +58,6 @@
 
   <script>
     $(function () {
-
-
-
-
-      //  let vh = window.innerHeight * 0.01;
-      // document.documentElement.style.setProperty('--vh', `${vh}px`);
-      // window.onpageshow = function (event) {
-      //   if (event.persisted) {
-      //     alert("reloadheadr")
-      //     window.location.reload();
-      //   }
-      // }
-    
-
-
-
       site_map();
       if (myUrl.main !== 'index.html'){
         // console.log(myUrl.main)
@@ -100,13 +84,28 @@
       // });
 
 // shopcart amount
-      // let data = JSON.parse(localStorage.getItem("cart"));
-// window.addEventListener('cart', console.log(localStorage.getItem("cart")));
-// window.dispatchEvent(new Event('cart')) 
-// window.dispatchEvent(new Event('cart', { key: "key", oldValue: "oldValue", newValue: "newValue", url: "http://localhost:8080", Storage: localStorage }));
-// IOS prveios page
+      
+        // window.addEventListener('storage', function(evet){
+        //   console.log(evet)
+        //   //  console.log(evet.storageArea)
+        // //  StorageEvent.storageArea
+        // }, false);
+
+      window.addEventListener('storage', event => {
+        console.log(event);
+          console.log( event.newValue);
+      })
+
+
+
+        // k1 cart
+        // let datas = JSON.parse(localStorage.getItem('cart'));
+        let datas = JSON.parse(localStorage.getItem('k1'));
+//  prveios page
       window.onpageshow = function (event) {
-        // alert("XXXX")
+        // addEventListener('Storage', chrome on storage change
+        // k1 cart
+        // let datas = JSON.parse(localStorage.getItem('cart'));
         let datas = JSON.parse(localStorage.getItem('k1'));
         console.log(datas)
         if (!datas) {
@@ -120,27 +119,11 @@
         }
       }
  
-    // window.onstorage = function (event) {
-    //   // window.addEventListener('Storage', function (event) {
-    //   // window.addEventListener('storage', function (e) {
-    //     console.log(localStorage.getItem('k1'));
-    //     // alert("XXXXX")
-    //     let datas= JSON.parse(localStorage.getItem('k1'));
-    //     console.log(datas)
-    //     if (!datas) {
-    //       $('.shopart_amount').css("display", "none")
-    //     } else {
-    //       if (!datas.length) {
-    //         $('.shopart_amount').css("display", "none")
-    //       } else {
-    //         $('.shopart_amount').text(datas.length)
-    //       }
-    //     }
-    //   // }, false);
-    // }
+ 
 
-
+      // let data = JSON.parse(localStorage.getItem("cart"));
       let data = JSON.parse(localStorage.getItem("k1"));
+
       if (!data) {
         $('.shopart_amount').css("display", "none")  
       } else {
@@ -168,22 +151,6 @@
             $("body").css("overflow", "auto");
         }
       });
-
-
-
-     
-
-
-    // $('.menu').bind('mouseleave touchend click', function (event) {
-    //     event.preventDefault();
-    //     console.log("CLIK")
-    //     alert("CLICK")
-    //   });
-    //   $('.menu').bind('mouseenter touchstart ', function () {
-    //     console.log("mouseenter")
-    //      alert("mouseenter")
-      // });
-
 
       $(".menu").on('click', function (e) {
         // e.preventDefault();
@@ -260,7 +227,7 @@
       //   }
       // })
 
-
+ 
 
     })
   </script>

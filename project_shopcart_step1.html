@@ -39,8 +39,8 @@
                         <label class="userdata recip_city">
                             <i class="step1_member  far fa-address-book"></i>
                             <div class="list_selector">
-                                <select class="county select-selected"></select>
-                                <select class="district select-selected"></select>
+                                <select class="recip_city select-selected"></select>
+                                <select class="recip_state select-selected"></select>
                             </div>
                         </label>
                         <!-- <label class="userdata recip_city">
@@ -109,14 +109,14 @@
         $("footer").load("footer.html");
         process_color();
 
-        new TwCitySelector();
+
         //select city
         new TwCitySelector({
             el: ".list_selector",
-            elCounty: ".county",
-            elDistrict: ".district",
+            elCounty: ".recip_city",
+            elDistrict: ".recip_state",
         });
-
+     
 
 
 
@@ -207,7 +207,7 @@
             //         console.log(a)
             //     }
             // }
-
+console.log(thisform)
             thisform.each(function () {
                 let type = $(this).attr('type');
                 let val = $(this).val();
@@ -232,6 +232,50 @@
 
             const alldatas = formTrim($('#form_checkout1').serializeArray())
             console.log($('#form_checkout1').serialize())
+
+
+            var categoryList = login_status();
+            
+            categoryList.then(function(data) {
+                console.log('呼び出し先', data);
+                if (data.success=="N"){
+                    alert("請先登入");
+                    window.location.href = "project_cloversky_login.html";
+                }else{              
+                    $.ajax({
+                        url: allurl + '/reirasys_api/registered_Checkout1.php',
+                        type: 'post',
+                        dataType: 'json',
+                        data:$('#form_checkout1').serialize(),
+                        success: function (response) {                         
+                            if (!response.success){
+                                console.log(response.err);
+                                // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
+                                // for (const [key, value] of Object.entries(response.err)) {
+                                //     console.log(key, value);
+                                //     $("input[name='"+ key+"']")
+                                //     .css('background','pink')
+                                //     .val($("input[name='"+ key+"']").val()+ value)
+                                
+                                // }
+                                let obj = response.err;
+                                for(const property in obj) {
+                                    console.log(`obj[${property}] = ${obj[property]}`);
+                                    $(`input[name='${property}']`)
+                                    .css('background','pink')
+                                    .val($(`input[name='${property}']`).val()+`${obj[property]}`)
+                                }
+
+                            }else{
+                                window.location.href = "project_shopcart_step2.html";
+                            }
+                    
+                        }
+                    });
+                }
+            }).fail(function() { 
+                console.log('err');
+            });
         })
 
 
