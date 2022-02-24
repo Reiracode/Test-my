@@ -160,7 +160,7 @@ $(document).ready(function () {
         console.log(new_amt)
 
         let $a_btn = $(".minus_cal");             
-        $a_btn.eq(row_index).attr("disabled", false);
+        // $a_btn.eq(row_index).attr("disabled", false);
 
         if ($(this).hasClass("add_cal")) {             
             $a.eq(row_index).val(new_amt + 1);
@@ -169,7 +169,7 @@ $(document).ready(function () {
                 $a_btn.eq(row_index).attr("disabled", false);
                 $a.eq(row_index).val(new_amt - 1);
             } else {
-                $a_btn.eq(row_index).attr("disabled", "true");
+                // $a_btn.eq(row_index).attr("disabled", "true");
             }
         } 
 

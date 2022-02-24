@@ -24,11 +24,48 @@
 
 .div_mobile_swiper {
     width: 100%;
+    // display: none;
     @include phone{
+        display: block;
         width: 100%;
         height: 100%;
     }
 }
+
+ .swiper {
+     display: none;
+     @include phone{
+          display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
 // .swiper-wrapper {
 //     height: 100%;
@@ -221,7 +258,7 @@ figure.list_img1 {
 
 input.carlist_amount {
     color: red;
-    font-size: large;
+    font-size: 26px;
     height: 100%;
     background-color: #bcaeae;
     border: none;
@@ -243,7 +280,25 @@ input.carlist_amount:disabled {
     -moz-box-shadow: none;
     box-shadow: none;
 }
-
+// input[type="color"],
+// input[type="date"],
+// input[type="datetime"],
+// input[type="datetime-local"],
+// input[type="email"],
+// input[type="month"],
+// input[type="num"],
+// input[type="password"],
+// input[type="search"],
+// input[type="tel"],
+// input[type="text"],
+// input[type="time"],
+// input[type="url"],
+// input[type="week"],
+// // button.add_minus_btn,
+// select:focus,
+// textarea {
+//   font-size: 16px;
+// }
 
 
 #menu {

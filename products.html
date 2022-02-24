@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta content='developer' name='reiracode' />
     <link rel="icon" href="./images/logo.png" type="image/png" />
@@ -11,7 +11,11 @@
     <title>Rehome</title>
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />   
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <style>
+
+    </style>
 </head>
 <!-- 
 1、數量=0 or ""不能加入購物車
@@ -23,9 +27,9 @@
 -->
 
 <body>
-    <header></header>
+<header></header>
     <div class="second_layout bg-c">
-       
+    
         <nav class="items">
             <ul>
                 <li><a href="./index.html">top</a>
@@ -42,25 +46,20 @@
 
         <div class="prod_detail">
             <div class="div_left">
-                <!-- mobile swiper -->
-                <div class="div_mobile_swiper">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper"></div>
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-button-prev swiper-button-white"></div>
-                        <div class="swiper-button-next swiper-button-white"></div>
-                        <div class="swiper-scrollbar"></div>
+                <!-- mobile Slider main container -->
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper" id="swiper-wrapper">
                     </div>
+                    <div class="swiper-pagination"></div>
                 </div>
 
                 <!-- pc -->
                 <div class="prod_detail_pc">
-                    <!-- 大図 -->
                     <figure class="list_img1">
                         <img src="./images/cloversky/000000000370_1.jpg" alt="">
                         <img src="./images/cloversky/000000000370_1.jpg" alt="" class="active">
                     </figure>
-                    <!-- 小図 -->
+                    
                     <div class="mini_pic"></div>
                 </div>
             </div>
@@ -112,14 +111,12 @@
         <footer class='flex-layout'></footer>
     </div>
     <script src="./js/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <script src="./js/format.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script>
     $(function () {
             $("header").load("headers.html");
             $("footer").load("footer.html");
-
             //safari 100vh bug
             // let vh = window.innerHeight * 0.01;
             // document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -173,6 +170,7 @@
             function renderpage() {
                 let search_item = [];
                 if (myResponse) {
+                    // console.log(myResponse)
                     search_item = myResponse;
                     // TITLE
                     $(".product_title").text(search_item.title);
@@ -180,47 +178,69 @@
                     //加入shopping CAR
                     $(".add_car").attr("data-price", search_item.price);
                     $(".add_car").attr("data-id", search_item.id);
-                    //大図
-                    $(".prod_detail_pc>figure img")
-                    .attr("src", "./images/cloversky/" + search_item.id + "_1.jpg")
 
-                    let windowwidth = window.matchMedia("(max-width: 767px)")
-                    console.log(windowwidth.matches)
-                    if (windowwidth.matches) { // If media query matches
+                    // mobile swiper
+                    if (window.matchMedia('(max-width: 767px)').matches) {
+                        let htmls=""
                         for (x = 1; x <= search_item.imgno; x++) {
-                            $(".swiper-wrapper")
-                                .append("<div class='swiper-slide'><div class='slide-inner'> " +
-                                    "<img src=./images/cloversky/" + search_item.id + "_" + x + ".jpg alt=swpier" + x + ">" +
-                                    "</div></div>")
-                        }
+                            htmls += `<div class='swiper-slide'><img src="./images/cloversky/${search_item.id}_${x}.jpg"></div>`
+                        }         
+                        var swiper = new Swiper(".mySwiper", {
+                            pagination: {
+                                el: ".swiper-pagination",
+                            },
+                        });
+                        swiper.appendSlide(htmls);
+                        swiper.autoplay.start();
                     } else {
-                        console.log(windowwidth.matches)
+                        //大図
+                        $(".prod_detail_pc>figure img")
+                            .attr("src", "./images/cloversky/" + search_item.id + "_1.jpg")
                         renderMinimg(search_item)
                         $(".mini_pic .protail_img:first-child").addClass('active');
+
+                        //click 商品小圖置換父層大圖
+                        $(".protail_img").click(function () {
+                            console.log($(this))
+                            //小図
+                            $(this).addClass('active').siblings("figure") //find sibling h3 elements
+                                .removeClass("active");
+
+                            let index = $(".protail_img").index(this);
+                            console.log(index)
+                            let place_img = $(this).find("img").attr("src");
+
+                            $(".list_img1 img:nth-child(2)").removeClass('active')
+                                .delay(100)
+                                .queue(function () {
+                                    // this means acitve first
+                                    $(this).parent().children().eq(0).attr("src", place_img);
+                                    $(this).attr("src", place_img).addClass('active').dequeue();
+                                });
+                            return false;
+                        });
+
                     }
 
-                    //click 商品小圖置換父層大圖
-                    $(".protail_img").click(function () {
-                        console.log($(this))
-                        //小図
-                        $(this).addClass('active').siblings("figure") //find sibling h3 elements
-                            .removeClass("active");
 
-                        let index = $(".protail_img").index(this);
-                        console.log(index)
-                        let place_img = $(this).find("img").attr("src");
 
-                        $(".list_img1 img:nth-child(2)").removeClass('active')
-                            .delay(100)
-                            .queue(function () {
-                                // this means acitve first
-                                $(this).parent().children().eq(0).attr("src", place_img);
-                                $(this).attr("src", place_img).addClass('active').dequeue();
-                            });
-                        return false;
-                    });
+                    // let windowwidth = window.matchMedia("(max-width: 767px)")
+                    // console.log(windowwidth.matches)
+                    // if (windowwidth.matches) { // If media query matches
+                    //     for (x = 1; x <= search_item.imgno; x++) {
+                    //         $(".swiper-wrapper")
+                    //             .append("<div class='swiper-slide'><div class='slide-inner'> " +
+                    //                 "<img src=./images/cloversky/" + search_item.id + "_" + x + ".jpg alt=swpier" + x + ">" +
+                    //                 "</div></div>")
+                    //     }
+                    // } else {
+                    //     console.log(windowwidth.matches)
+                    //     renderMinimg(search_item)
+                    //     $(".mini_pic .protail_img:first-child").addClass('active');
+                    // }
 
-                    // click
+                   
+                    // tab click
                     $("#menu").click(function (e) {
                         if (e.target.tagName === 'P') {
                             console.log($(e.target));
@@ -249,7 +269,7 @@
 
             $(".add_minus_btn").click(function () {
                 let new_amt = parseInt($(".amount").val())
-                console.log("new_amt" + new_amt)
+                // console.log("new_amt" + new_amt)
                 $(".minus_cal").attr("disabled", false);
 
                 if ($(this).hasClass("add_cal")) {
@@ -259,7 +279,7 @@
                         $(".minus_cal").attr("disabled", false);
                         $(".amount").val(new_amt - 1)
                     } else {
-                        $(".minus_cal").attr("disabled", "true");
+                        // $(".minus_cal").attr("disabled", "true");
                     }
                 }
             })
@@ -325,27 +345,27 @@
 
             });
 
-            let swiper = new Swiper('.swiper-container', {
-                loop: true,
-                speed: 1000,
-                grabCursor: true,
-                watchSlidesProgress: true,
-                mousewheelControl: true,
-                keyboardControl: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                loop: true,
-            });
+            // let swiper = new Swiper('.swiper-container', {
+            //     loop: true,
+            //     speed: 1000,
+            //     grabCursor: true,
+            //     watchSlidesProgress: true,
+            //     mousewheelControl: true,
+            //     keyboardControl: true,
+            //     pagination: {
+            //         el: '.swiper-pagination',
+            //         clickable: true,
+            //     },
+            //     navigation: {
+            //         nextEl: '.swiper-button-next',
+            //         prevEl: '.swiper-button-prev',
+            //     },
+            //     loop: true,
+            // });
+
+
             
-            // function setCart() {
-            //     $("header").load("headers.html");
-            // }
+        
 
 
         // k1 localstorage
