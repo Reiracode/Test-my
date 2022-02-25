@@ -1,5 +1,6 @@
 // // open menu
 .overlay-test {
+      // transform: translateY(10%);
     position: fixed;
     top: 0;
     right: 0px;
@@ -9,12 +10,13 @@
     justify-content:center;
     align-items: center;
     width: 100vw;
-    height: 100vh;  
+    height: 100vh;  /*給 Safari 以外的瀏覽器讀取*/
+    height:calc(var(--vh, 1vh) * 100);
     transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
     z-index: 99999;
+    border: 2px solid blue;
     &.open {
       display: flex;
-      // clip-path: circle(200% at top right);
     }
     ul { 
       display: flex;

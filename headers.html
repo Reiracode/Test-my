@@ -42,7 +42,6 @@
     </ul>
   </div>
 
- 
   <div class="modal_bg">
     <button class="modal_close">
       <span></span>
@@ -59,39 +58,31 @@
 
   <script>
     $(function () {
-      site_map();
-      
-      if (myUrl.main !== 'index.html'){
-        if (window.matchMedia('(max-width: 480px)').matches) {
-          $(window).scroll(function (e) {
-            if ($(this).scrollTop() > 140) {
-              $("header").addClass('ds-f');
-            } else {
-              $("header").removeClass('ds-f');
-            }
-          });
-        }
+      //safari 100vh bug
+      // let vh = window.innerHeight * 0.01;
+      // document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+      const setFillHeight = () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
       }
+      // 画面のサイズ変動があった時に高さを再計算する
+      window.addEventListener('resize', setFillHeight);
+      // 初期化
+      setFillHeight();
 
-// shopcart amount
-      
-        // window.addEventListener('storage', function(evet){
-        //   console.log(evet)
-        //   //  console.log(evet.storageArea)
-        // //  StorageEvent.storageArea
-        // }, false);
+      site_map();
 
+      // shopcart amount
       window.addEventListener('storage', event => {
-        console.log(event);
-          console.log( event.newValue);
+        console.log(event);//storageArea
+        console.log(event.newValue);
       })
 
-
-
-        // k1 cart
-        // let datas = JSON.parse(localStorage.getItem('cart'));
-        let datas = JSON.parse(localStorage.getItem('k1'));
-//  prveios page
+      // k1 cart
+      // let datas = JSON.parse(localStorage.getItem('cart'));
+      let datas = JSON.parse(localStorage.getItem('k1'));
+      //  prveios page
       window.onpageshow = function (event) {
         // addEventListener('Storage', chrome on storage change
         // k1 cart
@@ -108,14 +99,11 @@
           }
         }
       }
- 
- 
 
       // let data = JSON.parse(localStorage.getItem("cart"));
       let data = JSON.parse(localStorage.getItem("k1"));
-
       if (!data) {
-        $('.shopart_amount').css("display", "none")  
+        $('.shopart_amount').css("display", "none")
       } else {
         if (!data.length) {
           $('.shopart_amount').css("display", "none")
@@ -137,87 +125,20 @@
 
       $('.modal_bg').click((e) => {
         if (!$(e.target).closest('.expand').length) {
-            $(".modal_bg").removeClass('active');
-            $("body").css("overflow", "auto");
+          $(".modal_bg").removeClass('active');
+          $("body").css("overflow", "auto");
         }
       });
 
       $(".menu").on('click', function (e) {
-        // e.preventDefault();
-        // e.stopPropagation();
-        
-        // $(this).addClass("active");
         $(".overlay-test").addClass("open");
         $("body").css("overflow", "hidden");
-
       })
-      // $(document).on("click, tap", ".menu", function (event) {
-      //   // do thing
-      //    alert("Only touch event is fired");
-      //   return false; // double event fix
-      // }); 
-      // $(".menu").on('touchstart click', function (event) {
-      //   // event.preventDefault();
-      //   // event.stopPropagation();
-      //   if (event.type == "touchstart") {
-      //     // $(this).off('click');
-      //     console.log("Only touch event is fired");
-      //     // alert(" touch event is fired");
-      //     return false;
-
-      //   } else if (event.type == "click") {
-      //     // $(this).off('touchstart');
-      //     console.log("Only click event is fired");
-      //      return false;
-      //     //  alert(" click event is fired");
-      //   }
-
-       
-      //    $(".overlay-test").addClass("open");
-      //   $("body").css("overflow", "hidden");
-
-      // });
-
-
-        // $(".menu").on('click', onlyClick, false);
-        // function onlyClick(ev) {
-        //   // Call preventDefault() to prevent any further handling
-        //   console.log("Here a click event is triggered");
-        //   ev.preventDefault();
-        //   console.log("After triggering an event");
-        // }
-
-        // $(".menu").on("touchStart", onlyTouch, false);
-      // function onlyTouch(ev) {
-      //   // Call preventDefault() to prevent any further handling
-      //   alert("Here a touchstart event is triggered");
-      //   ev.preventDefault();
-      // }
-      
-
+    
       $(".modal_closes").on('click', function (e) {
-
-        // $(this).remove("active");
         $(".overlay-test").removeClass("open");
         $("body").css("overflow", "auto");
-
-    })
-      // $(".menu").click(function (event) {
-      //   if ($(this).hasClass("active")) {
-      //     console.log("Yes:Class")
-      //     $(this).removeClass("active");
-      //     $(".overlay-test").removeClass("open");
-      //     $("body").css("overflow", "auto");
-
-      //   } else {
-      //     console.log("NOT:Class")
-      //     $(this).addClass("active");
-      //     $(".overlay-test").addClass("open");
-      //     $("body").css("overflow", "hidden");
-      //   }
-      // })
-
- 
+      })
 
     })
   </script>

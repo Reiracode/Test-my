@@ -8,7 +8,7 @@
         width: 100%;
     }
     @include mobile{
-        margin:0;
+        // margin:0;
     }
 }
 
@@ -135,7 +135,7 @@ figure.list_img1 {
         display: block;
     }
     img.active {
-        animation: 3.1s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards
+        animation: 1.6s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards
         mqn-picker-image-intro;  
     }
 

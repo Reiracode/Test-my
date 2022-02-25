@@ -27,13 +27,13 @@
 
 			<div class="main_ds">
 				<h2 class="wrap_word">
-					<span class="copy-wrap">Creating</span>
+					<span class="wrap-slogan">Creating</span>
 				</h2>
 				<h2 class="wrap_word">
-					<span class="copy-wrap">Sustainable</span>
+					<span class="wrap-slogan">Sustainable</span>
 				</h2>
 				<h2 class="wrap_word">
-					<span class="copy-wrap">Designed</span>
+					<span class="wrap-slogan">Designed</span>
 				</h2>
 			</div>
 
@@ -1333,9 +1333,9 @@
 			$("footer").load("footer.html");
 			$("header").load("headers.html");
 			$('header').appendTo('body');
-			//safari 100vh bug
-			let vh = window.innerHeight * 0.01;
-			document.documentElement.style.setProperty('--vh', `${vh}px`);
+			//safari 100vh bug for svg ani
+			// let vh = window.innerHeight * 0.01;
+			// document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 			// GSAP
 			gsap.registerPlugin(ScrollTrigger);
@@ -1344,15 +1344,16 @@
 			function start() {
 				const tl = new TimelineMax();
 				//#f2c9c9
-				tl.to(".svg_bg path", { duration: 2, strokeDashoffset: "0", ease: Linear.easeNone })
+				tl.to('body',{overflow:'hidden'})	
+				.to(".svg_bg path", { duration: 2, strokeDashoffset: "0", ease: Linear.easeNone })
 					.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
 					.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=0.2')
 
 					.to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
-					.to('.wrapper', { backgroundColor: '#cbbcbc12', duration: 0.1 }, 'end-label+=0.1')
+					.to('.wrapper', { background: '#cbbcbc12', duration: 0.1 }, 'end-label+=0.1')
 					// slogan , stagger: 0.1 each item delay 0.1s
-					.to('.wrap_word .copy-wrap', { color: '#ffe1fe96', duration: 0.5, yPercent: 0, x: 0, y: 0, stagger: 0.1, ease: Linear.easeNone })
-					.to('.wrap_word .copy-wrap', { opacity: 0 }, "+=0.2")
+					.to('.wrap_word .wrap-slogan', { color: '#ffe1fe96', duration: 0.5, yPercent: 0, x: 0, y: 0, stagger: 0.1, ease: Linear.easeNone })
+					.to('.wrap_word .wrap-slogan', { opacity: 0 }, "+=0.2")
 
 					.to('.rehome', { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.6")
 
@@ -1360,7 +1361,8 @@
 					.to(".cursorFront", { duration: 0.3, scale: 50, opacity: 0.4, x: Math.floor((Math.random() * 600) - 200) })
 					.to(".cursorBack", { duration: 0.2, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
 					.to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
-			}
+					.to('body', { overflow: 'auto' })
+				}
 			start();
 
 			const pageContainer = document.querySelector('#scroll-zone');

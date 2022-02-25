@@ -455,9 +455,12 @@ header {
           align-items: center;
   width: 100vw;
   height: 100vh;
+  /*給 Safari 以外的瀏覽器讀取*/
+  height: calc(var(--vh, 1vh) * 100);
   -webkit-transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
   transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
   z-index: 99999;
+  border: 2px solid blue;
 }
 
 .overlay-test.open {
@@ -619,7 +622,7 @@ header {
   line-height: 120px;
 }
 
-.wrap_word .copy-wrap {
+.wrap_word .wrap-slogan {
   font-weight: 400;
   font-size: 100px;
   -webkit-font-smoothing: antialiased;
@@ -634,7 +637,7 @@ header {
 }
 
 @media (max-width: 480px) {
-  .wrap_word .copy-wrap {
+  .wrap_word .wrap-slogan {
     font-size: 60px;
   }
 }
@@ -1259,10 +1262,11 @@ figure.grid_list:hover figcaption p, figure.grid_list:active figcaption p {
 
 .typebutton {
   display: inline-block;
-  border-radius: 19px;
-  padding: 10px;
+  border-radius: 12px 20px 0;
+  padding: 14px;
   background-color: #ea9999;
   color: white;
+  margin: 6px;
   cursor: pointer;
   font-size: .9rem;
 }
@@ -1292,15 +1296,25 @@ figure.grid_list:hover figcaption p, figure.grid_list:active figcaption p {
 
 .breadcrumb a {
   color: grey;
+  padding: 10px 0;
 }
 
 .breadcrumb a:hover {
-  color: #fff;
+  color: #d3b5b5;
 }
 
 .breadcrumb a:not(:first-child)::before {
   content: '/';
   padding: 0 5px;
+}
+
+@media (max-width: 480px) {
+  .select-div {
+    height: 50px;
+  }
+  .select-div.open {
+    height: atuo;
+  }
 }
 
 footer {
@@ -1484,6 +1498,8 @@ footer .menu-link a:hover {
   padding-top: 80px;
   -webkit-filter: drop-shadow(6px 6px #fff);
           filter: drop-shadow(6px 6px #fff);
+  -webkit-filter: drop-shadow(1px 6px #fff);
+          filter: drop-shadow(1px 6px #fff);
 }
 
 @media (max-width: 767px) {
@@ -1777,7 +1793,7 @@ footer .menu-link a:hover {
   content: attr(data-content);
   height: 30px;
   width: 100%;
-  color: pink;
+  color: #df4d4d;
   position: absolute;
   left: 0px;
   top: 50%;
@@ -1882,7 +1898,6 @@ footer .menu-link a:hover {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 calc(50% - 10px);
           flex: 1 0 calc(50% - 10px);
-  margin-right: 10px;
 }
 
 .fa-user:before {
@@ -1999,11 +2014,6 @@ footer .menu-link a:hover {
 }
 
 .list_selector select {
-  width: 45%;
-  height: auto;
-  padding: 10px 16px;
-  font-size: 16px;
-  color: #2f2f2f;
   background-image: linear-gradient(45deg, transparent 50%, #f08b1a 0), linear-gradient(135deg, #f08b1a 50%, transparent 0), linear-gradient(90deg, #e6a652, #e6a652);
   background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-size: 5px 5px,5px 5px,1px 1.5em;
@@ -2021,6 +2031,12 @@ footer .menu-link a:hover {
 
 .list_selector select:focus {
   border-color: pink;
+}
+
+@media (max-width: 480px) {
+  .list_selector select {
+    text-indent: 40px;
+  }
 }
 
 .mainbody {
@@ -2198,12 +2214,6 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before
   }
 }
 
-@media (max-width: 480px) {
-  .prod_detail {
-    margin: 0;
-  }
-}
-
 .div_left {
   margin: 15px 0;
   -webkit-box-flex: 1;
@@ -2352,8 +2362,8 @@ figure.list_img1 img {
 }
 
 figure.list_img1 img.active {
-  -webkit-animation: 3.1s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards mqn-picker-image-intro;
-          animation: 3.1s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards mqn-picker-image-intro;
+  -webkit-animation: 1.6s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards mqn-picker-image-intro;
+          animation: 1.6s cubic-bezier(0.6, 0.05, 0.01, 0.99) 0s 1 normal forwards mqn-picker-image-intro;
 }
 
 figure.list_img1 > img:nth-child(1) {

@@ -71,10 +71,12 @@
 // tag
 .typebutton {
     display: inline-block;
-    border-radius: 19px;
-    padding: 10px;
+    // border-radius: 19px;
+    border-radius: 12px 20px 0;
+    padding: 14px;
     background-color: #ea9999;
     color: white;
+    margin: 6px;
     cursor: pointer;
     font-size: .9rem;
     &:hover,&.active{
@@ -105,12 +107,25 @@
     // margin: 10px 0;
     a {
         color: grey;
+        padding: 10px 0;
         &:hover{
-            color:#fff;
+            color:#d3b5b5;
         }
         &:not(:first-child)::before {
             content: '/';
             padding: 0 5px;
         }    
     }
+}
+
+
+
+.select-div{
+    @include mobile{
+        height: 50px;
+        &.open{
+            height: atuo;
+        }
+    }
+
 }

@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <header class="ds-f"></header>
+    <!-- <header class="ds-f"></header> -->
     <div class="second_layout">
-
+        <header></header>
         <div class="top_page">
             <div class="select-tool">
                 <nav class="items">
@@ -50,14 +50,12 @@
     <script type="text/javascript" src="./js/jquery.simplePagination.js"></script>
     <script type="text/javascript" src="./js/format.js"></script>
     <script>
-
     $(document).ready(function () {
         // alldata= all items  ,filterdata by id;
         let alldata, filterdata;
         $("header").load("headers.html");
         $("footer").load("footer.html");
         site_map();
-
         //判斷資料來源
         const dataurl = !!(allurl == "http://localhost:8080")
             ? allurl + '/reirasys_api/shopitems.php'
@@ -69,6 +67,8 @@
         $(currentItem.parents("li").get().reverse()).each(function () {
             $(".breadcrumb").append($(this).children("a"));
         });
+
+    
 
         async function def_load() {
             try {

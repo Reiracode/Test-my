@@ -115,6 +115,9 @@
             el: ".list_selector",
             elCounty: ".recip_city",
             elDistrict: ".recip_state",
+
+              countyValue: '台北市', // 注意此項為關聯參數
+            districtValue: '中正區'
         });
      
 
@@ -261,6 +264,7 @@ console.log(thisform)
                                 let obj = response.err;
                                 for(const property in obj) {
                                     console.log(`obj[${property}] = ${obj[property]}`);
+                                    // error msg in field
                                     $(`input[name='${property}']`)
                                     .css('background','pink')
                                     .val($(`input[name='${property}']`).val()+`${obj[property]}`)

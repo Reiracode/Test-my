@@ -27,9 +27,9 @@
 -->
 
 <body>
-<header></header>
+<!-- <header class="ds-f"></header> -->
     <div class="second_layout bg-c">
-    
+    <header></header>
         <nav class="items">
             <ul>
                 <li><a href="./index.html">top</a>
@@ -117,11 +117,7 @@
     $(function () {
             $("header").load("headers.html");
             $("footer").load("footer.html");
-            //safari 100vh bug
-            // let vh = window.innerHeight * 0.01;
-            // document.documentElement.style.setProperty('--vh', `${vh}px`);
             site_map();
-
             // breadcrumb
             let currentItem = $(".items").find("[href$='" +  myUrl.main + "']");
             $(currentItem.parents("li").get().reverse()).each(function () {
@@ -129,11 +125,18 @@
             });
             $(currentItem).attr("href", "")
 
+        $(window).resize(function () {
+            // console.log("RESIXED");
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                // renderpage();
+            }  
+        });
+         
+
+
             // product no
             let search_id = (location.search).substr(9, 13)
             let myResponse;
-            // localhost
-            console.log(allurl)
             if (allurl=="http://localhost:8080"){
                 searchId(search_id).then((res) => {
                     myResponse = res;
@@ -190,6 +193,8 @@
                                 el: ".swiper-pagination",
                             },
                         });
+
+                        //  swiper.removeAllSlides();
                         swiper.appendSlide(htmls);
                         swiper.autoplay.start();
                     } else {
@@ -197,6 +202,9 @@
                         $(".prod_detail_pc>figure img")
                             .attr("src", "./images/cloversky/" + search_item.id + "_1.jpg")
                         renderMinimg(search_item)
+                        
+
+
                         $(".mini_pic .protail_img:first-child").addClass('active');
 
                         //click 商品小圖置換父層大圖
