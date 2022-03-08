@@ -8,7 +8,11 @@
   overflow: hidden;
   position: relative;
 	// background-color: $stroke-color;
-	background-color: #dfcece;
+	// background-color: #dfcece;
+
+background: rgb(229,197,197);
+background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 100%);
+
 
 // radius
 //too much color
@@ -36,13 +40,16 @@
 		position: absolute;
 		z-index: -1;
     clip-path: circle(10% at 50% 50%);
+
+ 
+// clip-path: circle(10% at center	);
+// clip-path: circle(15% at 22% 55%);
+ 
 		&>img{
 			height: 100%;
 			width:100%;
 			filter: contrast(0.8) opacity(0.9);
 			transform: scale(2);
-			// opacity: 0	;
-			// clip-path: circle(0%);
 			@include pad{
           width:unset;
 			}
@@ -121,3 +128,55 @@
 }
 
 
+.main_ds{
+		top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+		position: absolute;
+    width: 100vw;
+    height: 100vh;
+		max-width: 900px;
+		overflow: hidden;
+}
+
+.main_ds div{
+		top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+}
+
+
+.main_ds div:nth-child(2){
+	background:#c9ace385;
+	clip-path: circle(0% at 50% 50%)
+}
+
+
+.main_ds div h2{
+  font-size: 10em;
+	color:transparent;
+	font-family: "Bodoni Moda";
+	position: absolute;
+	top: 50%;
+	transform: translate(calc(50% - 32vw), -50%);
+	width: 65vw;
+}
+
+.main_ds div:nth-child(2) h2{
+  -webkit-text-stroke:2px  #fff;
+  color:transparent;
+}
+
+.main_ds span{
+	font-family: "Bodoni Moda";
+}
+
+.main_ds  h2 div{
+    color: transparent;
+    white-space: nowrap;
+    line-height: 60vh;
+    font-family: "Bodoni Moda";
+}

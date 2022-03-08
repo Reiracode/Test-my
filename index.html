@@ -26,15 +26,17 @@
 			</div>
 
 			<div class="main_ds">
-				<h2 class="wrap_word">
-					<span class="wrap-slogan">Creating</span>
-				</h2>
-				<h2 class="wrap_word">
-					<span class="wrap-slogan">Sustainable</span>
-				</h2>
-				<h2 class="wrap_word">
-					<span class="wrap-slogan">Designed</span>
-				</h2>
+				<div class="slogan">
+					<!-- <h2>Creating Elegant Designed</h2> -->
+				<h2><span>Creating</span> Elegant <span>Designed</span></h2>
+				</div>
+			
+				<div class="slogan2">
+					<!-- <h2>Creating Elegant Designed</h2> -->
+						<h2><span>Creating</span> Elegant <span>Designed</span></h2>
+				</div>
+			
+			
 			</div>
 
 			<h2 class="sign_block" data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
@@ -62,7 +64,8 @@
 					</mask>
 					<path class="rehome" mask="url(#letters)"
 						d="M9.92798 31.332L3.42798 27.332L1.92798 18.832L8.42798 13.832L14.428 10.832L21.428 6.83203L28.428 4.83203H34.928H41.428H47.428H52.428L57.428 6.83203L61.928 9.33203L64.428 13.832L65.928 18.832L64.428 21.832L61.928 24.832L59.428 27.332L55.428 29.832L52.428 31.332L47.428 33.832L43.428 35.332L37.428 36.832L27.428 37.832H18.928L15.928 36.832L27.428 21.832L37.428 10.832L41.428 13.832L25.428 31.332L17.428 44.332L14.428 52.832L11.928 59.332L14.428 61.832L17.428 59.332L21.428 52.832L26.428 43.332L32.428 52.832L37.428 59.332L43.428 63.832L48.928 67.832L53.928 71.332L57.428 72.832L62.928 73.832H68.428H72.428L77.928 71.332L79.428 67.832L77.928 61.832L64.428 48.832L68.428 45.832L74.428 43.332L79.428 37.832V33.832L74.428 31.332L70.928 33.832L66.928 35.832L59.428 41.332L53.928 48.832V55.832L57.428 59.332H64.428L77.928 52.832L83.428 47.332L88.928 41.332L93.928 36.832L99.928 33.832L105.428 27.332L112.928 21.832L116.928 18.832L122.428 12.332L125.928 4.83203L122.428 1.83203H119.428L112.928 6.83203L109.928 9.33203L105.428 16.832L99.928 23.332L92.428 43.332L88.928 48.832L85.428 59.332L90.928 57.332L95.428 48.832L101.428 43.332L105.428 37.832L109.928 33.832L112.928 31.332H116.928L115.428 35.832L112.928 39.332L110.928 43.832L109.928 48.832L106.928 54.332L109.928 57.332L112.928 59.332L116.928 57.332L119.428 54.332L124.428 50.832L128.428 47.332L149.928 35.832L143.928 31.332L136.428 33.832L132.928 39.332L130.428 52.832V57.332L133.928 58.832H138.428L142.428 55.832L145.428 50.832L149.928 41.332H152.928L149.928 47.332L147.928 52.832L149.928 54.332L154.428 52.832L158.428 50.832L161.428 47.332L169.928 33.832L172.928 31.332L169.928 41.332L166.928 45.832L163.928 52.832L161.428 58.832L169.928 50.832L176.428 43.332L180.428 37.832L186.428 33.832L189.428 31.332L192.928 33.832L189.428 37.832L184.928 43.832V50.832L192.928 41.332L199.428 37.832L205.428 35.832L199.428 47.332L196.428 54.332L199.428 58.832H205.428L209.928 54.332L215.428 48.832L225.928 47.332L233.428 45.832L240.928 39.332L243.428 33.832L240.928 31.332L233.428 33.832L227.428 39.332L223.928 41.332L218.428 52.832V57.332L223.928 59.332L231.428 58.832L235.428 57.332L240.928 54.332L243.428 50.832L247.928 47.332L249.428 43.832" />
-				</svg>
+
+					</svg>
 			</h2>
 			<svg class="svg_bg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 339"
 				preserveAspectRatio="none">
@@ -1327,7 +1330,7 @@
 	<script src="./js/gsap.min.js"></script>
 	<script src="./js/ScrollTrigger.min.js"></script>
 	<script src="./js/locomotive-scroll.min.js"></script>
-
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/SplitText.js"></script>
 	<script>
 		$(function () {
 			$("footer").load("footer.html");
@@ -1341,28 +1344,55 @@
 			gsap.registerPlugin(ScrollTrigger);
 			Splitting();
 
-			function start() {
+
+
+// @keyframes box-wipe-leave {
+//   0% { clip-path: inset(0); }
+//   50% { clip-path: inset(25% 50% 25% 0%); }
+//   100% { clip-path: inset(25% -50% 25% 100%); }
+// }
+			function start() {				
 				const tl = new TimelineMax();
 				//#f2c9c9
 				tl.to('body',{overflow:'hidden'})	
-				.to(".svg_bg path", { duration: 2, strokeDashoffset: "0", ease: Linear.easeNone })
-					.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
-					.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=0.2')
+					.to(".svg_bg path", {duration: 1, strokeDashoffset: "0", ease: Linear.easeNone, yoyo:true })
 
+					.to('.slogan2', 1.85, {duration: 1, 'clip-path': 'circle(50% at center)', ease: 'bounce'}, 'end-label')
+					.to('.slogan h2', { duration: 1, color: '#fff' ,y: -5}, 'end-label+=1')
+					.to('.main_ds', { autoAlpha: 0,scale: 3, ease: Sine.easeInOut }, 'end-label+=1')	
+
+					// .to('.slogan2 h2', 3, {
+					// 	stagger: 0.1,
+					// 	xPercent: function (i, elem) {
+					// 		// return i % 2 === 1 ? -xMove : xMove
+					// 		return i* -xMove
+					// 	},
+					// 	ease: Sine.easeInOut
+					// }, "end-label+=2")
+
+
+					// .to('.wrapper', { background: '#cbbcbc12' })
+					// // 開啟clip path 背景圖	
+					// .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
+					// .to(".logo_bg", { duration: 0.1,'clip-path': 'circle(75% at 50% 50%)', ease: Sine.easeInOut })				
+			
+					.to('.wrapper', { background: '#cbbcbc12', duration: 0.1 }, 'end-label+=1')
+						.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=1')
+					.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=1.2')
 					.to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
-					.to('.wrapper', { background: '#cbbcbc12', duration: 0.1 }, 'end-label+=0.1')
-					// slogan , stagger: 0.1 each item delay 0.1s
-					.to('.wrap_word .wrap-slogan', { color: '#ffe1fe96', duration: 0.5, yPercent: 0, x: 0, y: 0, stagger: 0.1, ease: Linear.easeNone })
-					.to('.wrap_word .wrap-slogan', { opacity: 0 }, "+=0.2")
+		
 
-					.to('.rehome', { duration: 1, strokeDashoffset: "0", ease: Linear.easeNone }, "+=0.6")
 
-					.to(".cursorBack", { duration: 0.33, scale: 100, opacity: 0.2, x: Math.floor((Math.random() * 600) - 300) })
-					.to(".cursorFront", { duration: 0.3, scale: 50, opacity: 0.4, x: Math.floor((Math.random() * 600) - 200) })
-					.to(".cursorBack", { duration: 0.2, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
-					.to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
+					.to('.rehome', { strokeDashoffset: "0", ease: Linear.easeNone } )
+
+
+					// .to(".cursorBack", { duration: 0.33, scale: 100, opacity: 0.2, x: Math.floor((Math.random() * 600) - 300) })
+					// .to(".cursorFront", { duration: 0.3, scale: 50, opacity: 0.4, x: Math.floor((Math.random() * 600) - 200) })
+					// .to(".cursorBack", { duration: 0.2, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
+					// .to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
 					.to('body', { overflow: 'auto' })
 				}
+				
 			start();
 
 			const pageContainer = document.querySelector('#scroll-zone');
