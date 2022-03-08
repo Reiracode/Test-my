@@ -14,8 +14,8 @@
     height:calc(var(--vh, 1vh) * 100);
     transition: all 0.4s cubic-bezier(0.4, 0.39, 0.37, 1.11);
     z-index: 99999;
-    border: 2px solid blue;
-    &.open {
+    // border: 2px solid blue;
+    &.active {
       display: flex;
     }
     ul { 

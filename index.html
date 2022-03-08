@@ -1357,32 +1357,14 @@
 				tl.to('body',{overflow:'hidden'})	
 					.to(".svg_bg path", {duration: 1, strokeDashoffset: "0", ease: Linear.easeNone, yoyo:true })
 
-					.to('.slogan2', 1.85, {duration: 1, 'clip-path': 'circle(50% at center)', ease: 'bounce'}, 'end-label')
-					.to('.slogan h2', { duration: 1, color: '#fff' ,y: -5}, 'end-label+=1')
-					.to('.main_ds', { autoAlpha: 0,scale: 3, ease: Sine.easeInOut }, 'end-label+=1')	
+					.to('.slogan2', 1.85, {duration: 2, 'clip-path': 'circle(50% at center)', ease: 'bounce'}, 'end-label')
+					.to('.slogan h2', 1.85, { duration: 1, color: '#fff' ,y: -5}, 'end-label+=1')
+					.to('.main_ds', 0.6, { autoAlpha: 0,scale: 3, ease: Sine.easeInOut }, 'end-label+=2')	
 
-					// .to('.slogan2 h2', 3, {
-					// 	stagger: 0.1,
-					// 	xPercent: function (i, elem) {
-					// 		// return i % 2 === 1 ? -xMove : xMove
-					// 		return i* -xMove
-					// 	},
-					// 	ease: Sine.easeInOut
-					// }, "end-label+=2")
-
-
-					// .to('.wrapper', { background: '#cbbcbc12' })
-					// // 開啟clip path 背景圖	
-					// .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label')
-					// .to(".logo_bg", { duration: 0.1,'clip-path': 'circle(75% at 50% 50%)', ease: Sine.easeInOut })				
-			
-					.to('.wrapper', { background: '#cbbcbc12', duration: 0.1 }, 'end-label+=1')
-						.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=1')
-					.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=1.2')
+					.to('.wrapper', { background: '#cbbcbc12', duration: 0.1 }, 'end-label+=2.6')
+					.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=2.7')
+					.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=2.8')
 					.to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
-		
-
-
 					.to('.rehome', { strokeDashoffset: "0", ease: Linear.easeNone } )
 
 

@@ -25,7 +25,7 @@
   </ul>
 
   <div class='overlay-test'>
-    <button class="modal_closes">
+    <button class="modal_close">
       <span></span>
       <span></span>
     </button>
@@ -117,11 +117,7 @@
         $(".modal_bg").addClass('active');
         $("body").css("overflow", "hidden");
       })
-      // overlay close
-      $('.modal_close').click(() => {
-        $(".modal_bg").removeClass('active');
-        $("body").css("overflow", "auto");
-      })
+
 
       $('.modal_bg').click((e) => {
         if (!$(e.target).closest('.expand').length) {
@@ -131,12 +127,21 @@
       });
 
       $(".menu").on('click', function (e) {
-        $(".overlay-test").addClass("open");
+        $(".overlay-test").addClass("active");
         $("body").css("overflow", "hidden");
       })
     
-      $(".modal_closes").on('click', function (e) {
-        $(".overlay-test").removeClass("open");
+      // $(".modal_closes").on('click', function (e) {
+      //   $(".overlay-test").removeClass("open");
+      //   $("body").css("overflow", "auto");
+      // })
+
+            // overlay close
+      $('.modal_close').click((e) => {
+        console.log(e.target.parentNode);
+        // $(".modal_bg").removeClass('active');
+        $(e.target.parentNode).removeClass('active');
+
         $("body").css("overflow", "auto");
       })
 
