@@ -261,8 +261,10 @@
     height: 54px;
     padding: 12px;
     text-indent: 45px;
+    border-radius: 4px;
     // background: #ddd;
     border: 1px solid #888;
+    font-family: 'Noto Serif JP';
     &:focus{
         border-color: plum;
         box-shadow: 0 0 0 1px plum;
@@ -373,24 +375,19 @@
     justify-content: flex-end;
     width: 100%;
     select {
-        // width: 45%;
-        // height: auto;
-        // padding: 10px 16px;
-        // font-size: 16px;
-        // color: #2f2f2f;
-        background-image: linear-gradient(45deg,transparent 50%,#f08b1a 0),linear-gradient(135deg,#f08b1a 50%,transparent 0),linear-gradient(90deg,#e6a652,#e6a652);
+        // background-image: linear-gradient(45deg,transparent 50%,#f08b1a 0),linear-gradient(135deg,#f08b1a 50%,transparent 0),linear-gradient(90deg,#e6a652,#e6a652);
+        background-image: linear-gradient(45deg,transparent 50%,#e29d4e 0),linear-gradient(135deg,#e29d4e 50%,transparent 0),linear-gradient(90deg,#e6a652,#e6a652);
         background-position: calc(100% - 20px) calc(1em + 2px),calc(100% - 15px) calc(1em + 2px),calc(100% - 2.5em) .5em;
         background-size: 5px 5px,5px 5px,1px 1.5em;
         background-repeat: no-repeat;
         letter-spacing: 1px;
-        border: 1px solid #e6a652;
+        border: 1px solid #ceac80;
         border-radius: 4px;
         width: 100%;
         font-size: 18px;
         height: 54px;
         padding: 12px;
         text-indent: 45px;
-        border: 1px solid #841e1e;
             &:focus{
                 border-color: pink;
             }

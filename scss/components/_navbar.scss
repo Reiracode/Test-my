@@ -1,6 +1,6 @@
 .container{
 	position: relative;
-  overflow-y: hidden!important	;
+  overflow-y: hidden!important;
 }
 
 header {
@@ -154,7 +154,10 @@ header {
     z-index: 9999;
     width: 100vw;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-color: rgba(170, 170, 170, 0.95);
+    justify-content:center;
+    align-items: center;
     &.active {
       display: flex;
     }

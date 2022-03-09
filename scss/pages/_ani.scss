@@ -50,7 +50,7 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 			width:100%;
 			filter: contrast(0.8) opacity(0.9);
 			transform: scale(2);
-			@include pad{
+			@include mobile{
           width:unset;
 			}
 		}
@@ -101,7 +101,7 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 		// height: 100%;
 		height: calc(var(--vh, 1vh) * 100);
 		width:100%;
-		@include pad{
+		@include mobile{
 				width:unset;
 		}
     path{

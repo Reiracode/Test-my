@@ -32,18 +32,18 @@
 
                     <label class="userdata">
                         <i class="step1_member far fa-address-card"></i>
-                        <input type="text" placeholder="住所" name="recip_street" id="recip_street" required>                  
+                        <input type="text" placeholder="住所" name="recip_street" id="recip_street" required>
                     </label>
 
                     <!-- <div class="form_group" > -->
-                        <label class="userdata recip_city">
-                            <i class="step1_member  far fa-address-book"></i>
-                            <div class="list_selector">
-                                <select class="recip_city select-selected"></select>
-                                <select class="recip_state select-selected"></select>
-                            </div>
-                        </label>
-                        <!-- <label class="userdata recip_city">
+                    <label class="userdata recip_city">
+                        <i class="step1_member  far fa-address-book"></i>
+                        <div class="list_selector">
+                            <select class="recip_city select-selected"></select>
+                            <select class="recip_state select-selected"></select>
+                        </div>
+                    </label>
+                    <!-- <label class="userdata recip_city">
                             <i class="step1_member  far fa-address-book"></i>
                             <input type="text" placeholder="city" name="recip_city" id="recip_city" required>
                         </label>
@@ -104,183 +104,126 @@
 
 
     <script>
-    $(document).ready(function () {
-        $("header").load("headers.html");
-        $("footer").load("footer.html");
-        process_color();
+        $(document).ready(function () {
+            $("header").load("headers.html");
+            $("footer").load("footer.html");
+            process_color();
 
+            //select city
+            new TwCitySelector({
+                el: ".list_selector",
+                elCounty: ".recip_city",
+                elDistrict: ".recip_state",
 
-        //select city
-        new TwCitySelector({
-            el: ".list_selector",
-            elCounty: ".recip_city",
-            elDistrict: ".recip_state",
+                countyValue: '台北市', // 注意此項為關聯參數
+                districtValue: '中正區'
+            });
 
-              countyValue: '台北市', // 注意此項為關聯參數
-            districtValue: '中正區'
-        });
-     
+            const thisform = $('#form_checkout1 input:required')
+            // 方法一:keyup 判斷資料是否符合
+            // 針對每一筆，再for all 
+            //預設就先執行keyup  .keyup(function(){}).keyup();  
+            // thisform.keyup(submittf)
+            //         .keyup();
 
-
-
-
-        const thisform = $('#form_checkout1 input:required')
-// 方法一:keyup 判斷資料是否符合
-// 針對每一筆，再for all 
-//預設就先執行keyup  .keyup(function(){}).keyup();  
-        // thisform.keyup(submittf)
-        //         .keyup();
-
-        // function submittf() {
-        //     //判斷這次input的值 
-        //     let allowsubmit = false; //預設不可送單
-        //     let this_val = $(this).val();
-        //     !this_val.trim()
-        //         ? allowsubmit = false
-        //         : allowsubmit = !checkAlIInput() ? false : true
-        //     // !allowsubmit ? console.log("不可送單") : console.log("可送單")
-        //     $('#btn_Show').prop('disabled', !allowsubmit);
-        // }
-
-        // function checkAlIInput() {
-        //     let validsubmit = true;
-        //     thisform.each(function () {
-        //         let type = $(this).attr('type');
-        //         let val = $(this).val();
-        //         let name = $(this).attr('name');
-        //         if (type != 'text') {
-        //             if (!validataType(type, val)) validsubmit = false
-        //         } else {
-        //             console.log(type + ":" + val + ":" + name)
-        //             if (!val.trim()) validsubmit = false
-        //         }
-        //     })
-        //     console.log("validsubmit 送" + validsubmit);
-        //     return validsubmit;
-        // }
-
-// new RegExp判斷input是否符合型態 (mail,XXXXX)
-        function validataType(type, val) {
-            let regmm;
-            let msg;
-            switch (type) {
-                case "mobile":
-                    regmm = '((?=(09))[0-9]{10})$';
-                    msg="手機格式不對"
-                    break;
-                case "mail":
-                    regmm = '[a-zA-Z0-9]+\@gmail.com';
-                    msg = "mail格式不對"
-                    break;
-                default:
-                    break;
-            }
-            // const regmob = new RegExp(regmm);
-            // if (regmob.test(val)) {
-            //     return true;
-            // } else {
-            //     return false;
-            // }
-            const regmob = new RegExp(regmm);
-            if (regmob.test(val)) {
-                return true;
-            } else {
-                // console.log(msg)
-                return msg;
-            }
-        }
-        
-        // 方法二:送出btn 再
-        $("#btn_Show").on("click", function (e) {
-            e.preventDefault();
-            // for (i = 0; i < thisform.length; i++) {
-            //     if (!thisform[i].value) {
-            //         console.log("NULL")
-            //         // return
-            //     }else{
-            //         // let type = $(this).attr('type');
-            //         // let val = $(this).val();
-            //         // let name = $(this).attr('name');
-            //         // console.log(type+name);
-
-            //         console.log(thisform[i])
-            //         const thiscol = thisform[i].id;
-            //         console.log(thiscol)
-            //         let a = $("#{thiscol}`").attr('type');
-            //         console.log(a)
-            //     }
-            // }
-console.log(thisform)
-            thisform.each(function () {
-                let type = $(this).attr('type');
-                let val = $(this).val();
-                let name = $(this).attr('name');
-                if (type != 'text') {
-                    console.log(this)
-                    !validataType(type, val)
-                    console.log(name)
-                    console.log(validataType(type, val))
-                
-                //  $(`#${name}`)
-                    // $('input[name=' + name + ']').attr('data-content', validataType(type, val)); 
-                    $('input[name=' + name + ']').parent('label').attr('data-content', validataType(type, val)); 
-                    // $('input [name="' + name + '"]').next().css("background-color", "red");;
-                        // if (!validataType(type, val)){
-                        // }  
-                } else {
-                    console.log(type + ":" + val + ":" + name)
-                    if (!val.trim()) validsubmit = false
+            // new RegExp判斷input是否符合型態 (mail,XXXXX)
+            function validataType(type, val) {
+                let regmm;
+                let msg;
+                switch (type) {
+                    case "mobile":
+                        regmm = '((?=(09))[0-9]{10})$';
+                        msg = "手機格式不對"
+                        break;
+                    case "mail":
+                        regmm = '[a-zA-Z0-9]+\@gmail.com';
+                        msg = "mail格式不對"
+                        break;
+                    default:
+                        break;
                 }
-            })
+                const regmob = new RegExp(regmm);
+                if (regmob.test(val)) {
+                    return true;
+                } else {
+                    return msg;
+                }
+            }
 
-            const alldatas = formTrim($('#form_checkout1').serializeArray())
-            console.log($('#form_checkout1').serialize())
+            // 方法二:送出btn 再
+            $("#btn_Show").on("click", function (e) {
+                e.preventDefault();
+                console.log(thisform)
+                let oksu = true;
+                thisform.each(function () {
+                    let type = $(this).attr('type');
+                    let val = $(this).val();
+                    let name = $(this).attr('name');
+                    if (type != 'text') {
+                        // $('input[name=' + name + ']').attr('data-content', validataType(type, val)); 
+                        $('input[name=' + name + ']').parent('label').attr('data-content', validataType(type, val));
+                        if (validataType(type, val) == true) {
+                            console.log("可送----" + name)
+                        } else {
+                            console.log("----不可送----" + name)
+                            oksu = "falllls"
+                        }
+                    } else {
+                        console.log(type + ":" + val + ":" + name)
+                        // if (!val.trim()) validsubmit = false
+                        if (!val.trim()) {
+                            console.log("----trim不可送----" + name)
+                            oksu = "falllls"
+                        } else {
+                            console.log("trim可送----" + name)
+                        }
+                    }
+                })
+console.log(oksu)
+                const alldatas = formTrim($('#form_checkout1').serializeArray())
+                console.log($('#form_checkout1').serialize())
 
 
-            var categoryList = login_status();
-            
-            categoryList.then(function(data) {
-                console.log('呼び出し先', data);
-                if (data.success=="N"){
-                    alert("請先登入");
-                    window.location.href = "project_cloversky_login.html";
-                }else{              
-                    $.ajax({
-                        url: allurl + '/reirasys_api/registered_Checkout1.php',
-                        type: 'post',
-                        dataType: 'json',
-                        data:$('#form_checkout1').serialize(),
-                        success: function (response) {                         
-                            if (!response.success){
-                                console.log(response.err);
-                                // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
-                                // for (const [key, value] of Object.entries(response.err)) {
-                                //     console.log(key, value);
-                                //     $("input[name='"+ key+"']")
-                                //     .css('background','pink')
-                                //     .val($("input[name='"+ key+"']").val()+ value)
-                                
-                                // }
-                                let obj = response.err;
-                                for(const property in obj) {
-                                    console.log(`obj[${property}] = ${obj[property]}`);
-                                    // error msg in field
-                                    $(`input[name='${property}']`)
-                                    .css('background','pink')
-                                    .val($(`input[name='${property}']`).val()+`${obj[property]}`)
+                var categoryList = login_status();
+if (oksu==true){
+                categoryList.then(function (data) {
+                    console.log('呼び出し先', data);
+                    if (data.success == "N") {
+                        alert("請先登入");
+                        window.location.href = "project_cloversky_login.html";
+                    } else {
+                        $.ajax({
+                            url: allurl + '/reirasys_api/registered_Checkout1.php',
+                            type: 'post',
+                            dataType: 'json',
+                            data: $('#form_checkout1').serialize(),
+                            success: function (response) {
+                                if (!response.success) {
+                                    console.log(response.err);
+                                    let obj = response.err;
+                                    for (const property in obj) {
+                                        console.log(`obj[${property}] = ${obj[property]}`);
+                                        // error msg in field
+                                        $(`input[name='${property}']`)
+                                            .css('background', 'pink')
+                                            .val($(`input[name='${property}']`).val() + `${obj[property]}`)
+                                    }
+
+                                } else {
+                                    window.location.href = "project_shopcart_step2.html";
                                 }
 
-                            }else{
-                                window.location.href = "project_shopcart_step2.html";
                             }
-                    
-                        }
-                    });
-                }
-            }).fail(function() { 
-                console.log('err');
-            });
-        })
+                        });
+                    }
+                }).fail(function () {
+                    console.log('err');
+                });
+
+}
+
+
+            })
 
 
 
@@ -290,14 +233,14 @@ console.log(thisform)
 
 
 
-        //******  購物明細****** 
-        const data = JSON.parse(localStorage.getItem("cart"));
-        console.log(data)
-        let total = 0;
-        $.each(data, function (i, val) {
-            total += data[i].amount * data[i].price;
-            $(".tb_shopcart tbody")
-                .append(`<tr> 
+            //******  購物明細****** 
+            const data = JSON.parse(localStorage.getItem("cart"));
+            console.log(data)
+            let total = 0;
+            $.each(data, function (i, val) {
+                total += data[i].amount * data[i].price;
+                $(".tb_shopcart tbody")
+                    .append(`<tr> 
                 <td name='fname0' id='fname0'>
                     <img src='./images/cloversky/${data[i].item_no}_1.jpg' alt=''>
                 </td> 
@@ -308,68 +251,68 @@ console.log(thisform)
                 <td name='fname2' id='fname2'> ${data[i].amount}</td>                                   
                 <td name='fname3' id='fname3'>${number_format(data[i].amount * data[i].price)}</td> 
                 </tr> `)
-        })
-        $("#car_total").text(number_format(total)); 
+            })
+            $("#car_total").text(number_format(total));
 
-// 送出單據
-        // $("#btn_Show").on("click", function (e) {
-        //     e.preventDefault();
-        //     for (i = 0; i < thisform.length; i++) {
-        //         if (!thisform[i].value) {
-        //             return
-        //         }
-        //     }
-        //     console.log(formTrim($('#form_checkout1').serializeArray()))
-        //     var alldatas = formTrim($('#form_checkout1').serializeArray())
-        //     console.log($('#form_checkout1').serialize())
+            // 送出單據
+            // $("#btn_Show").on("click", function (e) {
+            //     e.preventDefault();
+            //     for (i = 0; i < thisform.length; i++) {
+            //         if (!thisform[i].value) {
+            //             return
+            //         }
+            //     }
+            //     console.log(formTrim($('#form_checkout1').serializeArray()))
+            //     var alldatas = formTrim($('#form_checkout1').serializeArray())
+            //     console.log($('#form_checkout1').serialize())
 
-        //     // login
-        //     var categoryList = login_status();
-        //     categoryList.then(function (data) {
-        //         console.log('呼び出し先', data);
-        //         if (data.IsLogin == "N") {
-        //             alert("請先登入");
-        //             window.location.href = "project_cloversky_login.html";
-        //         } else {
-        //             $.ajax({
-        //                 url: allurl + '/reirasys_api/registered_Checkout1.php',
-        //                 type: 'post',
-        //                 dataType: 'json',
-        //                 data: $('#form_checkout1').serialize(),
-        //                 success: function (response) {
-        //                     if (!response.IsLogin) {
-        //                         console.log(response.err);
-        //                         // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
-        //                         // for (const [key, value] of Object.entries(response.err)) {
-        //                         //     console.log(key, value);
-        //                         //     $("input[name='"+ key+"']")
-        //                         //     .css('background','pink')
-        //                         //     .val($("input[name='"+ key+"']").val()+ value)
-        //                         // }
-        //                         let obj = response.err;
-        //                         for (const property in obj) {
-        //                             console.log(`obj[${property}] = ${obj[property]}`);
-        //                             $(`input[name='${property}']`)
-        //                                 .css('background', 'pink')
-        //                                 .val($(`input[name='${property}']`).val() + `${obj[property]}`)
-        //                         }
+            //     // login
+            //     var categoryList = login_status();
+            //     categoryList.then(function (data) {
+            //         console.log('呼び出し先', data);
+            //         if (data.IsLogin == "N") {
+            //             alert("請先登入");
+            //             window.location.href = "project_cloversky_login.html";
+            //         } else {
+            //             $.ajax({
+            //                 url: allurl + '/reirasys_api/registered_Checkout1.php',
+            //                 type: 'post',
+            //                 dataType: 'json',
+            //                 data: $('#form_checkout1').serialize(),
+            //                 success: function (response) {
+            //                     if (!response.IsLogin) {
+            //                         console.log(response.err);
+            //                         // {recip_name: "姓名請大於兩個中文字!", recip_street: "地址過短"} 
+            //                         // for (const [key, value] of Object.entries(response.err)) {
+            //                         //     console.log(key, value);
+            //                         //     $("input[name='"+ key+"']")
+            //                         //     .css('background','pink')
+            //                         //     .val($("input[name='"+ key+"']").val()+ value)
+            //                         // }
+            //                         let obj = response.err;
+            //                         for (const property in obj) {
+            //                             console.log(`obj[${property}] = ${obj[property]}`);
+            //                             $(`input[name='${property}']`)
+            //                                 .css('background', 'pink')
+            //                                 .val($(`input[name='${property}']`).val() + `${obj[property]}`)
+            //                         }
 
-        //                     } else {
-        //                         window.location.href = "project_shopcart_step2.html";
-        //                     }
+            //                     } else {
+            //                         window.location.href = "project_shopcart_step2.html";
+            //                     }
 
-        //                 }
-        //             });
-        //         }
-        //     }).fail(function () {
-        //         console.log('err');
-        //     });
+            //                 }
+            //             });
+            //         }
+            //     }).fail(function () {
+            //         console.log('err');
+            //     });
 
-        // });
+            // });
 
-    });
+        });
 
-</script>
+    </script>
 </body>
 
 </html>
