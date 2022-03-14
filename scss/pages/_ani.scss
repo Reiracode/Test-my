@@ -7,32 +7,10 @@
   box-shadow: 0px 6px 24px rgba(166, 161, 161, 0.6);
   overflow: hidden;
   position: relative;
-	// background-color: $stroke-color;
-	// background-color: #dfcece;
 
-// background: rgb(229,197,197);
-background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 100%);
+	background-color: #dfcece;
+	background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 100%);
 
-
-// radius
-//too much color
-// background: rgb(227,187,233);
-// background: radial-gradient(circle, rgba(227,187,233,1) 5%, rgba(237,181,213,1) 18%, rgba(227,187,233,1) 46%, rgba(227,225,251,1) 71%, rgba(246,215,239,1) 84%, rgba(207,184,231,1) 100%);
-// //normal
-// background: rgb(198,188,230);
-// background: radial-gradient(circle, rgba(198,188,230,1) 0%, rgba(255,207,248,1) 100%);
-// // smoth
-// 	background: rgb(220,211,249);
-// 	background: radial-gradient(circle, rgba(220,211,249,1) 0%, rgba(255,207,248,1) 100%);
-// 	// too white center
-// background: rgb(250,209,251);
-// background: radial-gradient(circle, rgba(250,209,251,1) 0%, rgba(239,220,251,1) 18%, rgba(244,208,250,1) 44%, rgba(250,198,252,1) 72%, rgba(240,196,252,1) 83%, rgba(207,184,231,1) 100%);
-// // outside circle too colorful
-// background: rgb(250,209,251);
-// background: radial-gradient(circle, rgba(250,209,251,1) 0%, rgba(223,195,241,1) 18%, rgba(236,195,233,1) 44%, rgba(250,198,252,1) 72%, rgba(240,196,252,1) 79%, rgba(170,142,200,1) 100%);
-
-// background: rgb(201,166,231);
-// background: radial-gradient(circle, rgba(201,166,231,1) 0%, rgba(194,173,173,1) 100%);
 	.logo_bg {
 		width: 100%;
 		height: 100%;
@@ -40,11 +18,6 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 		position: absolute;
 		z-index: -1;
     clip-path: circle(10% at 50% 50%);
-
- 
-// clip-path: circle(10% at center	);
-// clip-path: circle(15% at 22% 55%);
- 
 		&>img{
 			height: 100%;
 			width:100%;
@@ -65,7 +38,6 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 	position:absolute; 
 	width:100%;
 	height: 100%; 
-	// z-index: 1;
 	/* svg signature*/
 		.sign_svg {
 			margin: auto;
@@ -83,14 +55,9 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 	// #squiggle {
 		.rehome {
 			stroke-dasharray: 1280;
-			// t1.to
 			stroke-dashoffset: 1280;
-			// stroke-dashoffset: 0;
 			fill:none;
-			// stroke:#fecece;
 			stroke:#fecde8;
-			//t1.to
-			// stroke:#f5b5b5fa;
 			stroke-miterlimit:10;
 			stroke-width:12pt;
 	}
@@ -98,20 +65,19 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 
 // 	<!-- bg path animation -->
 .svg_bg{
-		// height: 100%;
-		height: calc(var(--vh, 1vh) * 100);
-		width:100%;
-		@include mobile{
-				width:unset;
-		}
-    path{
-			stroke-dasharray: 13000;
-			stroke-dashoffset:13000;
-			fill: none;
-			stroke-width: 5pt;
-			// stroke:#ffe6e6;
-			stroke:#fff;
-		}
+	height: calc(var(--vh, 1vh) * 100);
+	width:100%;
+	@include mobile{
+			width:unset;
+	}
+	path{
+		stroke-dasharray: 13000;
+		stroke-dashoffset:13000;
+		fill: none;
+		stroke-width: 5pt;
+		// stroke:#ffe6e6;
+		stroke:#fff;
+	}
 }
 
 #replay {
@@ -128,69 +94,64 @@ background: radial-gradient(circle, rgba(229,197,197,1) 0%, rgba(240,213,248,1) 
 	}
 }
 
-
 .main_ds{
-		top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-		position: absolute;
-    width: 100vw;
-    height: 100vh;
-		max-width: 900px;
-		overflow: hidden;
-}
-
-.main_ds div{
-		top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    width: 60vw;
-    height: 60vw;
-		@include phone{
-			width: 70vw;
-			height: 70vw;
-		}
-}
-
-
-.main_ds div:nth-child(2){
-	background:#c9ace385;
-	clip-path: circle(0% at 50% 50%)
-}
-
-
-.main_ds div h2{
-  font-size: 10em;
-	// color:transparent;
-	color:#fff0;
-	font-family: "Bodoni Moda";
-	position: absolute;
 	top: 50%;
-	transform: translate(calc(50% - 32vw), -50%);
-	width: 65vw;
-	@include pad{
-		font-size: 8em;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	div{
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		width: 60vw;
+		height: 60vw;
+		@include phone{
+			width: 100vw;
+			height: 100vw;
+		}
+		&:nth-child(2){
+			background: linear-gradient(63deg,#f8a0a04f, #c9ace385);
+			clip-path: circle(0% at 50% 50%)
+		}
 	}
-	@include phone{
-		font-size: 5.6em;
-		width: 100vw;
-		transform: translate(calc(30% - 43vw), -50%);
+	h2{
+		font-size: 10em;
+		color:#fff0;
+		font-family: "Bodoni Moda";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		// transform: tran	slate(calc(50%), -50%);
+		transform: translate(calc(-50%), -50%);
+		// width: 65vw;
+		line-height: 140px;
+		@include pad{
+			font-size: 8em;
+		}
+		@include phone{
+			font-size: 5.6em;
+				line-height: 100px;
+			  width: 80vw;
+				// transform: translate(calc(-50%), -50%);
+				transform: translate(calc(-50% - 40px), -50%);
+			// word-break: break-all;
+			// transform: translate(calc(50% - 40vw), -50%);
+		}
+		span{
+			font-family: "Bodoni Moda";
+			margin-left: 100px;
+				@include phone{
+						margin-left: 0;
+				}
+		}
 	}
-}
 
-.main_ds div:nth-child(2) h2{
-  -webkit-text-stroke:2px  #fff;
-  color:transparent;
-}
+	.slogan2 h2{
+		-webkit-text-stroke:2px  #fff;
+		color:transparent;
+	}
 
-.main_ds span{
-	font-family: "Bodoni Moda";
-}
-
-.main_ds  h2 div{
-    color: transparent;
-    white-space: nowrap;
-    line-height: 60vh;
-    font-family: "Bodoni Moda";
-}
+} 

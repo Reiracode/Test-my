@@ -21,11 +21,7 @@
       transform: scale(2.5)
     }
 
-    .main_ds {
-      position: absolute;
-      top: 20%;
-      left: 10%;
-    }
+   
 
     .wrap_word {
       color: transparent;
@@ -60,12 +56,7 @@
   font-style: normal;
 }
 
-// #b69e90
  
-
-
-
-
 
 .textpanel{
 		// height: 30vh;
@@ -99,10 +90,6 @@
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           -webkit-box-decoration-break: clone;
-  
-
-
-
           -webkit-text-stroke: 1px #cbbcbc;  
           background-image: linear-gradient(to bottom, #cbbcbc 50%, transparent 50%);
           background-size: 100% 200%;
@@ -110,11 +97,151 @@
           background-position: 50% calc(100px - (var(--progress) * 100px));
           transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           transition-delay: 1.25s;
-
       }
     }
   }
 }
+
+
+// locomoscroll horizon but other keep width:100% then display no overflow-x
+// #sectionPin {
+//   height: 100vh;
+//   overflow: hidden;
+//   display: flex;
+//   left: 0;
+//   background: var(--text-color);
+//   color: var(--bg-color);
+//   @include phone{
+//     height: auto;
+//     justify-content: center;
+//     align-items: center;
+    
+//   }
+// }
+
+// .pin-wrap {
+//   height: 100vh;
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   // padding: 10px 10vw;
+//   padding: 4rem;
+//   @include phone{
+//     height: auto;
+//     padding: 4rem 2 rem;
+//     flex-direction: column;
+//   }
+
+// 	.flex_alink3{
+// 		// width:60vw;
+//     flex: 0 0 calc(60vw - 200px);
+// 		margin: 0 100px;
+//     background:$stroke-color;
+//     display: flex;
+//     flex-direction: column;
+//     &:first-child{
+//         background-color: transparent;
+//         // width:60vw;
+//         @include phone{
+//           // width:80%;
+        
+//         }
+//       p{
+//         color:darkgray;
+//       }
+//     }
+// 		@include phone{
+//       // border: 5px solid pink;
+//       margin: 10px 0 ;
+//       // padd ing: 20px;
+	 
+// 		}
+// 		p{
+// 			font-size:20px ;
+// 			color: rgb(235, 109, 109);
+// 			margin-top: 60px;
+//       line-height: 1.6;
+// 		}
+
+// 		.flex_list_card {
+// 			position: relative;
+// 			height: 50vh;
+// 			margin: 50px;
+//       overflow: hidden;
+// 			// margin: 0 50px 50px;
+// 			@include phone{
+// 				margin: 40px; 
+// 			}
+// 			>img {
+//         display: block;
+// 				width: 100%;
+// 				// height: 100%;
+// 				object-fit: cover;
+// 				border-radius: 3px;
+// 				// transition:  .5s ease;
+//         transition: filter 0.5s ease-in 1s, transform 1s ease-in;
+// 				&.active{	
+//           filter: grayscale(10%) sepia(40%) brightness(100%);
+//           transform-origin: left top;   
+//           transform: scale(1.1);
+// 				}
+// 				// transform: scale(calc(var(--progress) * 1));
+// 			}
+// 			.unsplash_info{
+// 				position: absolute;
+// 				top:10%;
+// 				left:0;
+// 				color:#fff;
+// 				opacity: 0;
+// 				transition: .5s;
+// 				a{
+// 					display: inline-block;
+// 					font-family: cursive;
+// 					color: #ae7e7e;
+// 				}
+// 			}
+
+// 			&:hover .unsplash_info{
+// 					opacity: 1;
+
+// 			}
+// 		}
+
+// 		.flex_list_descript {
+// 				// width: 60vw;
+// 				color: $primary-color;
+//         flex-grow: 1;
+//         padding: 0 20px 10px;
+//         @include phone{
+//           padding: 0;
+//           margin: 0px 40px 40px;  
+//         }
+
+// 				& >h2{
+// 					line-height: 60px;
+// 					color: transparent;
+// 					font-family: Bodoni Moda;
+// 					font-weight: 400;
+// 					font-size: 80px;
+// 					-webkit-font-smoothing: antialiased;
+//           -webkit-text-stroke: 2px $primary-color;
+//           transition: all .2s;
+//           @include phone{
+//             font-size: 60px;
+//             color: #ffffff1c;
+//             -webkit-text-stroke: 1px #fff;
+//           }
+
+// 					&.active {
+//               -webkit-text-stroke:1px #ffff;
+//               color:#fbededd4;
+// 					}
+// 				}
+// 		}
+// 	}
+
+
+// }
 
 
 // locomoscroll horizon but other keep width:100% then display no overflow-x
@@ -179,22 +306,26 @@
 			// margin: 0 50px 50px;
 			@include phone{
 				margin:0;
+        height: auto;
 			}
 			>img {
+        display: block;
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 				border-radius: 3px;
-				transition: all .5s;
 				transform-origin: center;
 				transform: scale(0.9);
-				// transition: all 1.5s cubic-bezier(.77,0,.175,1);
 				filter: grayscale(100%) sepia(20%) brightness(80%);
-				// transition-delay: 0.5;
+        transition: transform 1s ease 1s ,filter 2s  cubic-bezier(0.445, 0.05, 0.55, 0.95) 2s   ;
 				&.active{	
 					transform: scale(1);
-					filter: none; 
+					filter: none;   
 				}
+        @include phone{
+          transform: scale(1);
+          filter: none;
+        }
 				// transform: scale(calc(var(--progress) * 1));
 			}
 			.unsplash_info{
@@ -226,28 +357,34 @@
 				& >h2{
 					line-height: 60px;
 					color: transparent;
+          color: #e0d3d3d4;
 					font-family: Bodoni Moda;
 					font-weight: 400;
 					font-size: 80px;
 					-webkit-font-smoothing: antialiased;
-          -webkit-text-stroke: 2px $primary-color;
-          transition: all .2s;
+          -webkit-text-stroke: 1px $primary-color;
+          // transition: all .2s;
+          transition: color .5s ease 0.5s,transform .5s cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.5s;
           @include phone{
             color: #ffffff1c;
-            -webkit-text-stroke: 2px #fff;
+            -webkit-text-stroke: 1px #fff;
+            transform: translate3d(-10px, -30px, 10px);
           }
 
 					&.active {
-              -webkit-text-stroke:2px #ffff;
-              color:#fbededd4;
+              // -webkit-text-stroke:2px #ffff;
+              color:#fff;
+              transform: translate3d(-10px, -100px, 10px);
 					}
 				}
+      @include phone{
+        width:100%; 
+      }
 		}
 	}
 
 
 }
-
 // 
 section:not(#sectionpin) {
   width: 100%;
@@ -261,6 +398,7 @@ section:not(#sectionpin) {
   pointer-events: none;
   isolation: isolate;
   transition: transform 350ms;
+  visibility: hidden;
   &.cursorFront {
     width: 28px;
     height: 28px;
@@ -282,7 +420,7 @@ section:not(#sectionpin) {
   &.cursorFront.hov{
     width:150px;
     height:150px;
-    background-color: #e48393;
+    background-color:pink;
   }
 }
 

@@ -12,31 +12,24 @@
 	<title>Rehome</title>
 	<link rel="stylesheet" href="css/all.css">
 	<link rel='stylesheet' href=' ./js/locomotive-scroll.css' />
-
-</head>
+ </head>
 
 <body>
 	<div class="container" id="scroll-zone" data-scroll-container>
 		<header class="ds-n"></header>
 
 		<section class="wrapper">
-			<!-- <div class="mircle"></div> -->
 			<div class="logo_bg" data-scroll data-scroll-speed="-1.5">
 				<img src="./images/cloversky/top2.jpg" alt="logo_picture">
 			</div>
 
 			<div class="main_ds">
-				<div class="slogan">
-					<!-- <h2>Creating Elegant Designed</h2> -->
-				<h2><span>Creating</span> Elegant <span>Designed</span></h2>
+				<div class="slogan1">
+					<h2><span>Creating</span> Elegant <span>Designed</span></h2>
 				</div>
-			
 				<div class="slogan2">
-					<!-- <h2>Creating Elegant Designed</h2> -->
-						<h2><span>Creating</span> Elegant <span>Designed</span></h2>
+					<h2><span>Creating</span> Elegant <span>Designed</span></h2>
 				</div>
-			
-			
 			</div>
 
 			<h2 class="sign_block" data-scroll data-scroll-speed="2" data-scroll-delay="0.02">
@@ -1242,15 +1235,15 @@
 
 				<div class="flex_alink3">
 					<div class="flex_list_card">
-						<img src="https://images.unsplash.com/photo-1607023177533-0abba4f24db9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60" alt="stories_1">
-						<span class="unsplash_info">
-							Photo by <a href="https://unsplash.com/@insideweather" target="_blank">Inside Weather</a></br>on
-							<a href="https://unsplash.com/@insideweather" target="_blank">Unsplash</a>
+							<img src="./images/cloversky/flex_list_img01.jpg" alt="stories_1">
+							<span class="unsplash_info">
+							Photo by <a href="https://unsplash.com/@virender833" target="_blank">Virender Singh</a></br>on
+							<a href="https://unsplash.com/@virender833" target="_blank">Unsplash</a>
 						</span>
 					</div>
 
 					<div class="flex_list_descript">
-						<h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Discover </br>More Love</h2>
+						<h2 >Make Every Fabulous</h2>
 					</div>
 				</div>
 
@@ -1265,7 +1258,8 @@
 					</div>
 
 					<div class="flex_list_descript">
-						<h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Make Every Fabulous</h2>
+						<h2   >Make Every Fabulous</h2>
+				<!-- data-scroll data-scroll-speed="2" data-scroll-delay="0.4" -->
 					</div>
 				</div>
 
@@ -1279,7 +1273,7 @@
 					</div>
 
 					<div class="flex_list_descript">
-						<h2 data-scroll data-scroll-speed="2" data-scroll-delay="0.4">Dressing The</br>Home</h2>
+						<h2 >Dressing The</br>Home</h2>
 					</div>
 				</div>
 			</div>
@@ -1357,34 +1351,23 @@
 				tl.to('body',{overflow:'hidden'})	
 					.to(".svg_bg path", {duration: 1, strokeDashoffset: "0", ease: Linear.easeNone, yoyo:true })
 	
-		// .to('.slogan2', 0.85, {duration: 1, 'clip-path': 'circle(40% at center)', ease: 'bounce'}, 'end-label')
-		// .to('.slogan h2', 0.85, { duration: 0.8, color: '#fff' ,y: -5}, 'end-label+=1')
-		// .to('.slogan h2', 0.6, { autoAlpha: 0, scale: 1.5, ease: Sine.easeInOut }, 'end-label+=2')	
-		// .to('.slogan2', 0.6, { autoAlpha: 0, scale: 2, ease: Sine.easeInOut })					
-		// .to('.wrapper', {background: '#cbbcbc12'  }, 'end-label+=2.6')
-		// .to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=2.7')
-		// .to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=2.8')
-		// .to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })			
-		// .to('.rehome', { strokeDashoffset: "0", ease: Linear.easeNone } )
-
-		.to('.slogan2', 1.85, { duration: 2, 'clip-path': 'circle(50% at center)', ease: 'bounce' }, 'end-label')
-		.to('.slogan h2', 1.85, { duration: 1, color: '#fff', y: -5 }, 'end-label+=1')
-		
-		.to('.slogan h2', 1, { autoAlpha: 0, scale: 5, ease: Sine.easeInOut }, 'end-label+=2')	
-
-		.to('.main_ds', 1, { autoAlpha: 0, scale: 3, ease: Sine.easeInOut }, 'end-label+=2')
-		.to('.wrapper', { background: '#cbbcbc12' }, 'end-label+=2.6')
-		.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=2.7')
-		.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=2.8')
-		.to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
-		.to('.rehome', { strokeDashoffset: "0", ease: Linear.easeNone })
+			// final_1
+					.to('.slogan2', 1.85, { duration: 1, 'clip-path': 'circle(40% at center)', ease: 'bounce' }, 'end-label')
+					.to('.slogan1 h2', 1.5, { duration: 1, color: '#fff', y: -30 }, 'end-label+=1')
+			.to('.slogan1 h2', 0.2, { autoAlpha: 0, scale: 5, ease: Sine.easeInOut }, 'end-label+=2.5')	
+			.to('.main_ds', { autoAlpha: 0, scale: 3, ease: Sine.easeInOut }, 'end-label+=2.6')
+			.to('.wrapper', { background: '#cbbcbc12' }, 'end-label+=2.6')
+			.to(".logo_bg img", { duration: 1, opacity: 0.65, scale: 1 }, 'end-label+=2.7')
+			.to(".logo_bg", { 'clip-path': 'circle(75% at 50% 50%)', ease: "sine.out" }, 'end-label+=2.8')
+			.to(".svg_bg path", { stroke: '#ffe6e6', duration: 0.1 })
+			.to('.rehome', { strokeDashoffset: "0", ease: Linear.easeNone })
 
 
 					// .to(".cursorBack", { duration: 0.33, scale: 100, opacity: 0.2, x: Math.floor((Math.random() * 600) - 300) })
 					// .to(".cursorFront", { duration: 0.3, scale: 50, opacity: 0.4, x: Math.floor((Math.random() * 600) - 200) })
-					// .to(".cursorBack", { duration: 0.2, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
-					// .to(".cursorFront", { duration: 0.1, scale: 1, opacity: 1, x: '50vw', y: '50vh' })
-					.to('body', { overflow: 'auto' })
+			.to(".cursorBack", { duration: 0.2, scale: 1, autoAlpha: 1  })
+			.to(".cursorFront", { duration: 0.1, scale: 1, autoAlpha: 1  })
+			.to('body', { overflow: 'auto' })
 				}
 				
 			start();
@@ -1438,10 +1421,14 @@
 					"(min-width: 800px)": function () {
 						let horizonWidth = document.querySelector(".pin-wrap").offsetWidth - window.innerWidth;
 						const images = gsap.utils.toArray(".pin-wrap > .flex_alink3 img");
+ 
+
 						const imagesLen = images.length;
-						const t1 = document.querySelector(".pin-wrap").offsetHeight;
-						const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
-						const ani_word = document.querySelectorAll(".flex_list_descript > h2");
+						// const t1 = document.querySelector(".pin-wrap").offsetHeight;
+						// const t2 = document.querySelector(".pin-wrap > .flex_alink3 img").offsetHeight;
+						// const ani_word = document.querySelectorAll(".flex_list_descript > h2");
+						const ani_word = gsap.utils.toArray(".flex_list_descript > h2");
+
 						// markers: true,  標記線
 						console.log(imagesLen)//3
 						// ******* horizon scroll
@@ -1461,12 +1448,12 @@
 									// console.l  og(self.progress )
 									// 最接近的整數 Math.ceil
 									// if (self.progress >= 0.15 && self.progress <= 0.75) {
-									let xindex = Math.ceil(self.progress * 0.9 * imagesLen);
-
+									let xindex = Math.ceil(self.progress * 0.9 * imagesLen)
 									if (!!xindex) {
+										// console.log(images[xindex - 1] 
 										images[xindex - 1].classList.add('active');
 										ani_word[xindex - 1].classList.add('active');
-									}
+									} 
 								}
 							},
 							ease: "none"
@@ -1518,9 +1505,30 @@
             </figure>`);
 				}
 			})
-
-		 
 		})
+
+
+		  /* mouse  */
+				$(window).mousemove(function (e) {
+					let frontPosY = `${e.clientY - ($('.cursorFront').height() / 2)}px`;
+					let frontPosX = `${e.clientX - ($('.cursorFront').width() / 2)}px`;
+
+					let backPosY = `${e.clientY - ($('.cursorBack').height() / 2)}px`;
+					let backPosX = `${e.clientX - ($('.cursorBack').width() / 2)}px`;
+
+					$('.cursorFront').css('transform', `translateY(${frontPosY}) translateX(${frontPosX})`);
+					$('.cursorBack').css('transform', `translateY(${backPosY}) translateX(${backPosX})`);
+				});
+
+				$("h2").mouseover(function (e) {
+					// hovFlag = true;
+					$(".cursorFront").addClass("hov");
+				});
+
+				$("h2").mouseout(function (e) {
+					// hovFlag = false;
+					$(".cursorFront").removeClass("hov");
+				});
 
 	</script>
 </body>
